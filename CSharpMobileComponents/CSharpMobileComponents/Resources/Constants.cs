@@ -10,7 +10,7 @@ namespace CSharpMobileComponents.Resources
         {
            
             English,
-            German
+            Portuguese
         }
 
         public enum ColorThemes
