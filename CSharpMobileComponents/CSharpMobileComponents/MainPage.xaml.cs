@@ -12,8 +12,7 @@ namespace CSharpMobileComponents
     {
         public MainPage()
         {
-            InitializeComponent();
-            var y = 2;
+            InitializeComponent(); 
         }
     }
 }
