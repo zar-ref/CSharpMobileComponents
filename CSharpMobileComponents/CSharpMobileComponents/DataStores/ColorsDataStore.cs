@@ -16,6 +16,13 @@ namespace CSharpMobileComponents.DataStores
             return;
         }
 
+        public string CurrentColorTheme { get; set; } = ColorThemes.DarkTheme.ToString();
+
+        /// <summary>
+        /// Key: Color Type
+        /// Value: Current color theme's color
+        /// </summary>
+        public Dictionary<string, ColorTheme> Colors { get; set; }
         private static ColorsDataStore instance = null;
         public static ColorsDataStore Instance
         {
@@ -34,13 +41,6 @@ namespace CSharpMobileComponents.DataStores
         }
 
 
-
-        /// <summary>
-        /// Key: Color Type
-        /// Value: Current color theme's color
-        /// </summary>
-        public Dictionary<string, ColorTheme> Colors { get; set; }
-
         private void FillColorsDictionary()
         {
             Colors = new Dictionary<string, ColorTheme>();
@@ -49,7 +49,13 @@ namespace CSharpMobileComponents.DataStores
                 DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.Dark.ToString()),
                 LightThemeColor = CustomStyles.GetColorFromName(ColorNames.Light.ToString())
             });
+        }
+
+        public void ChangeCurrentColorTheme(ColorThemes colorTheme)
+        {
+            CurrentColorTheme = colorTheme.ToString();
 
         }
+
     }
 }

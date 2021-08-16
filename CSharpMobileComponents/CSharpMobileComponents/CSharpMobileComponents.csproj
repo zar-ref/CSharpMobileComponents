@@ -21,7 +21,6 @@
     <Folder Include="Resources\Icons\" />
     <Folder Include="Resources\Util\" />
     <Folder Include="Pages\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>
