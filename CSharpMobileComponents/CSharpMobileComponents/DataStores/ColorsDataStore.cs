@@ -23,6 +23,7 @@ namespace CSharpMobileComponents.DataStores
         /// Value: Current color theme's color
         /// </summary>
         public Dictionary<string, ColorTheme> Colors { get; set; }
+
         private static ColorsDataStore instance = null;
         public static ColorsDataStore Instance
         {
