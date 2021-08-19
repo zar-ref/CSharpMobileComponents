@@ -8,7 +8,7 @@ namespace CSharpMobileComponents.Resources
     {
         public enum Languages
         {
-           
+
             English,
             Portuguese
         }
@@ -69,28 +69,31 @@ namespace CSharpMobileComponents.Resources
 
         public enum ColorTypes
         {
-            BackgroundDark,
-            BackgroundDarkContrast,
+
             Background,
-            BackgroundContrast,
-            BackgroundLight,
-            BackgroundLightContrast,
-            BackgroundAccent,
-            BackgroundAccentContrast,
-
-            TextDark,
-            TextDarkContrast,
             Text,
-            TextContrast,
-            TextLight,
-            TextLightContrast,
-            TextAccent,
-            TextAccentContrast,
+            GradeOut
+        }
 
-
+        public enum DeviceTypes
+        {
+            Mobile,
+            Tablet
         }
 
 
+        public enum AppDeviceSizes
+        {
+            Small,
+            Body,
+            H1,
+            H2,
+            H3,
+            H4,
+
+            Tile
+
+        }
 
     }
 }

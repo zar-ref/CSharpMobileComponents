@@ -108,6 +108,13 @@ namespace CSharpMobileComponents.ViewModels
                 ColorsDataStore.Instance.CurrentColorTheme = ColorThemes.DarkTheme.ToString();
             OnPropertyChanged("Colors");
         }
+        public Dictionary<string, DeviceSizes> Sizes { get { return SizesDataStore.Instance.Sizes; } }
+        public static Binding GetSizeBindingFromSizeType(AppDeviceSizes sizeType)
+        {
+            
+            Binding binding = new Binding("Sizes[" + sizeType + "]"); 
+            return binding;
+        }
 
         #region INotifyPropertyChanged
 

@@ -63,8 +63,7 @@ namespace CSharpMobileComponents.ViewModels
             if (page == null)
                 return;
 
-            //await NavigateIsBusyTaskAsync(async () => await Application.Current.MainPage.Navigation.PushAsync(page));
-            await NavigateIsBusyTaskAsync(async () => await NavigateToPage(navigationModel)); // to try and improve....
+            await NavigateIsBusyTaskAsync(async () => await Application.Current.MainPage.Navigation.PushAsync(page)); 
 
         }
 

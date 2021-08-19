@@ -47,9 +47,20 @@ namespace CSharpMobileComponents.DataStores
             Colors = new Dictionary<string, ColorTheme>();
             Colors.Add(ColorTypes.Background.ToString(), new ColorTheme()
             {
-                DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.Dark.ToString()),
-                LightThemeColor = CustomStyles.GetColorFromName(ColorNames.Light.ToString())
+                DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.DarkDark.ToString()),
+                LightThemeColor = CustomStyles.GetColorFromName(ColorNames.LightLight.ToString())
             });
+            Colors.Add(ColorTypes.Text.ToString(), new ColorTheme()
+            {
+                DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.LightLight.ToString()),
+                LightThemeColor = CustomStyles.GetColorFromName(ColorNames.DarkDark.ToString())
+            });
+            Colors.Add(ColorTypes.GradeOut.ToString(), new ColorTheme()
+            {
+                DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.LightDark.ToString()),
+                LightThemeColor = CustomStyles.GetColorFromName(ColorNames.Dark.ToString())
+            });
+
         }
 
         public void ChangeCurrentColorTheme(ColorThemes colorTheme)
