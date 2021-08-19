@@ -1,12 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<pages:BaseNavigationPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CSharpMobileComponents.Pages.HomePage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+             x:Class="CSharpMobileComponents.Pages.HomePage"
+             xmlns:pages="clr-namespace:CSharpMobileComponents.Pages"
+             BackgroundColor="{Binding Colors , Converter={StaticResource ColorConverter} , ConverterParameter=Background} ">
+    <pages:BaseNavigationPage.ChildContent>
+        <Grid Grid.Row="0" Grid.Column="0"
+              HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ScrollView>
+                <StackLayout>
+                    <Button HeightRequest="200" Text="ola"/>
+                    <Button HeightRequest="200" Text="ola"/>
+                    <Button HeightRequest="200" Text="ola"/>
+                    <Button HeightRequest="200" Text="ola"/>
+                    <Button HeightRequest="200" Text="ola"/>
+                    <Button HeightRequest="200" Text="ola"/>
+                    <Button HeightRequest="200" Text="ola"/>
+                    <Button HeightRequest="200" Text="ola"/>
+                    <Button HeightRequest="200" Text="ola"/>
+                    <Button HeightRequest="200" Text="ola"/>
+                    <Button HeightRequest="200" Text="ola"/>
+ 
+                </StackLayout>
+               
+            </ScrollView>
+        </Grid>
+    </pages:BaseNavigationPage.ChildContent>
+        
+   
+         
+</pages:BaseNavigationPage>

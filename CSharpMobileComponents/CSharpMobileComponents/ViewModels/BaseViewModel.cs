@@ -111,8 +111,10 @@ namespace CSharpMobileComponents.ViewModels
         public Dictionary<string, DeviceSizes> Sizes { get { return SizesDataStore.Instance.Sizes; } }
         public static Binding GetSizeBindingFromSizeType(AppDeviceSizes sizeType)
         {
-            
-            Binding binding = new Binding("Sizes[" + sizeType + "]"); 
+            var converter = new SizesConverter();
+            Binding binding = new Binding("Sizes");
+            binding.Converter = converter;
+            binding.ConverterParameter = sizeType.ToString();
             return binding;
         }
 

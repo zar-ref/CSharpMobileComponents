@@ -6,7 +6,7 @@ namespace CSharpMobileComponents.Models
 {
     public class DeviceSizes
     {
-        public int? MobileSize { get; set; }
-        public int? TabletSize { get; set; }
+        public int MobileSize { get; set; }
+        public int TabletSize { get; set; }
     }
 }

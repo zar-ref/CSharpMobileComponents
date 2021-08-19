@@ -11,6 +11,7 @@
                 <ResourceDictionary>
                     <Converters:TranslationConverter x:Key="TranslationConverter"/>
                     <Converters:ColorConverter x:Key="ColorConverter"/>
+                    <Converters:SizesConverter x:Key="SizesConverter"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

@@ -94,6 +94,11 @@ namespace CSharpMobileComponents.DataStores
                 MobileSize = 14,
                 TabletSize = 24
             });
+            Sizes.Add(AppDeviceSizes.ModalMargin.ToString(), new DeviceSizes()
+            {
+                MobileSize = 6,
+                TabletSize = 24
+            });
         }
     }
 }

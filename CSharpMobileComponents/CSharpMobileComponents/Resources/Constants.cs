@@ -91,7 +91,8 @@ namespace CSharpMobileComponents.Resources
             H3,
             H4,
 
-            Tile
+            Tile,
+            ModalMargin
 
         }
 

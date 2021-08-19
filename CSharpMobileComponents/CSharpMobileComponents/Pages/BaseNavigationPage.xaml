@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CSharpMobileComponents.Pages.BaseNavigationPage">
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=" *" />
+        </Grid.ColumnDefinitions>
+        
+        <ContentView 
+                Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                x:Name="ChildContentContainer"
+                />
+        <Grid   Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".2*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height=".2*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=" .1*" />
+                <ColumnDefinition Width=" *" />
+                <ColumnDefinition Width=" .1*" />
+            </Grid.ColumnDefinitions>
+            <Frame IsVisible="False" x:Name="overlayFrame" Grid.RowSpan="3" Grid.ColumnSpan="3" 
+                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  
+                   BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=GradeOut }" 
+                   InputTransparent="False" CascadeInputTransparent="True" Opacity="0.8 ">
+                <Button
+                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  
+                    Margin="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=ModalMargin }"
+                    BackgroundColor="Transparent"
+                    Clicked="OnCloseModal"
+                    />
+            </Frame>
+
+            <Frame IsVisible="False" x:Name="modalBorderFrame" 
+                   Grid.Row="1" Grid.Column="1" 
+                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"    
+                   BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Text }" 
+                   HasShadow="False" Margin="0" Padding="0"   >
+                <Frame  IsVisible="False" x:Name="modalFrame" 
+                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  
+                        Margin="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=ModalMargin }"
+                        BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Background }" 
+                        HasShadow="False">
+
+                </Frame>
+            </Frame>
+        </Grid>
+
+    </Grid>
+</ContentPage>
