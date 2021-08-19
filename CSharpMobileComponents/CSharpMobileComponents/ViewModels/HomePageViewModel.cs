@@ -6,5 +6,6 @@ namespace CSharpMobileComponents.ViewModels
 {
     public class HomePageViewModel : NavigationViewModel
     {
+        public HomePageViewModel() { }
     }
 }

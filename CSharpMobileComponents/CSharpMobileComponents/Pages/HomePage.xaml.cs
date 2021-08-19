@@ -18,6 +18,7 @@ namespace CSharpMobileComponents.Pages
         {
             InitializeComponent();
             _viewModel = new HomePageViewModel();
+            BindingContext = _viewModel;
         }
     }
 }

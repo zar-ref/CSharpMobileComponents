@@ -5,10 +5,13 @@
              xmlns:pages="clr-namespace:CSharpMobileComponents.Pages"
              BackgroundColor="{Binding Colors , Converter={StaticResource ColorConverter} , ConverterParameter=Background} ">
     <pages:BaseNavigationPage.ChildContent>
-        <Grid Grid.Row="0" Grid.Column="0"
-              HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <ScrollView>
-                <StackLayout>
+        <ScrollView>
+               <StackLayout Margin="30">
+
+                    <Button HeightRequest="200" Text="olaa"/>
+                    <Button HeightRequest="200" Text="olda"/>
+                    <Button HeightRequest="200" Text="osla"/>
+                    <Button HeightRequest="200" Text="osla"/>
                     <Button HeightRequest="200" Text="ola"/>
                     <Button HeightRequest="200" Text="ola"/>
                     <Button HeightRequest="200" Text="ola"/>
@@ -16,17 +19,13 @@
                     <Button HeightRequest="200" Text="ola"/>
                     <Button HeightRequest="200" Text="ola"/>
                     <Button HeightRequest="200" Text="ola"/>
-                    <Button HeightRequest="200" Text="ola"/>
-                    <Button HeightRequest="200" Text="ola"/>
-                    <Button HeightRequest="200" Text="ola"/>
-                    <Button HeightRequest="200" Text="ola"/>
- 
+
                 </StackLayout>
-               
-            </ScrollView>
-        </Grid>
+        </ScrollView>
+             
+ 
     </pages:BaseNavigationPage.ChildContent>
-        
-   
-         
+
+
+
 </pages:BaseNavigationPage>

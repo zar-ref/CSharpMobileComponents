@@ -10,9 +10,9 @@ namespace CSharpMobileComponents
     {
         public App()
         {
-            _ = ColorsDataStore.Instance;
-            _ = LanguagesDataStore.Instance;
-            _ = SizesDataStore.Instance;
+            //_ = ColorsDataStore.Instance;
+            //_ = LanguagesDataStore.Instance;
+            //_ = SizesDataStore.Instance;
 
             InitializeComponent();
             MainPage = new HomePage();
