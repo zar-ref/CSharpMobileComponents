@@ -55,6 +55,11 @@ namespace CSharpMobileComponents.DataStores
                 DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.LightLight.ToString()),
                 LightThemeColor = CustomStyles.GetColorFromName(ColorNames.DarkDark.ToString())
             });
+            Colors.Add(ColorTypes.SecondaryButtonTextColor.ToString(), new ColorTheme()
+            {
+                DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.Primary.ToString()),
+                LightThemeColor = CustomStyles.GetColorFromName(ColorNames.DarkDark.ToString())
+            });
             Colors.Add(ColorTypes.GradeOut.ToString(), new ColorTheme()
             {
                 DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.LightDark.ToString()),

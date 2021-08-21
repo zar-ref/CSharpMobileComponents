@@ -29,56 +29,27 @@ namespace CSharpMobileComponents.ViewModels
             }
         }
 
-        public string CurrentLanguage { get; set; } =  Languages.English.ToString();
+        public string CurrentLanguage { get; set; } = Languages.English.ToString();
 
         //Key: resource
         //Value: translation
-        private static Dictionary<string, string> translations { get; set; } = new Dictionary<string, string>();
+
         public Dictionary<string, string> Translations
         {
             get
             {
-                if (translations == null)
-                    translations = new Dictionary<string, string>();
-                return translations;
-            }
-            set
-            {
-
-                translations = value;
-                OnPropertyChanged("Translations");
-            }
-        }
-
-        public void ClearTranslations()
-        {
-            translations.Clear();
-        }
-
-
-        public void RegisterTranslation(string resource)
-        {
-            var translation = TranslateExtension.GetLanguageResource(resource);
-            if (translation == null)
-                translations.Add(resource, "Missing Translation");
-            var alreadyHasKey = translations.Any(dic => dic.Key == resource);
-            if (!alreadyHasKey)
-            {
-                translations.Add(resource, translation);
-                OnPropertyChanged("Translations");
+                return LanguagesDataStore.Instance.Translations;
             }
 
         }
 
-        public void SwitchTranslations()
+
+        public void SwitchTranslations(Languages newLanguage)
         {
-            var translationkeys = translations.Keys.ToList();
-            ClearTranslations();
+            LanguagesDataStore.Instance.ChangeLanguage(newLanguage);
             CurrentLanguage = LanguagesDataStore.Instance.Language;
-            foreach (var resource in translationkeys)
-            {
-                RegisterTranslation(resource);
-            }
+            OnPropertyChanged("Translations");
+
         }
 
         public static Binding GetTranslationBindingFromResource(string resource)

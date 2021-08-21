@@ -43,7 +43,7 @@
                    HasShadow="False" Margin="0" Padding="0"   >
                     <Frame  IsVisible="False" x:Name="modalFrame" 
                         HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  
-                        Margin="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=ModalMargin }"
+                        Margin="{Binding Thicknesses, Converter={StaticResource ThicknessConverter} , ConverterParameter=ModalMargin }"
                         BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Background }" 
                         HasShadow="False">
 

@@ -1,4 +1,5 @@
-﻿using CSharpMobileComponents.ViewModels;
+﻿using CSharpMobileComponents.DataStores;
+using CSharpMobileComponents.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -26,16 +27,12 @@ namespace CSharpMobileComponents.Resources.Converters
             if (alreadyHasKey)
                 return translationDictionary[key];
 
-
-            BaseViewModel vm;
+             
             try
             {
-                vm = (BaseViewModel)Application.Current.MainPage.Navigation.NavigationStack.LastOrDefault().BindingContext;
-                if (vm == null)
-                    return string.Empty;
-                vm.RegisterTranslation(key);
+                LanguagesDataStore.Instance.RegisterTranslation(key);
 
-                return vm.Translations[key];
+                return LanguagesDataStore.Instance.Translations[key];
             }
             catch (Exception ex) //Page stil does not have binding context
             {

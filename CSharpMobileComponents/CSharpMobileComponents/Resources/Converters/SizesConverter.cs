@@ -22,10 +22,19 @@ namespace CSharpMobileComponents.Resources.Converters
             if (key == null)
                 return 1;
 
-            if (SizesDataStore.Instance.CurrentDeviceType == DeviceTypes.Mobile.ToString())
-                return sizeDictionary[key].MobileSize;
-            else
-                return sizeDictionary[key].TabletSize;
+            try
+            {
+                if (SizesDataStore.Instance.CurrentDeviceType == DeviceTypes.Mobile.ToString())
+                    return sizeDictionary[key].MobileSize;
+                else
+                    return sizeDictionary[key].TabletSize;
+            }
+            catch (Exception)
+            {
+                return 1;
+            }
+
+    
 
 
 

@@ -16,7 +16,7 @@ namespace CSharpMobileComponents.Resources.Resx
     {
 
 
-        const string ResourcePath = "CSharpMobileComponents.Resources.Resources";
+        const string ResourcePath = "CSharpMobileComponents.Resources.Resx.Resources";
         public string Text { get; set; }
 
         internal static string GetLanguageResource(string item)

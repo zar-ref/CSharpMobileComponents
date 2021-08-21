@@ -1,6 +1,7 @@
 ﻿using CSharpMobileComponents.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,25 @@ namespace CSharpMobileComponents.Pages
         public HomePageViewModel _viewModel;
         public HomePage()
         {
-            InitializeComponent();
-            _viewModel = new HomePageViewModel();
-            BindingContext = _viewModel;
+            InitializeComponent();     
+  
+            BindingContext = _viewModel = new HomePageViewModel();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            //_viewModel.OnPropertyChanged("Translations");
+        }
+
+        private void PrimaryBtnControl_ButtonClicked(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void PrimaryBtnControl_ButtonClicked_2(object sender, EventArgs e)
+        {
+
         }
     }
 }

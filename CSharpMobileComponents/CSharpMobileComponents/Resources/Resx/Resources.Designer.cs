@@ -61,6 +61,24 @@ namespace CSharpMobileComponents.Resources.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BUY NOW!.
+        /// </summary>
+        internal static string btn_buy_now {
+            get {
+                return ResourceManager.GetString("btn-buy-now", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Demo!.
+        /// </summary>
+        internal static string btn_start_demo {
+            get {
+                return ResourceManager.GetString("btn-start-demo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string label_cancel {

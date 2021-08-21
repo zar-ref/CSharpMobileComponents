@@ -3,19 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CSharpMobileComponents.Pages.HomePage"
              xmlns:pages="clr-namespace:CSharpMobileComponents.Pages"
-             xmlns:my="clr-namespace:CSharpMobileComponents.Resources.Controls"
+             xmlns:controls="clr-namespace:CSharpMobileComponents.Resources.Controls"
+        
              BackgroundColor="{Binding Colors , Converter={StaticResource ColorConverter} , ConverterParameter=Background} ">
     <pages:BaseNavigationPage.ChildContent>
-        <ScrollView>
-               <StackLayout Margin="30">
-                <my:PrimaryBtnControl HeightRequest="200"  />
-                <!--<my:PrimaryOrSecondaryBtnControl HeightRequest="200"  />
-                <my:PrimaryOrSecondaryBtnControl  HeightRequest="400" />-->
- 
-            </StackLayout>
-        </ScrollView>
-             
- 
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.6*"/>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.2*"/>
+            </Grid.RowDefinitions>
+
+            <controls:PrimaryBtnControl Grid.Row="1"  
+                                        WidthRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=PrimaryOrSecondaryButtonControlWidth }"
+                                        VerticalOptions="End" HorizontalOptions="Center" 
+                                        Command="{Binding  GoToMenuPageCommand  , Mode=OneWay}" 
+                    
+                                        DisplayText="{Binding Translations , Converter={StaticResource TranslationConverter} , ConverterParameter=btn-start-demo , Mode=OneWay}"/>
+            <controls:PrimaryBtnControl Grid.Row="2"    
+                                        Margin="0 , 8 , 0 ,0"
+                                        WidthRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=PrimaryOrSecondaryButtonControlWidth }"
+                                        VerticalOptions="Start" HorizontalOptions="Center" 
+                                        DisplayText="{Binding Translations , Converter={StaticResource TranslationConverter} , ConverterParameter=btn-buy-now , Mode=OneWay}"
+                                           />
+
+        </Grid>
+
+
     </pages:BaseNavigationPage.ChildContent>
 
 

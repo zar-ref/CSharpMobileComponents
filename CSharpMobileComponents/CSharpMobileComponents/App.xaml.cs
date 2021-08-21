@@ -1,6 +1,7 @@
 ﻿using CSharpMobileComponents.DataStores;
 using CSharpMobileComponents.Pages;
 using System;
+using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,12 +11,11 @@ namespace CSharpMobileComponents
     {
         public App()
         {
-            //_ = ColorsDataStore.Instance;
-            //_ = LanguagesDataStore.Instance;
-            //_ = SizesDataStore.Instance;
+           
 
-            InitializeComponent();
-            MainPage = new HomePage();
+            InitializeComponent(); 
+            
+            MainPage = new NavigationPage(new HomePage());
         }
 
         protected override void OnStart()
