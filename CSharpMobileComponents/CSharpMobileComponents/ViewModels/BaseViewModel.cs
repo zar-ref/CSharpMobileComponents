@@ -118,6 +118,16 @@ namespace CSharpMobileComponents.ViewModels
             return binding;
         }
 
+        public Dictionary<string, ThicknessModel> Thicknesses { get { return SizesDataStore.Instance.Thicknesses; } }
+        public static Binding GetSizeBindingFromThicknessType(AppDeviceThicknesses thicknessType)
+        {
+            var converter = new ThicknessConverter();
+            Binding binding = new Binding("Thicknesses");
+            binding.Converter = converter;
+            binding.ConverterParameter = thicknessType.ToString();
+            return binding;
+        }
+
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;

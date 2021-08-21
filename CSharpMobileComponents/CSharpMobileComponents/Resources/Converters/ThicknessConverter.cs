@@ -9,12 +9,12 @@ using static CSharpMobileComponents.Resources.Constants;
 
 namespace CSharpMobileComponents.Resources.Converters
 {
-    public class ColorConverter : IValueConverter
+     public class ThicknessConverter : IValueConverter
     {
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var colorDictionary = (Dictionary<string, ColorTheme>)value;
+            var thicknessDictionary = (Dictionary<string, ThicknessModel>)value;
             if (value == null)
                 return string.Empty;
 
@@ -23,19 +23,18 @@ namespace CSharpMobileComponents.Resources.Converters
                 return Color.Transparent;
             try
             {
-                if (ColorsDataStore.Instance.CurrentColorTheme == ColorThemes.DarkTheme.ToString())
-                    return colorDictionary[key].DarkThemeColor;
-                else if (ColorsDataStore.Instance.CurrentColorTheme == ColorThemes.LightTheme.ToString())
-                    return colorDictionary[key].LightThemeColor;
+                if (SizesDataStore.Instance.CurrentDeviceType == DeviceTypes.Mobile.ToString())
+                    return thicknessDictionary[key].MobileThickness;
                 else
-                    return Color.Transparent;
+                    return thicknessDictionary[key].TabletThickness;
+
             }
             catch (Exception)
             {
 
-                return Color.Transparent;
+                return 0;
             }
-          
+
 
 
 
@@ -51,5 +50,4 @@ namespace CSharpMobileComponents.Resources.Converters
 
 
     }
-
 }

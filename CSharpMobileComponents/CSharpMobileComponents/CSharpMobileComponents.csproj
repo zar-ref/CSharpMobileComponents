@@ -17,12 +17,14 @@
 
   <ItemGroup>
     <Folder Include="Resources\CustomViews\" />
-    <Folder Include="Resources\Controls\" />
     <Folder Include="Resources\Icons\" />
     <Folder Include="Resources\Util\" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\Controls\PrimaryBtnControl.xaml.cs">
+      <DependentUpon>PrimaryBtnControl.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Resx\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -35,6 +37,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\HomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Controls\PrimaryBtnControl.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Resx\Resources.resx">

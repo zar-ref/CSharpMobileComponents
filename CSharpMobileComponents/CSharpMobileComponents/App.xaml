@@ -13,6 +13,7 @@
                     <Converters:TranslationConverter x:Key="TranslationConverter"/>
                     <Converters:ColorConverter x:Key="ColorConverter"/>
                     <Converters:SizesConverter x:Key="SizesConverter"/>
+                    <Converters:ThicknessConverter x:Key="ThicknessConverter"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

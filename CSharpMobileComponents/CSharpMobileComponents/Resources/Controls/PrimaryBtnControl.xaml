@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Frame xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CSharpMobileComponents.Resources.Controls.PrimaryBtnControl"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"    
+       BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Text }"
+       HasShadow="False" Margin="0" Padding="0"
+       InputTransparent="True"
+       CornerRadius="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=ButtonControlCornerRadius }"
+       >
+    <Frame  IsVisible="true"          
+            CornerRadius="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=ButtonControlCornerRadius }"
+            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  
+            Margin="{Binding Thicknesses, Converter={StaticResource ThicknessConverter} , ConverterParameter=SecondaryButtonMargin }"
+            BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Background }" 
+            HasShadow="False"
+            Padding="4"
+            InputTransparent="True">
+
+        <Button  
+                CornerRadius="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=ButtonControlCornerRadius }"
+                Margin="0" Padding="0" 
+                x:Name="button" 
+                HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Background }" 
+                TextColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Text }"/>
+  
+
+    </Frame>
+</Frame>
+

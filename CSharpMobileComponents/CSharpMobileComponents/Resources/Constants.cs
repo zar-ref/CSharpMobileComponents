@@ -72,7 +72,8 @@ namespace CSharpMobileComponents.Resources
 
             Background,
             Text,
-            GradeOut
+            GradeOut,
+            PrimaryButtonBorder
         }
 
         public enum DeviceTypes
@@ -92,8 +93,16 @@ namespace CSharpMobileComponents.Resources
             H4,
 
             Tile,
-            ModalMargin
+           
+            ButtonControlHeight,
+            ButtonControlCornerRadius
 
+        }
+
+        public enum AppDeviceThicknesses
+        {
+            ModalMargin,
+            SecondaryButtonMargin
         }
 
     }

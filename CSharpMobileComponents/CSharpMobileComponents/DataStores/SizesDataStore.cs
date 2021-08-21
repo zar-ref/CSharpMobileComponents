@@ -60,7 +60,8 @@ namespace CSharpMobileComponents.DataStores
         /// Key: Device Type
         /// Value: sizes used by the app
         /// </summary>
-        public Dictionary<string,  DeviceSizes > Sizes { get; set; }
+        public Dictionary<string, DeviceSizes> Sizes { get; set; }
+        public Dictionary<string, ThicknessModel> Thicknesses { get; set; }
 
         private static SizesDataStore instance = null;
         public static SizesDataStore Instance
@@ -77,6 +78,7 @@ namespace CSharpMobileComponents.DataStores
         {
             RegistDataStore();
             FillSizesDictionary();
+            FillThicknessesDictionary();
         }
 
         private string GetDeviceType()
@@ -88,16 +90,31 @@ namespace CSharpMobileComponents.DataStores
 
         private void FillSizesDictionary()
         {
-            Sizes = new Dictionary<string,  DeviceSizes>();
+            Sizes = new Dictionary<string, DeviceSizes>();
             Sizes.Add(AppDeviceSizes.Body.ToString(), new DeviceSizes()
             {
                 MobileSize = 14,
                 TabletSize = 24
-            });
-            Sizes.Add(AppDeviceSizes.ModalMargin.ToString(), new DeviceSizes()
+            });           
+            Sizes.Add(AppDeviceSizes.ButtonControlHeight.ToString(), new DeviceSizes()
             {
-                MobileSize = 6,
-                TabletSize = 24
+                MobileSize = 42,
+                TabletSize = 60
+            });
+            Sizes.Add(AppDeviceSizes.ButtonControlCornerRadius.ToString(), new DeviceSizes()
+            {
+                MobileSize = 25,
+                TabletSize = 33
+            });
+        }
+
+        private void FillThicknessesDictionary()
+        {
+            Thicknesses = new Dictionary<string, ThicknessModel>();
+            Thicknesses.Add(AppDeviceThicknesses.SecondaryButtonMargin.ToString(), new ThicknessModel()
+            {
+                MobileThickness = 6,
+                TabletThickness = 6
             });
         }
     }
