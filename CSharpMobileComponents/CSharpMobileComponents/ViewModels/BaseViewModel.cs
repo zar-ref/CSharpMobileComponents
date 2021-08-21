@@ -29,7 +29,7 @@ namespace CSharpMobileComponents.ViewModels
             }
         }
 
-        public string CurrentLanguage { get; set; } = Languages.English.ToString();
+        public string CurrentLanguage { get; set; } = LanguagesDataStore.Instance.Language;
 
         //Key: resource
         //Value: translation
@@ -46,8 +46,10 @@ namespace CSharpMobileComponents.ViewModels
 
         public void SwitchTranslations(Languages newLanguage)
         {
-            LanguagesDataStore.Instance.ChangeLanguage(newLanguage);
             CurrentLanguage = LanguagesDataStore.Instance.Language;
+            LanguagesDataStore.Instance.ChangeLanguage(newLanguage);
+
+
             OnPropertyChanged("Translations");
 
         }

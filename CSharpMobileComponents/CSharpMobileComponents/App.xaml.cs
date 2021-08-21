@@ -1,9 +1,11 @@
 ﻿using CSharpMobileComponents.DataStores;
 using CSharpMobileComponents.Pages;
+using CSharpMobileComponents.Resources.Styles;
 using System;
 using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static CSharpMobileComponents.Resources.Constants;
 
 namespace CSharpMobileComponents
 {
@@ -11,11 +13,10 @@ namespace CSharpMobileComponents
     {
         public App()
         {
-           
 
-            InitializeComponent(); 
-            
-            MainPage = new NavigationPage(new HomePage());
+
+            InitializeComponent();
+            MainPage = new NavigationPage(new HomePage()) { BarBackgroundColor = CustomStyles.GetColorFromName(ColorNames.Primary.ToString()) };
         }
 
         protected override void OnStart()
