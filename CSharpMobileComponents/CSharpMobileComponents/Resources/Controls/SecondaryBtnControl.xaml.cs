@@ -12,18 +12,17 @@ using Xamarin.Forms.Xaml;
 namespace CSharpMobileComponents.Resources.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PrimaryBtnControl : Frame 
+    public partial class SecondaryBtnControl : Frame
     {
-
-        public static  readonly BindableProperty DisplayTextProperty = BindableProperty.Create(
+        public static readonly BindableProperty DisplayTextProperty = BindableProperty.Create(
          propertyName: "DisplayText",
          returnType: typeof(string),
-         declaringType: typeof(PrimaryBtnControl), 
+         declaringType: typeof(SecondaryBtnControl),
          propertyChanged: HandleDisplayTextPropertyChanged);
 
         private static void HandleDisplayTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (PrimaryBtnControl)bindable;
+            var control = (SecondaryBtnControl)bindable;
             var newText = (string)newValue;
             control.DisplayText = newText;
             control.button.Text = newText;
@@ -39,7 +38,7 @@ namespace CSharpMobileComponents.Resources.Controls
         public static readonly BindableProperty CommandProperty = BindableProperty.Create(
         propertyName: "Command",
         returnType: typeof(ICommand),
-        declaringType: typeof(PrimaryBtnControl), 
+        declaringType: typeof(SecondaryBtnControl),
         propertyChanged: HandleCommandPropertyChanged);
 
 
@@ -52,7 +51,7 @@ namespace CSharpMobileComponents.Resources.Controls
         public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(
         propertyName: "CommandParameter",
         returnType: typeof(object),
-        declaringType: typeof(PrimaryBtnControl), 
+        declaringType: typeof(SecondaryBtnControl),
         propertyChanged: HandleCommandParameterPropertyChanged);
 
 
@@ -64,7 +63,7 @@ namespace CSharpMobileComponents.Resources.Controls
 
         private static void HandleCommandPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (PrimaryBtnControl)bindable;
+            var control = (SecondaryBtnControl)bindable;
             var newCommand = (ICommand)newValue;
             control.Command = newCommand;
             control.button.Command = newCommand;
@@ -74,15 +73,15 @@ namespace CSharpMobileComponents.Resources.Controls
 
         private static void HandleCommandParameterPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (PrimaryBtnControl)bindable;
+            var control = (SecondaryBtnControl)bindable;
             var newCommandParam = (object)newValue;
             control.CommandParameter = newCommandParam;
             control.button.CommandParameter = newCommandParam;
             if (newCommandParam != null)
                 control.button.Clicked -= control.Button_Clicked;
         }
-        
-        public PrimaryBtnControl()
+
+        public SecondaryBtnControl()
         {
             InitializeComponent();
             button.Text = DisplayText;
@@ -95,7 +94,5 @@ namespace CSharpMobileComponents.Resources.Controls
         {
             ButtonClicked?.Invoke(sender, e);
         }
-
-
     }
 }

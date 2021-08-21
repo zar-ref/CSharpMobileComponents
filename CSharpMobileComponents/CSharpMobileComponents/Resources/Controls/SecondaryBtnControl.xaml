@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Frame xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       x:Class="CSharpMobileComponents.Resources.Controls.PrimaryBtnControl"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"    
+       x:Class="CSharpMobileComponents.Resources.Controls.SecondaryBtnControl"
        BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=SecondaryButtonTextColor }"
        HasShadow="False" Margin="0" Padding="0"
        InputTransparent="True"
@@ -11,7 +11,7 @@
             CornerRadius="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=PrimaryOrSecondaryButtonControlCornerRadius }"
             HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  
             Margin="{Binding Thicknesses, Converter={StaticResource ThicknessConverter} , ConverterParameter=SecondaryButtonMargin }"
-            BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Background }" 
+            BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=SecondaryButtonBackgroundColor }" 
             HasShadow="False"
             Padding="{Binding Thicknesses, Converter={StaticResource ThicknessConverter} , ConverterParameter=SecondaryButtonPadding }"
             InputTransparent="True">
@@ -21,11 +21,10 @@
                 Margin="0" Padding="0" 
                 x:Name="button" 
                 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-                BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=PrimaryButtonBackgroundColor }" 
-                TextColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=PrimaryButtonTextColor }"
+                BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=SecondaryButtonBackgroundColor }" 
+                TextColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=SecondaryButtonTextColor }"
                 FontAttributes="Bold"  />
-  
+
 
     </Frame>
 </Frame>
-

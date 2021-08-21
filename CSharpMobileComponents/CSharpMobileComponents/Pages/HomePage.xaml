@@ -14,12 +14,13 @@
                 <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
 
-            <controls:PrimaryBtnControl Grid.Row="1"  
+            <controls:SecondaryBtnControl  
+                                        Grid.Row="1"  
                                         WidthRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=PrimaryOrSecondaryButtonControlWidth }"
                                         VerticalOptions="End" HorizontalOptions="Center" 
-                                        Command="{Binding  GoToMenuPageCommand  , Mode=OneWay}" 
-                    
+                                        Command="{Binding  GoToMenuPageCommand  , Mode=OneWay}"                     
                                         DisplayText="{Binding Translations , Converter={StaticResource TranslationConverter} , ConverterParameter=btn-start-demo , Mode=OneWay}"/>
+            
             <controls:PrimaryBtnControl Grid.Row="2"    
                                         Margin="0 , 8 , 0 ,0"
                                         WidthRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=PrimaryOrSecondaryButtonControlWidth }"
