@@ -19,7 +19,6 @@
     <Folder Include="Resources\Controls\Interfaces\" />
     <Folder Include="Resources\CustomViews\" />
     <Folder Include="Resources\Icons\" />
-    <Folder Include="Resources\Util\" />
   </ItemGroup>
 
   <ItemGroup>
