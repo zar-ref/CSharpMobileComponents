@@ -18,8 +18,8 @@
                 <Image Source="icon_sun.png" Effects:TintImageEffect.TintColor="Blue"/>
                 <Image Source="icon_sun.png" Effects:TintImageEffect.TintColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=SecondaryButtonTextColor }"  />
 
-                <ImageButton  Source="icon_sun.png" Effects:TintImageEffect.TintColor="DarkOrange" />
-                <ImageButton  Source="icon_sun.png"  Effects:TintImageEffect.TintColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=SecondaryButtonTextColor }"  />
+                <ImageButton  Source="icon_sun.png" Effects:TintImageButtonEffect.TintColor="OrangeRed" BackgroundColor="Transparent" />
+                <ImageButton  Source="icon_sun.png" BackgroundColor="Transparent"  Effects:TintImageButtonEffect.TintColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=SecondaryButtonTextColor }"  />
             </StackLayout>
        
             <!--Command="{Binding  GoToMenuPageCommand  , Mode=OneWay}"-->
