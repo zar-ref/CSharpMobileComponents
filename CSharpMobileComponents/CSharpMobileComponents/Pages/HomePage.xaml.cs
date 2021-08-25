@@ -1,4 +1,5 @@
-﻿using CSharpMobileComponents.ViewModels;
+﻿using CSharpMobileComponents.Resources.Util.Tint;
+using CSharpMobileComponents.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -20,6 +21,11 @@ namespace CSharpMobileComponents.Pages
             InitializeComponent();     
   
             BindingContext = _viewModel = new HomePageViewModel();
+            var img = new Image() { Source = "icon_sun.png"   };
+   
+            TintImageEffect.SetTintColor2(img, BaseViewModel.GetColorBindingFromColor(CSharpMobileComponents.Resources.Constants.ColorTypes.SecondaryButtonTextColor));
+           
+            testStack.Children.Add(img);
         }
 
         protected override void OnAppearing()

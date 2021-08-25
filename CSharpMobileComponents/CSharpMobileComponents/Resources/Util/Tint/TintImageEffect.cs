@@ -26,6 +26,13 @@ namespace CSharpMobileComponents.Resources.Util.Tint
         }
 
 
+        public static void SetTintColor2(BindableObject element, Binding value)
+        {
+
+            element.SetValue(TintColorProperty, value);
+        }
+
+
         static void OnTintColorPropertyPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             AttachEffect(bindable as Image, (Color)newValue);

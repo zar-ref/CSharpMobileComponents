@@ -13,10 +13,10 @@
                 <RowDefinition Height="0.2*"/>
                 <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
-            <StackLayout Grid.Row="0" Orientation="Vertical">
+            <StackLayout Grid.Row="0" Orientation="Vertical" x:Name="testStack">
                 <Image Source="icon_sun.png"/>
-                <Image Source="icon_sun.png" Effects:TintImageEffect.TintColor="Blue"/>
-                <Image Source="icon_sun.png" Effects:TintImageEffect.TintColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=SecondaryButtonTextColor }"  />
+                <!--<Image Source="icon_sun.png" Effects:TintImageEffect.TintColor="Blue"/>
+                <Image Source="icon_sun.png" Effects:TintImageEffect.TintColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=SecondaryButtonTextColor }"  />-->
 
                 <ImageButton  Source="icon_sun.png" Effects:TintImageButtonEffect.TintColor="OrangeRed" BackgroundColor="Transparent" />
                 <ImageButton  Source="icon_sun.png" BackgroundColor="Transparent"  Effects:TintImageButtonEffect.TintColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=SecondaryButtonTextColor }"  />
