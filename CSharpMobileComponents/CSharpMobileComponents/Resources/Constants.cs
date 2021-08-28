@@ -109,7 +109,11 @@ namespace CSharpMobileComponents.Resources
         {
             ModalMargin,
             SecondaryButtonMargin,
-            SecondaryButtonPadding
+            SecondaryButtonPadding,
+            MarginTop_1,
+            MarginTop_2,
+            MarginTop_3, 
+            MarginTop_4,
         }
 
     }

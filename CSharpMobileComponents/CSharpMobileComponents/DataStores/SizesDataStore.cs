@@ -95,7 +95,7 @@ namespace CSharpMobileComponents.DataStores
             {
                 MobileSize = 14,
                 TabletSize = 24
-            });           
+            });
             Sizes.Add(AppDeviceSizes.ButtonControlHeight.ToString(), new DeviceSizes()
             {
                 MobileSize = 42,
@@ -129,6 +129,26 @@ namespace CSharpMobileComponents.DataStores
             Thicknesses.Add(AppDeviceThicknesses.ModalMargin.ToString(), new ThicknessModel()
             {
                 MobileThickness = 6,
+                TabletThickness = 6
+            });
+            Thicknesses.Add(AppDeviceThicknesses.MarginTop_1.ToString(), new ThicknessModel()
+            {
+                MobileThickness =  new Thickness( 0 , 2 , 0, 0),
+                TabletThickness = 6
+            });
+            Thicknesses.Add(AppDeviceThicknesses.MarginTop_2.ToString(), new ThicknessModel()
+            {
+                MobileThickness = new Thickness(0, 4, 0, 0),
+                TabletThickness = 6
+            });
+            Thicknesses.Add(AppDeviceThicknesses.MarginTop_3.ToString(), new ThicknessModel()
+            {
+                MobileThickness = new Thickness(0, 8, 0, 0),
+                TabletThickness = 6
+            });
+            Thicknesses.Add(AppDeviceThicknesses.MarginTop_4.ToString(), new ThicknessModel()
+            {
+                MobileThickness = new Thickness(0, 16, 0, 0),
                 TabletThickness = 6
             });
         }

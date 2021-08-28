@@ -24,7 +24,7 @@
                                         DisplayText="{Binding Path=Translations , Converter={StaticResource TranslationConverter} , ConverterParameter=btn-start-demo , Mode=TwoWay}"/>
 
             <controls:PrimaryBtnControl Grid.Row="2"    
-                                        Margin="0 , 8 , 0 ,0"
+                                        Margin="{Binding Thicknesses, Converter={StaticResource SizesConverter} , ConverterParameter=MarginTop_3 }"
                                         ButtonClicked="PrimaryBtnControl_ButtonClicked_2"
                                         WidthRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=PrimaryOrSecondaryButtonControlWidth }"
                                         VerticalOptions="Start" HorizontalOptions="Center" 
