@@ -1,4 +1,5 @@
-﻿using CSharpMobileComponents.Resources.Util.Tint;
+﻿using CSharpMobileComponents.Resources.Converters;
+using CSharpMobileComponents.Resources.Util.Tint;
 using CSharpMobileComponents.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static CSharpMobileComponents.Resources.Constants;
 
 namespace CSharpMobileComponents.Pages
 {
@@ -20,12 +22,7 @@ namespace CSharpMobileComponents.Pages
         {
             InitializeComponent();     
   
-            BindingContext = _viewModel = new HomePageViewModel();
-            var img = new Image() { Source = "icon_sun.png"   };
-   
-            TintImageEffect.SetTintColor2(img, BaseViewModel.GetColorBindingFromColor(CSharpMobileComponents.Resources.Constants.ColorTypes.SecondaryButtonTextColor));
-           
-            testStack.Children.Add(img);
+            BindingContext = _viewModel = new HomePageViewModel();  
         }
 
         protected override void OnAppearing()

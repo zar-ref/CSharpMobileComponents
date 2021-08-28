@@ -26,6 +26,14 @@ namespace CSharpMobileComponents.Resources.Util.Tint
             element.SetValue(TintColorProperty, value);
         }
 
+        //For Code  Behind Binding
+        public static void SetTintColorBinding(BindableObject element, Binding value)
+        {
+
+            element.SetBinding(TintColorProperty, value);
+        }
+
+
 
         static void OnTintColorPropertyPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
