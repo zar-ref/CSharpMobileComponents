@@ -12,9 +12,8 @@
                 <RowDefinition Height="0.6*"/>
                 <RowDefinition Height="0.2*"/>
                 <RowDefinition Height="0.2*"/>
-            </Grid.RowDefinitions>
-          
-       
+            </Grid.RowDefinitions> 
+
             <!--Command="{Binding  GoToMenuPageCommand  , Mode=OneWay}"-->
             <controls:SecondaryBtnControl  
                                         Grid.Row="1"  
@@ -24,7 +23,7 @@
                                         DisplayText="{Binding Path=Translations , Converter={StaticResource TranslationConverter} , ConverterParameter=btn-start-demo , Mode=TwoWay}"/>
 
             <controls:PrimaryBtnControl Grid.Row="2"    
-                                        Margin="{Binding Thicknesses, Converter={StaticResource SizesConverter} , ConverterParameter=MarginTop_3 }"
+                                        Margin="{Binding Thicknesses, Converter={StaticResource ThicknessConverter} , ConverterParameter=MarginTop_3 }"
                                         ButtonClicked="PrimaryBtnControl_ButtonClicked_2"
                                         WidthRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=PrimaryOrSecondaryButtonControlWidth }"
                                         VerticalOptions="Start" HorizontalOptions="Center" 

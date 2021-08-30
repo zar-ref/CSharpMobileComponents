@@ -11,8 +11,6 @@
                 <ColumnDefinition Width=" *" />
             </Grid.ColumnDefinitions>
 
-
-
             <Grid   Grid.Row="0" Grid.Column="0"   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height=".2*" />

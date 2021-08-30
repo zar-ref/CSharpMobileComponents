@@ -17,7 +17,7 @@ namespace CSharpMobileComponents.Pages
             get { return this.ChildContentContainer.Content; }
             set { this.ChildContentContainer.Content = value; }
         }
-
+        public bool IsModalBeingUsed { get; set; } = false;
         public Frame ModalFrame { get; set; }
         public Frame ModalBorderFrame { get; set; }
         public Frame OverlayFrame { get; set; }
@@ -38,10 +38,14 @@ namespace CSharpMobileComponents.Pages
         {
             if (isVisible)
             {
+                if (IsModalBeingUsed)
+                    return;
+
                 OverlayFrame.IsVisible = isVisible;
                 ModalBorderFrame.IsVisible = isVisible;
                 ModalFrame.IsVisible = isVisible;
                 ModalFrame.Content = modalView;
+                IsModalBeingUsed = true;
                 return;
 
             }
@@ -50,6 +54,7 @@ namespace CSharpMobileComponents.Pages
             ModalBorderFrame.IsVisible = isVisible;
             OverlayFrame.IsVisible = isVisible;
             ModalFrame.Content = null;
+            IsModalBeingUsed = false;
         }
 
     }
