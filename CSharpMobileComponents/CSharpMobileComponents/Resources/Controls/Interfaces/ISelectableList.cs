@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CSharpMobileComponents.Resources.Controls.Interfaces
 {
-    interface ISelectableList
+    public interface ISelectableList
     {
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpMobileComponents.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,7 @@ namespace CSharpMobileComponents.Pages
             OverlayFrame = overlayFrame;
             ModalBorderFrame = modalBorderFrame;
             ModalFrame = modalFrame;
+            ResetToolbar();
         }
         public void OnCloseModal(System.Object sender, System.EventArgs e)
         {
@@ -57,5 +59,24 @@ namespace CSharpMobileComponents.Pages
             IsModalBeingUsed = false;
         }
 
+        private void ResetToolbar()
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                Application.Current.MainPage.ToolbarItems.Clear(); 
+
+                ToolbarItem changeThemeToolbarItem = new ToolbarItem() { IconImageSource = "icon_sun", Priority = 0, Order = ToolbarItemOrder.Primary };
+                changeThemeToolbarItem.Clicked += OnChangeTheme;
+                Application.Current.MainPage.ToolbarItems.Add(changeThemeToolbarItem);
+            });
+        }
+
+        private void OnChangeTheme(object sender, EventArgs e)
+        {
+            var vm = (BaseViewModel)this.BindingContext;
+            if (vm == null)
+                return;
+            vm.SwitchColorTheme(); 
+        }
     }
 }
