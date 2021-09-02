@@ -18,7 +18,6 @@
   <ItemGroup>
     <Folder Include="Resources\CustomViews\" />
     <Folder Include="Resources\Icons\" />
-    <Folder Include="Resources\ViewCells\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,11 +44,17 @@
     <EmbeddedResource Update="Resources\Controls\SecondaryBtnControl.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Controls\SelectableListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Resx\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Styles\Colors.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ViewCells\SelectableRadioViewCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

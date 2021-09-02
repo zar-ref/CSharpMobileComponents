@@ -14,6 +14,7 @@
                     <Converters:ColorConverter x:Key="ColorConverter"/>
                     <Converters:SizesConverter x:Key="SizesConverter"/>
                     <Converters:ThicknessConverter x:Key="ThicknessConverter"/>
+                    <Converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

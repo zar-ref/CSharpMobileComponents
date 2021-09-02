@@ -6,10 +6,9 @@ using static CSharpMobileComponents.Resources.Constants;
 
 namespace CSharpMobileComponents.Models.Lists
 {
-    public class ThemesModel : BaseModel, ISelectableModel
+    public class ThemesModel : SelectableModel
     {
         public string ThemeName { get; set; }
-        public  ColorThemes Theme { get; set; }
-        public  bool IsSelected { get; set; }
+        public  ColorThemes Theme { get; set; } 
     }
 }

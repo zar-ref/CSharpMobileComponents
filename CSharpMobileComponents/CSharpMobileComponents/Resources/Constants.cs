@@ -116,5 +116,11 @@ namespace CSharpMobileComponents.Resources
             MarginTop_4,
         }
 
+        public enum SelectableListTypes
+        {
+            Radio,
+            Check
+        }
+
     }
 }
