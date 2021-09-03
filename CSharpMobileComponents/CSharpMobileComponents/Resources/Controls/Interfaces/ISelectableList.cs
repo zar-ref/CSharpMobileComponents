@@ -8,6 +8,6 @@ namespace CSharpMobileComponents.Resources.Controls.Interfaces
     public interface ISelectableList
     {
         bool HasMultipleSelections { get; set; }
-        void HandleItemTapped(object sender, ItemTappedEventArgs e)
+        void HandleItemTapped(object sender, ItemTappedEventArgs e);
     }
 }

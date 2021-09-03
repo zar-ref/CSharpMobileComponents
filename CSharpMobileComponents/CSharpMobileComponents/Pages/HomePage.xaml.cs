@@ -1,4 +1,5 @@
 ﻿using CSharpMobileComponents.Resources.Converters;
+using CSharpMobileComponents.Resources.CustomViews;
 using CSharpMobileComponents.Resources.Util.Tint;
 using CSharpMobileComponents.ViewModels;
 using System;
@@ -22,7 +23,10 @@ namespace CSharpMobileComponents.Pages
         {
             InitializeComponent();     
   
-            BindingContext = _viewModel = new HomePageViewModel();  
+            BindingContext = _viewModel = new HomePageViewModel();
+            list.ChildView = new StringOnlyView();
+            list.SetBinding(ListView.ItemsSourceProperty, "list");
+       
         }
 
         protected override void OnAppearing()

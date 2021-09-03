@@ -1,6 +1,7 @@
-﻿using CSharpMobileComponents.Models;
-using CSharpMobileComponents.Models.Interfaces;
+﻿using CSharpMobileComponents.Models; 
 using CSharpMobileComponents.Resources.Controls.Interfaces;
+using CSharpMobileComponents.Resources.CustomViews;
+using CSharpMobileComponents.Resources.ViewCells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,9 +42,35 @@ namespace CSharpMobileComponents.Resources.Controls
         }
 
 
+        //Default Behaviour is selecting the item when pressing the view cell
+        public static readonly BindableProperty ChildViewProperty = BindableProperty.Create(
+           propertyName: "ChildView",
+           returnType: typeof(View),
+           declaringType: typeof(SelectableListView) ,
+           propertyChanged: HandleChildViewPropertyChanged);
 
-     
-        private void HandleItemTapped(object sender, ItemTappedEventArgs e)
+        public View ChildView
+        {
+            get { return (View)GetValue(ChildViewProperty); }
+            set { SetValue(ChildViewProperty, value); }
+        }
+
+          public static readonly BindableProperty HasDefaultBehaviourProperty = BindableProperty.Create(
+           propertyName: "HasDefaultBehaviour",
+           returnType: typeof(bool),
+           declaringType: typeof(SelectableListView),
+           defaultValue: true);
+
+        public bool HasDefaultBehaviour
+        {
+            get { return (bool)GetValue(HasDefaultBehaviourProperty); }
+            set { SetValue(HasDefaultBehaviourProperty, value); }
+        }
+
+         
+
+
+        public void HandleItemTapped(object sender, ItemTappedEventArgs e)
         {
             var selectableItem = (SelectableModel)e.Item;
             if (selectableItem == null)
@@ -62,18 +89,35 @@ namespace CSharpMobileComponents.Resources.Controls
                 }
             }
             selectableItem.IsSelected = !selectableItem.IsSelected;
-            
+            SelectedItem = selectableItem;
             if (TappedCommand != null)
             {
                 TappedCommand?.Execute(e.Item);
             }
-            SelectedItem = null;
         }
 
         public SelectableListView()
         {
             InitializeComponent();
-            ItemTapped += HandleItemTapped; 
+
+          
+
+            if (HasDefaultBehaviour)
+                ItemTapped += HandleItemTapped;
+         
         }
+
+        static void   HandleChildViewPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var control = (SelectableListView)bindable;
+            var newView = (View)newValue;
+            control.ChildView = newView;
+            control.ItemTemplate = new DataTemplate(() =>
+            {
+                return new SelectableRadioViewCell(control.ChildView).View;
+            });
+        }
+
+    
     }
 }

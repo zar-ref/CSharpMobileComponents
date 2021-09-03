@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpMobileComponents.Models.Lists;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
@@ -10,9 +11,13 @@ namespace CSharpMobileComponents.ViewModels
     {
         public ICommand GoToMenuPageCommand { get; set; }
         public int Test { get; set; } = 2;
+        public List<StringOnlyModel> list { get; set; } = new List<StringOnlyModel>();
         public HomePageViewModel()
         { 
             GoToMenuPageCommand = new Command(() => GoToMenu());
+            list.Add(new StringOnlyModel() { DisplayText = "yo"});
+            list.Add(new StringOnlyModel() { DisplayText = "yoa"});
+       
 
         }
 

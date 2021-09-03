@@ -6,6 +6,19 @@ namespace CSharpMobileComponents.Models
 {
     public class SelectableModel : BaseModel
     {
-        public bool IsSelected { get; set; }
+        public bool isSelected { get; set; }
+
+        public bool IsSelected
+        {
+            get
+            {
+                return isSelected;
+            }
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using CSharpMobileComponents.Models;
-using CSharpMobileComponents.Models.Interfaces;
+﻿using CSharpMobileComponents.Models; 
 using CSharpMobileComponents.Resources.ViewCells.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -24,10 +23,11 @@ namespace CSharpMobileComponents.Resources.ViewCells
 
         SelectableModel SelectableItem { get; set; } = null;
 
-        public SelectableRadioViewCell()
+        public SelectableRadioViewCell(View childView)
         {
             InitializeComponent();
             SelectableItem = (SelectableModel)BindingContext;
+            ChildContentView = childView;
         }
     }
 }
