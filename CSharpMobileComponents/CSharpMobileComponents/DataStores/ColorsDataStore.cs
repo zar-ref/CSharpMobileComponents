@@ -17,6 +17,11 @@ namespace CSharpMobileComponents.DataStores
         }
 
         public string CurrentColorTheme { get; set; } = ColorThemes.DarkTheme.ToString();
+        public List<ColorThemes> AvailableColorThemes { get; set; } = new List<ColorThemes>
+        {
+            {ColorThemes.LightTheme },
+            {ColorThemes.DarkTheme }
+        };
 
         /// <summary>
         /// Key: Color Type

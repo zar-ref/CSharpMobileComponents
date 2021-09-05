@@ -11,12 +11,12 @@ namespace CSharpMobileComponents.ViewModels
     {
         public ICommand GoToMenuPageCommand { get; set; }
         public int Test { get; set; } = 2;
-        public List<StringOnlyModel> list { get; set; } = new List<StringOnlyModel>();
+        public List<ThemesModel> list { get; set; } = new List<ThemesModel>();
         public HomePageViewModel()
         { 
             GoToMenuPageCommand = new Command(() => GoToMenu());
-            list.Add(new StringOnlyModel() { DisplayText = "yo"});
-            list.Add(new StringOnlyModel() { DisplayText = "yoa"});
+            list.Add(new ThemesModel() { DisplayText = "yo"});
+            list.Add(new ThemesModel() { DisplayText = "yoa"});
        
 
         }

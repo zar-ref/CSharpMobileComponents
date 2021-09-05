@@ -37,6 +37,7 @@ namespace CSharpMobileComponents.DataStores
 
         };
 
+       
         public CultureInfo CurrentAplicationCultureInfo
         {
             get
@@ -58,7 +59,7 @@ namespace CSharpMobileComponents.DataStores
             var alreadyHasKey = Translations.Any(dic => dic.Key == resource);
             if (!alreadyHasKey)
             {
-                Translations.Add(resource, translation); 
+                Translations.Add(resource, translation);
             }
 
         }

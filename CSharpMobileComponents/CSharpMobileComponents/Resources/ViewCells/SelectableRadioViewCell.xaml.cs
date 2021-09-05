@@ -1,4 +1,6 @@
-﻿using CSharpMobileComponents.Models; 
+﻿using CSharpMobileComponents.Models;
+using CSharpMobileComponents.Models.Interfaces;
+using CSharpMobileComponents.Resources.CustomViews;
 using CSharpMobileComponents.Resources.ViewCells.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,22 +14,54 @@ using Xamarin.Forms.Xaml;
 namespace CSharpMobileComponents.Resources.ViewCells
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SelectableRadioViewCell : ViewCell, ISelectableViewCell
+    public partial class SelectableRadioViewCell : StackLayout
     {
+        public static readonly BindableProperty ChildViewProperty = BindableProperty.Create(
+          propertyName: "ChildView",
+          returnType: typeof(View),
+          defaultValue: null,
+          defaultBindingMode: BindingMode.OneWay,
+          declaringType: typeof(SelectableRadioViewCell),
+          propertyChanged: HandleChildViewPropertyChanged2);
 
-        public View ChildContentView
+        public View ChildView
         {
-            get { return this.ChildViewCellContainer.Content; }
-            set { this.ChildViewCellContainer.Content = value; }
+            get { return (View)GetValue(ChildViewProperty); }
+            set { SetValue(ChildViewProperty, value); }
+        }
+        //public View ChildContentView
+        //{
+        //    get { return this.ChildViewCellContainer.Content; }
+        //    set { this.ChildViewCellContainer.Content = value; }
+        //}
+
+        ISelectableModel SelectableItem { get; set; } = null;
+
+        public SelectableRadioViewCell()
+        {
+            InitializeComponent();  
         }
 
-        SelectableModel SelectableItem { get; set; } = null;
-
-        public SelectableRadioViewCell(View childView)
+        static void HandleChildViewPropertyChanged2(BindableObject bindable, object oldValue, object newValue)
         {
-            InitializeComponent();
-            SelectableItem = (SelectableModel)BindingContext;
-            ChildContentView = childView;
+          
+            var control = (SelectableRadioViewCell)bindable;
+            //if (control.ChildView != null)
+            //    return;
+            var v = (StringOnlyView)newValue;
+            //v.SetViewBindings();
+            control.childView.Children.Add(v);
+
         }
+        protected override void OnBindingContextChanged()
+        {
+            //base.OnBindingContextChanged();
+            //SelectableItem = (ISelectableModel)BindingContext;
+        }
+
+        //protected override void OnBindingContextChanged()
+        //{
+        //    var x = BindingContext;
+        //}
     }
 }

@@ -1,6 +1,8 @@
-﻿using CSharpMobileComponents.Resources.Converters;
+﻿using CSharpMobileComponents.Resources.Controls;
+using CSharpMobileComponents.Resources.Converters;
 using CSharpMobileComponents.Resources.CustomViews;
 using CSharpMobileComponents.Resources.Util.Tint;
+using CSharpMobileComponents.Resources.ViewCells;
 using CSharpMobileComponents.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -21,12 +23,29 @@ namespace CSharpMobileComponents.Pages
         public HomePageViewModel _viewModel;
         public HomePage()
         {
-            InitializeComponent();     
-  
+            InitializeComponent();
+
             BindingContext = _viewModel = new HomePageViewModel();
-            list.ChildView = new StringOnlyView();
+      
+
             list.SetBinding(ListView.ItemsSourceProperty, "list");
-       
+            //list.SetValue(SelectableListView.ChildViewProperty, new StringOnlyView());
+            var dataTemplate = new DataTemplate(() =>
+            {
+
+                 
+                //var selectableCell = new SelectableRadioViewCell();
+                var x = new Label();
+                //x.SetBinding(Label.TextProperty, "DisplayText");
+                //selectableCell.ChildView = x;
+                //return new ViewCell { View = x };
+                //return selectableCell;
+
+                var stringOnlyLabel = new StringOnlyView();
+                stringOnlyLabel.SetViewBindings();
+                return new ViewCell { View = stringOnlyLabel };
+            });
+            list.ItemTemplate = dataTemplate;
         }
 
         protected override void OnAppearing()
@@ -37,7 +56,7 @@ namespace CSharpMobileComponents.Pages
 
         private void PrimaryBtnControl_ButtonClicked(object sender, EventArgs e)
         {
-            _viewModel.SwitchColorTheme(); 
+            _viewModel.SwitchColorTheme();
         }
 
         private void PrimaryBtnControl_ButtonClicked_2(object sender, EventArgs e)

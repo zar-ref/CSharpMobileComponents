@@ -4,6 +4,7 @@
              x:Class="CSharpMobileComponents.Pages.HomePage"
              xmlns:pages="clr-namespace:CSharpMobileComponents.Pages"
              xmlns:controls="clr-namespace:CSharpMobileComponents.Resources.Controls" 
+             xmlns:customViews="clr-namespace:CSharpMobileComponents.Resources.CustomViews" 
              xmlns:Effects="clr-namespace:CSharpMobileComponents.Resources.Util.Tint"
              BackgroundColor="{Binding Colors , Converter={StaticResource ColorConverter} , ConverterParameter=Background} ">
     <pages:BaseNavigationPage.ChildContent>
@@ -14,8 +15,8 @@
                 <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
             <StackLayout x:Name="TestStaack" Grid.Row="0">
-                <controls:SelectableListView x:Name="list"/>
 
+                <controls:SelectableListView x:Name="list" />
             </StackLayout>
             <!--Command="{Binding  GoToMenuPageCommand  , Mode=OneWay}"-->
             <controls:SecondaryBtnControl  

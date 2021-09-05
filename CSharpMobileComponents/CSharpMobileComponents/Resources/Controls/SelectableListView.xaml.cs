@@ -1,4 +1,5 @@
-﻿using CSharpMobileComponents.Models; 
+﻿using CSharpMobileComponents.Models;
+using CSharpMobileComponents.Models.Interfaces;
 using CSharpMobileComponents.Resources.Controls.Interfaces;
 using CSharpMobileComponents.Resources.CustomViews;
 using CSharpMobileComponents.Resources.ViewCells;
@@ -46,7 +47,7 @@ namespace CSharpMobileComponents.Resources.Controls
         public static readonly BindableProperty ChildViewProperty = BindableProperty.Create(
            propertyName: "ChildView",
            returnType: typeof(View),
-           declaringType: typeof(SelectableListView) ,
+           declaringType: typeof(SelectableListView),
            propertyChanged: HandleChildViewPropertyChanged);
 
         public View ChildView
@@ -55,11 +56,11 @@ namespace CSharpMobileComponents.Resources.Controls
             set { SetValue(ChildViewProperty, value); }
         }
 
-          public static readonly BindableProperty HasDefaultBehaviourProperty = BindableProperty.Create(
-           propertyName: "HasDefaultBehaviour",
-           returnType: typeof(bool),
-           declaringType: typeof(SelectableListView),
-           defaultValue: true);
+        public static readonly BindableProperty HasDefaultBehaviourProperty = BindableProperty.Create(
+         propertyName: "HasDefaultBehaviour",
+         returnType: typeof(bool),
+         declaringType: typeof(SelectableListView),
+         defaultValue: true);
 
         public bool HasDefaultBehaviour
         {
@@ -67,12 +68,12 @@ namespace CSharpMobileComponents.Resources.Controls
             set { SetValue(HasDefaultBehaviourProperty, value); }
         }
 
-         
+
 
 
         public void HandleItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var selectableItem = (SelectableModel)e.Item;
+            var selectableItem = (ISelectableModel)e.Item;
             if (selectableItem == null)
                 return;
             var listView = (ExtendedListView)sender;
@@ -80,7 +81,7 @@ namespace CSharpMobileComponents.Resources.Controls
                 return;
             if (!HasMultipleSelections)
             {
-                var listItems = (IEnumerable<SelectableModel>)ItemsSource;
+                var listItems = (IEnumerable<ISelectableModel>)ItemsSource;
                 foreach (var listItem in listItems)
                 {
                     if (listItem == selectableItem)
@@ -100,24 +101,47 @@ namespace CSharpMobileComponents.Resources.Controls
         {
             InitializeComponent();
 
-          
-
             if (HasDefaultBehaviour)
                 ItemTapped += HandleItemTapped;
-         
         }
 
-        static void   HandleChildViewPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void HandleChildViewPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (SelectableListView)bindable;
-            var newView = (View)newValue;
-            control.ChildView = newView;
-            control.ItemTemplate = new DataTemplate(() =>
+            try
             {
-                return new SelectableRadioViewCell(control.ChildView).View;
-            });
+                var control = (SelectableListView)bindable;
+                //var newChildView = (View)newValue;
+                //var selectableCell = new SelectableRadioViewCell();
+
+                //selectableCell.SetValue(SelectableRadioViewCell.ChildViewProperty, x);
+
+                control.ItemTemplate = new DataTemplate(() =>
+                {
+                     
+
+                    var newChildView = (View)newValue;
+                    var selectableCell = new SelectableRadioViewCell();
+                    var x = new StringOnlyView();
+                    //x.SetBinding( Label.TextProperty , "DisplayText"  );
+                    selectableCell.ChildView = x;
+                    return new ViewCell { View = selectableCell };
+                    //return selectableCell;
+                });
+            }
+            catch (Exception ex)
+            {
+
+                return;
+            }
+
+
+            //control.ItemTemplate = new DataTemplate(() =>
+            //{
+
+            //    return new SelectableRadioViewCell(control.ChildView);
+            //});
         }
 
-    
+
     }
 }
