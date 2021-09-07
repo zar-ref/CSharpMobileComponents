@@ -110,26 +110,17 @@ namespace CSharpMobileComponents.Resources.Controls
             try
             {
                 var control = (SelectableListView)bindable;
-                //var newChildView = (View)newValue;
-                //var selectableCell = new SelectableRadioViewCell();
-
-                //selectableCell.SetValue(SelectableRadioViewCell.ChildViewProperty, x);
-                var newChildView = (StringOnlyView)newValue;
+     
+                var newChildView = (ICustomView)newValue;
                 var type = newChildView.GetType();
                 var dataTemplate = new DataTemplate(() =>
-                {
-                    //newChildView.SetBinding(Label.BindingContextProperty,"." );
-                    StringOnlyView x = (StringOnlyView)Activator.CreateInstance(type);
-                    x.SetViewBindings();
-                    //newChildView.SetViewBindings();
+                {                
+                    ICustomView childView = (ICustomView)Activator.CreateInstance(type);
+                    childView.SetViewBindings(); 
                     var selectableCell = new SelectableRadioViewCell();
                     selectableCell.SetViewBindings();
-                    selectableCell.SetValue(SelectableRadioViewCell.ChildViewProperty, x);
-                    //selectableCell.SetBinding(StackLayout.BindingContextProperty,"." );
-
-
-                    return new ViewCell { View = selectableCell };
-                    //return selectableCell;
+                    selectableCell.SetValue(SelectableRadioViewCell.ChildViewProperty, childView); 
+                    return selectableCell; 
                 });
                 control.ItemTemplate = dataTemplate;
             }
@@ -138,21 +129,9 @@ namespace CSharpMobileComponents.Resources.Controls
 
                 return;
             }
-
-
-            //control.ItemTemplate = new DataTemplate(() =>
-            //{
-
-            //    return new SelectableRadioViewCell(control.ChildView);
-            //});
+ 
         }
-        protected override void OnBindingContextChanged()
-        {
-            var x = BindingContext;
-            //ChildView.SetValue(BindingContextProperty, x);
-            //base.OnBindingContextChanged();
-            //SelectableItem = (ISelectableModel)BindingContext;
-        }
+ 
 
 
     }

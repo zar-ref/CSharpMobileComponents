@@ -11,7 +11,7 @@ using Xamarin.Forms.Xaml;
 namespace CSharpMobileComponents.Resources.CustomViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class StringOnlyView : Label
+    public partial class StringOnlyView : Label, ICustomView
     {
         IDisplayTextModel TextItem { get; set; } = null;
         public static readonly BindableProperty DisplayTextProperty = BindableProperty.Create(
@@ -35,20 +35,27 @@ namespace CSharpMobileComponents.Resources.CustomViews
 
         public StringOnlyView()
         {
-            InitializeComponent();
-            var x = BindingContext;
+            InitializeComponent(); 
         }
 
         protected override void OnBindingContextChanged()
         {
 
             base.OnBindingContextChanged();
-            var x = BindingContext as IDisplayTextModel;
-            if (x == null)
+            var bindingContext = BindingContext as IDisplayTextModel;
+            if (bindingContext == null)
                 return;
-            SetViewBindings();
-            //TextItem = x;
-            //Text = TextItem.DisplayText;
+            if (TextItem == null)
+            {
+                TextItem = bindingContext;
+                SetViewBindings();
+            }
+
+            if (TextItem.DisplayText != bindingContext.DisplayText)
+            {
+                TextItem = bindingContext;
+                SetViewBindings();
+            } 
         }
 
         public void SetViewBindings()

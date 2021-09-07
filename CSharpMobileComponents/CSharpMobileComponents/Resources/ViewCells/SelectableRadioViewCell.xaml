@@ -1,15 +1,20 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<StackLayout xmlns="http://xamarin.com/schemas/2014/forms" 
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CSharpMobileComponents.Resources.ViewCells.SelectableRadioViewCell" 
- 
-        Orientation="Horizontal"                         
-        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-    <!--radio selection-->
-    <Label Text="olaaaaaa"   HorizontalOptions="Start" VerticalOptions="Start"/>
-    <Label x:Name="lbl"   TextColor="Red"  HorizontalOptions="Start" VerticalOptions="Start"/>
-    <StackLayout 
+             x:Class="CSharpMobileComponents.Resources.ViewCells.SelectableRadioViewCell"    >
+    <StackLayout Orientation="Horizontal">
+        <Label Text="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}} , Path=BindingContext.Translations , Converter={StaticResource TranslationConverter} , ConverterParameter=btn-buy-now , Mode=TwoWay}"   HorizontalOptions="Start" VerticalOptions="Start"/>
+        <Label IsVisible="{Binding IsSelected, Converter={StaticResource InverseBoolConverter}}" 
+               Text="de selected"  
+               TextColor="Red"  HorizontalOptions="Start" VerticalOptions="Start"/>
+        <Label Text="selected"    
+               IsVisible="{Binding IsSelected}"
+               TextColor="LightBlue"  HorizontalOptions="Start" VerticalOptions="Start"/>
+        <StackLayout 
             x:Name="childView" 
             HorizontalOptions="End" VerticalOptions="End"/>
 
-</StackLayout>
+    </StackLayout>
+    <!--radio selection-->
+
+</ViewCell>

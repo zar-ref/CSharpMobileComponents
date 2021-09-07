@@ -14,7 +14,7 @@ using Xamarin.Forms.Xaml;
 namespace CSharpMobileComponents.Resources.ViewCells
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SelectableRadioViewCell : StackLayout
+    public partial class SelectableRadioViewCell : ViewCell, ISelectableViewCell, ICustomView
     {
         public static readonly BindableProperty ChildViewProperty = BindableProperty.Create(
           propertyName: "ChildView",
@@ -34,38 +34,37 @@ namespace CSharpMobileComponents.Resources.ViewCells
         //    get { return this.ChildViewCellContainer.Content; }
         //    set { this.ChildViewCellContainer.Content = value; }
         //}
-        public static readonly BindableProperty DisplayTextProperty = BindableProperty.Create(
-        propertyName: "DisplayText",
-        returnType: typeof(string),
-        declaringType: typeof(SelectableRadioViewCell),
-        propertyChanged: HandleDisplayTextPropertyChanged);
+        //public static readonly BindableProperty DisplayTextProperty = BindableProperty.Create(
+        //propertyName: "DisplayText",
+        //returnType: typeof(string),
+        //declaringType: typeof(SelectableRadioViewCell),
+        //propertyChanged: HandleDisplayTextPropertyChanged);
 
-        private static void HandleDisplayTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var control = (SelectableRadioViewCell)bindable;
-            var newText = (string)newValue;
-            control.DisplayText = newText;
-            control.lbl.Text = newText;
-        }
-        public string DisplayText
-        {
-            get { return (string)GetValue(DisplayTextProperty); }
-            set { SetValue(DisplayTextProperty, value); }
-        }
+        //private static void HandleDisplayTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        //{
+        //    var control = (SelectableRadioViewCell)bindable;
+        //    var newText = (string)newValue;
+        //    control.DisplayText = newText; 
+        //}
+        //public string DisplayText
+        //{
+        //    get { return (string)GetValue(DisplayTextProperty); }
+        //    set { SetValue(DisplayTextProperty, value); }
+        //}
 
         ISelectableModel SelectableItem { get; set; } = null;
 
         public SelectableRadioViewCell()
         {
-            InitializeComponent(); 
+            InitializeComponent();
 
         }
 
-       
+
 
         static void HandleChildViewPropertyChanged2(BindableObject bindable, object oldValue, object newValue)
         {
-          
+
             var control = (SelectableRadioViewCell)bindable;
             //if (control.ChildView != null)
             //    return;
@@ -78,20 +77,24 @@ namespace CSharpMobileComponents.Resources.ViewCells
         }
         protected override void OnBindingContextChanged()
         {
-            var x = BindingContext;
-            ChildView.SetValue(BindingContextProperty, x);
-            //base.OnBindingContextChanged();
-            //SelectableItem = (ISelectableModel)BindingContext;
+            base.OnBindingContextChanged();
+            var bindingContext = BindingContext;
+            if (bindingContext == null)
+                return;
+            ChildView.SetValue(BindingContextProperty, bindingContext);
+            var selectableItemReceived = BindingContext as ISelectableModel;
+            if (SelectableItem == null)
+                SelectableItem = selectableItemReceived;
+            //TODO
+            //if(SelectableItem.IsSelected != selectableItemReceived.IsSelected )
+             
         }
 
         public void SetViewBindings()
         {
-            this.SetBinding(DisplayTextProperty, "DisplayText");
+            //this.SetBinding(DisplayTextProperty, "DisplayText");
         }
 
-        //protected override void OnBindingContextChanged()
-        //{
-        //    var x = BindingContext;
-        //}
+      
     }
 }

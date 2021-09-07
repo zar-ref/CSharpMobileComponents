@@ -15,7 +15,7 @@ namespace CSharpMobileComponents.ViewModels
         public HomePageViewModel()
         { 
             GoToMenuPageCommand = new Command(() => GoToMenu());
-            list.Add(new ThemesModel() { DisplayText = "yo"});
+            list.Add(new ThemesModel() { DisplayText = "yo", IsSelected = true }) ;
             list.Add(new ThemesModel() { DisplayText = "yoa"});
        
 

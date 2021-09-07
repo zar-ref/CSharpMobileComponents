@@ -7,6 +7,6 @@ namespace CSharpMobileComponents.Resources.ViewCells.Interfaces
 {
     interface ISelectableViewCell
     {
-        View ChildContentView { get; set; }
+        View ChildView { get; set; }
     }
 }
