@@ -57,7 +57,7 @@ namespace CSharpMobileComponents.Pages
         private void PrimaryBtnControl_ButtonClicked(object sender, EventArgs e)
         {
             //_viewModel.SwitchColorTheme();
-            //_viewModel.list.FirstOrDefault().IsSelected = !_viewModel.list.FirstOrDefault().IsSelected;
+            _viewModel.list.FirstOrDefault().IsSelected = !_viewModel.list.FirstOrDefault().IsSelected;
         }
 
         private void PrimaryBtnControl_ButtonClicked_2(object sender, EventArgs e)
