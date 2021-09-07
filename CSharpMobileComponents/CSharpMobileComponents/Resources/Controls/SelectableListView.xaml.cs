@@ -114,19 +114,24 @@ namespace CSharpMobileComponents.Resources.Controls
                 //var selectableCell = new SelectableRadioViewCell();
 
                 //selectableCell.SetValue(SelectableRadioViewCell.ChildViewProperty, x);
-
-                control.ItemTemplate = new DataTemplate(() =>
+                var newChildView = (StringOnlyView)newValue;
+                var type = newChildView.GetType();
+                var dataTemplate = new DataTemplate(() =>
                 {
-                     
-
-                    var newChildView = (View)newValue;
+                    //newChildView.SetBinding(Label.BindingContextProperty,"." );
+                    StringOnlyView x = (StringOnlyView)Activator.CreateInstance(type);
+                    x.SetViewBindings();
+                    //newChildView.SetViewBindings();
                     var selectableCell = new SelectableRadioViewCell();
-                    var x = new StringOnlyView();
-                    //x.SetBinding( Label.TextProperty , "DisplayText"  );
-                    selectableCell.ChildView = x;
+                    selectableCell.SetViewBindings();
+                    selectableCell.SetValue(SelectableRadioViewCell.ChildViewProperty, x);
+                    //selectableCell.SetBinding(StackLayout.BindingContextProperty,"." );
+
+
                     return new ViewCell { View = selectableCell };
                     //return selectableCell;
                 });
+                control.ItemTemplate = dataTemplate;
             }
             catch (Exception ex)
             {
@@ -140,6 +145,13 @@ namespace CSharpMobileComponents.Resources.Controls
 
             //    return new SelectableRadioViewCell(control.ChildView);
             //});
+        }
+        protected override void OnBindingContextChanged()
+        {
+            var x = BindingContext;
+            //ChildView.SetValue(BindingContextProperty, x);
+            //base.OnBindingContextChanged();
+            //SelectableItem = (ISelectableModel)BindingContext;
         }
 
 

@@ -14,6 +14,24 @@ namespace CSharpMobileComponents.Resources.CustomViews
     public partial class StringOnlyView : Label
     {
         IDisplayTextModel TextItem { get; set; } = null;
+        public static readonly BindableProperty DisplayTextProperty = BindableProperty.Create(
+         propertyName: "DisplayText",
+         returnType: typeof(string),
+         declaringType: typeof(StringOnlyView),
+         propertyChanged: HandleDisplayTextPropertyChanged);
+
+        private static void HandleDisplayTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var control = (StringOnlyView)bindable;
+            var newText = (string)newValue;
+            control.DisplayText = newText;
+            control.Text = newText;
+        }
+        public string DisplayText
+        {
+            get { return (string)GetValue(DisplayTextProperty); }
+            set { SetValue(DisplayTextProperty, value); }
+        }
 
         public StringOnlyView()
         {
@@ -23,19 +41,21 @@ namespace CSharpMobileComponents.Resources.CustomViews
 
         protected override void OnBindingContextChanged()
         {
+
             base.OnBindingContextChanged();
             var x = BindingContext as IDisplayTextModel;
             if (x == null)
                 return;
-            TextItem = x;
-            Text = TextItem.DisplayText;
+            SetViewBindings();
+            //TextItem = x;
+            //Text = TextItem.DisplayText;
         }
 
         public void SetViewBindings()
         {
-            this.SetBinding(TextProperty, "DisplayText"  );
+            this.SetBinding(DisplayTextProperty, "DisplayText");
         }
 
- 
+
     }
 }

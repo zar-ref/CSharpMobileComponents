@@ -15,8 +15,20 @@
                 <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
             <StackLayout x:Name="TestStaack" Grid.Row="0">
-
                 <controls:SelectableListView x:Name="list" />
+                <!--<controls:SelectableListView x:Name="list" 
+                                             ItemsSource="{Binding list}"
+                                             >
+                    <controls:SelectableListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                   <customViews:StringOnlyView DisplayText="{Binding DisplayText}"/>
+                            </ViewCell>
+                         
+                        </DataTemplate>
+                    </controls:SelectableListView.ItemTemplate>
+
+                </controls:SelectableListView>-->
             </StackLayout>
             <!--Command="{Binding  GoToMenuPageCommand  , Mode=OneWay}"-->
             <controls:SecondaryBtnControl  

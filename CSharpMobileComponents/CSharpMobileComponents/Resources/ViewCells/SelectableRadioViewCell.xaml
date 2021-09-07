@@ -7,7 +7,7 @@
         HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
     <!--radio selection-->
     <Label Text="olaaaaaa"   HorizontalOptions="Start" VerticalOptions="Start"/>
-    <Label Text="{Binding DisplayText}"   HorizontalOptions="Start" VerticalOptions="Start"/>
+    <Label x:Name="lbl"   TextColor="Red"  HorizontalOptions="Start" VerticalOptions="Start"/>
     <StackLayout 
             x:Name="childView" 
             HorizontalOptions="End" VerticalOptions="End"/>

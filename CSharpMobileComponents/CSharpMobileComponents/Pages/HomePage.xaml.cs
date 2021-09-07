@@ -26,26 +26,26 @@ namespace CSharpMobileComponents.Pages
             InitializeComponent();
 
             BindingContext = _viewModel = new HomePageViewModel();
-      
+
 
             list.SetBinding(ListView.ItemsSourceProperty, "list");
-            //list.SetValue(SelectableListView.ChildViewProperty, new StringOnlyView());
-            var dataTemplate = new DataTemplate(() =>
-            {
+            list.SetValue(SelectableListView.ChildViewProperty, new StringOnlyView());
+            //var dataTemplate = new DataTemplate(() =>
+            //{
 
-                 
-                //var selectableCell = new SelectableRadioViewCell();
-                var x = new Label();
-                //x.SetBinding(Label.TextProperty, "DisplayText");
-                //selectableCell.ChildView = x;
-                //return new ViewCell { View = x };
-                //return selectableCell;
 
-                var stringOnlyLabel = new StringOnlyView();
-                stringOnlyLabel.SetViewBindings();
-                return new ViewCell { View = stringOnlyLabel };
-            });
-            list.ItemTemplate = dataTemplate;
+            //    var selectableCell = new SelectableRadioViewCell();
+            //    //var x = new Label();
+            //    //x.SetBinding(Label.TextProperty, "DisplayText");
+            //    //selectableCell.ChildView = x;
+            //    //return new ViewCell { View = x };
+            //    //return selectableCell;
+
+            //    var stringOnlyLabel = new StringOnlyView();
+            //    stringOnlyLabel.SetViewBindings();
+            //    return new ViewCell { View = stringOnlyLabel };
+            //});
+            //list.ItemTemplate = dataTemplate;
         }
 
         protected override void OnAppearing()
