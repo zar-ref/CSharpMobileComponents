@@ -28,53 +28,33 @@ namespace CSharpMobileComponents.Resources.ViewCells
         {
             get { return (View)GetValue(ChildViewProperty); }
             set { SetValue(ChildViewProperty, value); }
-        }
-        //public View ChildContentView
-        //{
-        //    get { return this.ChildViewCellContainer.Content; }
-        //    set { this.ChildViewCellContainer.Content = value; }
-        //}
-        //public static readonly BindableProperty DisplayTextProperty = BindableProperty.Create(
-        //propertyName: "DisplayText",
-        //returnType: typeof(string),
-        //declaringType: typeof(SelectableRadioViewCell),
-        //propertyChanged: HandleDisplayTextPropertyChanged);
-
-        //private static void HandleDisplayTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        //{
-        //    var control = (SelectableRadioViewCell)bindable;
-        //    var newText = (string)newValue;
-        //    control.DisplayText = newText; 
-        //}
-        //public string DisplayText
-        //{
-        //    get { return (string)GetValue(DisplayTextProperty); }
-        //    set { SetValue(DisplayTextProperty, value); }
-        //}
-
+        }  
         ISelectableModel SelectableItem { get; set; } = null;
-
+        public   event EventHandler<object> ToggleSelectionButtonClicked;
+    
         public SelectableRadioViewCell()
         {
             InitializeComponent();
+            toggleSelectionButton.Clicked += ToggleSelectionButton_Clicked;
 
         }
 
-
+        private void ToggleSelectionButton_Clicked(object sender, EventArgs e)
+        {
+            ToggleSelectionButtonClicked?.Invoke(sender, BindingContext);
+        }
 
         static void HandleChildViewPropertyChanged2(BindableObject bindable, object oldValue, object newValue)
         {
 
-            var control = (SelectableRadioViewCell)bindable;
-            //if (control.ChildView != null)
-            //    return;
-            var v = (StringOnlyView)newValue;
-            //v.SetBinding(StringOnlyView.DisplayTextProperty, "DisplayText");
-            //v.SetBinding(Label.TextProperty, "DisplayText");
+            var control = (SelectableRadioViewCell)bindable; 
+            var v = (StringOnlyView)newValue; 
             v.SetViewBindings();
             control.childView.Children.Add(v);
 
         }
+
+        
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();

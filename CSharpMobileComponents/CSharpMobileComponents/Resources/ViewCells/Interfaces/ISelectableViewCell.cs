@@ -8,5 +8,7 @@ namespace CSharpMobileComponents.Resources.ViewCells.Interfaces
     interface ISelectableViewCell
     {
         View ChildView { get; set; }
+
+        event EventHandler<object> ToggleSelectionButtonClicked;
     }
 }

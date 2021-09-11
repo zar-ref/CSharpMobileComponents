@@ -113,12 +113,17 @@ namespace CSharpMobileComponents.DataStores
             });
             Sizes.Add(AppDeviceSizes.OutterRadioButton.ToString(), new DeviceSizes()
             {
-                MobileSize = 20,
+                MobileSize = 24,
+                TabletSize = 33
+            });
+            Sizes.Add(AppDeviceSizes.GridRadioButtonWidthContainer.ToString(), new DeviceSizes()
+            {
+                MobileSize = 32,
                 TabletSize = 33
             });
             Sizes.Add(AppDeviceSizes.OutterRadioButtonCornerRadius.ToString(), new DeviceSizes()
             {
-                MobileSize = 10,
+                MobileSize = 12,
                 TabletSize = 33
             });
             Sizes.Add(AppDeviceSizes.InnerRadioButton.ToString(), new DeviceSizes()

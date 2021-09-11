@@ -9,67 +9,53 @@
                 <Binding Source="{RelativeSource AncestorType={x:Type ContentPage}}" Path="BindingContext.Colors"   Converter="{StaticResource ColorConverter}" ConverterParameter="ListViewSelectedItem" />
             </MultiBinding>
         </StackLayout.BackgroundColor>
-        <!--<Frame IsVisible="{Binding IsSelected, Converter={StaticResource InverseBoolConverter}}"
-               
-               
-               >
-            
-        </Frame>-->
-        <Frame 
+        <Grid HorizontalOptions="Start" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=GridRadioButtonWidthContainer }"/>
+            </Grid.ColumnDefinitions>
+            <Frame  Grid.Row="0" Grid.Column="0"
+                    IsVisible="{Binding IsSelected, Converter={StaticResource InverseBoolConverter}}"
                     HorizontalOptions="Center" VerticalOptions="Center"    
                     Margin="0" Padding="0"
-                    BackgroundColor="Green"
-                    CornerRadius="10"
-                  HeightRequest="20"
-                  WidthRequest="20">
-            <Frame 
-                        Margin="0" Padding="0"
-                        BackgroundColor="Black"
-                        CornerRadius="8"
-                        WidthRequest="16"
-                        HeightRequest="16"
-                        HorizontalOptions="Center" VerticalOptions="Center"              
-                        >
-
+                    BorderColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=RadioButton }"            
+                    BackgroundColor="Transparent"
+                    CornerRadius="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=OutterRadioButtonCornerRadius }"
+                    WidthRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=OutterRadioButton }"
+                    HeightRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=OutterRadioButton }">
             </Frame>
-        </Frame>
-
-        <Frame 
+            <Frame  Grid.Row="0" Grid.Column="0"
+                    IsVisible="{Binding IsSelected}"
                     HorizontalOptions="Center" VerticalOptions="Center"    
                     Margin="0" Padding="0"
-                    BorderColor="Green"            
-                 BackgroundColor="Transparent"
-                    CornerRadius="12"
-                  HeightRequest="24"
-                  WidthRequest="24">
-    
-            
-        </Frame>
-        <Frame 
-                    HorizontalOptions="Center" VerticalOptions="Center"    
-                    Margin="0" Padding="0"
-                    BorderColor="Green"
-            BackgroundColor="Transparent"
-                    CornerRadius="12"
-                  HeightRequest="24"
-                  WidthRequest="24">
-            <Frame 
-                        Margin="3" Padding="0"
-                        BackgroundColor="Green"
-                        CornerRadius="8"
-                        WidthRequest="16"
-                        HeightRequest="16"
-                        HorizontalOptions="Center" VerticalOptions="Center"              
-                        >
-
+                    BorderColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=RadioButton }"         
+                    BackgroundColor="Transparent"
+                    CornerRadius="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=OutterRadioButtonCornerRadius }"
+                    WidthRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=OutterRadioButton }"
+                    HeightRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=OutterRadioButton }">
+                <Frame  
+                    Margin="3" Padding="0"
+                    BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=RadioButton }"     
+                    CornerRadius="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=InnerRadioButtonCornerRadius }"
+                    WidthRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=InnerRadioButton }"
+                    HeightRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=InnerRadioButton }"
+                    HorizontalOptions="Center" VerticalOptions="Center">
+                </Frame>
             </Frame>
+            <Button Grid.Row="0" Grid.Column="0"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                    x:Name="toggleSelectionButton"/>
 
 
-        </Frame>
+
+        </Grid>
+        
         <StackLayout 
             x:Name="childView" 
             HorizontalOptions="End" VerticalOptions="End"/>
-        </StackLayout>
+    </StackLayout>
     <!--radio selection-->
 
 </ViewCell>

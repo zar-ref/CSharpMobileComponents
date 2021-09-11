@@ -99,10 +99,7 @@ namespace CSharpMobileComponents.Resources.Controls
 
         public SelectableListView()
         {
-            InitializeComponent();
-
-            if (HasDefaultBehaviour)
-                ItemTapped += HandleItemTapped;
+            InitializeComponent(); 
         }
 
         private static void HandleChildViewPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -110,29 +107,43 @@ namespace CSharpMobileComponents.Resources.Controls
             try
             {
                 var control = (SelectableListView)bindable;
-     
+
                 var newChildView = (ICustomView)newValue;
                 var type = newChildView.GetType();
                 var dataTemplate = new DataTemplate(() =>
-                {                
+                {
                     ICustomView childView = (ICustomView)Activator.CreateInstance(type);
-                    childView.SetViewBindings(); 
+                    childView.SetViewBindings();
                     var selectableCell = new SelectableRadioViewCell();
                     selectableCell.SetViewBindings();
-                    selectableCell.SetValue(SelectableRadioViewCell.ChildViewProperty, childView); 
-                    return selectableCell; 
+                    selectableCell.SetValue(SelectableRadioViewCell.ChildViewProperty, childView);
+                    //selectableCell.ToggleSelectionButtonClicked += SelectableCell_ToggleSelectionButtonClicked;
+                    return selectableCell;
                 });
                 control.ItemTemplate = dataTemplate;
             }
             catch (Exception ex)
             {
-
+                   
                 return;
             }
- 
+
         }
- 
 
-
+        //public static  void SelectableCell_ToggleSelectionButtonClicked(object sender, object e)
+        //{
+        //    var selectableItem = (ISelectableModel)e;
+        //    if (!HasMultipleSelections)
+        //    {
+        //        var listItems = (IEnumerable<ISelectableModel>)ItemsSource;
+        //        foreach (var listItem in listItems)
+        //        {
+        //            if (listItem == selectableItem)
+        //                continue;
+        //            listItem.IsSelected = false;
+        //        }
+        //    }
+        //    selectableItem.IsSelected = !selectableItem.IsSelected;
+        //}
     }
 }

@@ -106,7 +106,8 @@ namespace CSharpMobileComponents.Resources
             OutterRadioButton,
             OutterRadioButtonCornerRadius,
             InnerRadioButton,
-            InnerRadioButtonCornerRadius
+            InnerRadioButtonCornerRadius,
+            GridRadioButtonWidthContainer
 
 
         }
