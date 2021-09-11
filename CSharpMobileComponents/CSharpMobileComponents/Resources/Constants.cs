@@ -78,7 +78,8 @@ namespace CSharpMobileComponents.Resources
             PrimaryButtonBackgroundColor,
             SecondaryButtonBackgroundColor,
             PrimaryButtonTextColor,
-            ListViewSelectedItem
+            ListViewSelectedItem,
+            RadioButton
         }
 
         public enum DeviceTypes
@@ -102,6 +103,10 @@ namespace CSharpMobileComponents.Resources
             ButtonControlHeight,
             PrimaryOrSecondaryButtonControlCornerRadius,
             PrimaryOrSecondaryButtonControlWidth,
+            OutterRadioButton,
+            OutterRadioButtonCornerRadius,
+            InnerRadioButton,
+            InnerRadioButtonCornerRadius
 
 
         }
@@ -113,7 +118,7 @@ namespace CSharpMobileComponents.Resources
             SecondaryButtonPadding,
             MarginTop_1,
             MarginTop_2,
-            MarginTop_3, 
+            MarginTop_3,
             MarginTop_4,
         }
 

@@ -111,6 +111,26 @@ namespace CSharpMobileComponents.DataStores
                 MobileSize = (int)(double)(DeviceWidth / 1.2),
                 TabletSize = 33
             });
+            Sizes.Add(AppDeviceSizes.OutterRadioButton.ToString(), new DeviceSizes()
+            {
+                MobileSize = 20,
+                TabletSize = 33
+            });
+            Sizes.Add(AppDeviceSizes.OutterRadioButtonCornerRadius.ToString(), new DeviceSizes()
+            {
+                MobileSize = 10,
+                TabletSize = 33
+            });
+            Sizes.Add(AppDeviceSizes.InnerRadioButton.ToString(), new DeviceSizes()
+            {
+                MobileSize = 16,
+                TabletSize = 33
+            });
+            Sizes.Add(AppDeviceSizes.InnerRadioButtonCornerRadius.ToString(), new DeviceSizes()
+            {
+                MobileSize = 8,
+                TabletSize = 33
+            });
         }
 
         private void FillThicknessesDictionary()
@@ -133,7 +153,7 @@ namespace CSharpMobileComponents.DataStores
             });
             Thicknesses.Add(AppDeviceThicknesses.MarginTop_1.ToString(), new ThicknessModel()
             {
-                MobileThickness =  new Thickness( 0 , 2 , 0, 0),
+                MobileThickness = new Thickness(0, 2, 0, 0),
                 TabletThickness = 6
             });
             Thicknesses.Add(AppDeviceThicknesses.MarginTop_2.ToString(), new ThicknessModel()

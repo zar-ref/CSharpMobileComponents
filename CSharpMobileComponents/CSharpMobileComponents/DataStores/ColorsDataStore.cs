@@ -87,8 +87,13 @@ namespace CSharpMobileComponents.DataStores
             });
             Colors.Add(ColorTypes.ListViewSelectedItem.ToString(), new ColorTheme()
             {
-                DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.PrimaryLight.ToString()),
+                DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.DarkLightContrast.ToString()),
                 LightThemeColor = CustomStyles.GetColorFromName(ColorNames.DarkLightContrast.ToString())
+            });
+             Colors.Add(ColorTypes.RadioButton.ToString(), new ColorTheme()
+            {
+                DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.Primary.ToString()),
+                LightThemeColor = CustomStyles.GetColorFromName(ColorNames.Primary.ToString())
             });
 
         }

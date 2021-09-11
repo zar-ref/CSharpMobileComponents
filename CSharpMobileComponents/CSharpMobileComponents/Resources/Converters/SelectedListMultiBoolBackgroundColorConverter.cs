@@ -9,7 +9,7 @@ using static CSharpMobileComponents.Resources.Constants;
 
 namespace CSharpMobileComponents.Resources.Converters
 {
-    public class BoolMultiColorConverter : IMultiValueConverter
+    public class SelectedListMultiBoolBackgroundColorConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
