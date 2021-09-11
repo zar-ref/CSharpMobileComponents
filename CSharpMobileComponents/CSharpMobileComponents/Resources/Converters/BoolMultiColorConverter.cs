@@ -13,35 +13,14 @@ namespace CSharpMobileComponents.Resources.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            Dictionary<string, ColorTheme> colorDictionary = ( Dictionary<string, ColorTheme>) values[0];
-            if (colorDictionary == null)
-                return Color.Transparent;
-            bool  condition = (bool  ) values[1];
-            
-            var key = (string)parameter;
-            if (key == null)
-                return Color.Transparent;
-            string[] keys = key.Split('.');
-            if (keys.Length != 2)
-                return Color.Transparent;
             try
             {
-                if (ColorsDataStore.Instance.CurrentColorTheme == ColorThemes.DarkTheme.ToString())
-                {
-                    if (condition)
-                        return colorDictionary[keys[0]].DarkThemeColor;
-                    else
-                        return colorDictionary[keys[1]].DarkThemeColor;
-                }
-                
-                else if (ColorsDataStore.Instance.CurrentColorTheme == ColorThemes.LightTheme.ToString())
-                {
-                    if (condition)
-                        return colorDictionary[keys[0]].LightThemeColor;
-                    else
-                        return colorDictionary[keys[1]].LightThemeColor;
-                }
-         
+                Color color = (Color)values[1];
+                if (color == null)
+                    return Color.Transparent;
+                bool condition = (bool)values[0];
+                if (condition)
+                    return color;
                 else
                     return Color.Transparent;
             }

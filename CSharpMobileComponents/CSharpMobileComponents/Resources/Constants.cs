@@ -77,7 +77,8 @@ namespace CSharpMobileComponents.Resources
             SecondaryButtonTextColor,
             PrimaryButtonBackgroundColor,
             SecondaryButtonBackgroundColor,
-            PrimaryButtonTextColor
+            PrimaryButtonTextColor,
+            ListViewSelectedItem
         }
 
         public enum DeviceTypes

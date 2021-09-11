@@ -85,6 +85,11 @@ namespace CSharpMobileComponents.DataStores
                 DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.LightDark.ToString()),
                 LightThemeColor = CustomStyles.GetColorFromName(ColorNames.Dark.ToString())
             });
+            Colors.Add(ColorTypes.ListViewSelectedItem.ToString(), new ColorTheme()
+            {
+                DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.PrimaryLight.ToString()),
+                LightThemeColor = CustomStyles.GetColorFromName(ColorNames.DarkLightContrast.ToString())
+            });
 
         }
 

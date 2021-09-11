@@ -5,9 +5,9 @@
     <StackLayout Orientation="Horizontal"
                   >
         <StackLayout.BackgroundColor>
-            <MultiBinding Converter="{StaticResource BoolMultiColorConverter}" ConverterParameter="SecondaryButtonTextColor.SecondaryButtonBackgroundColor" >
-                <Binding Source="{RelativeSource AncestorType={x:Type ContentPage}}" Path="BindingContext.Colors"  />
-                <Binding Path="IsSelected"  />
+            <MultiBinding Converter="{StaticResource BoolMultiColorConverter}"   >
+                <Binding Path="IsSelected" Mode="TwoWay" />
+                <Binding Source="{RelativeSource AncestorType={x:Type ContentPage}}" Path="BindingContext.Colors"   Converter="{StaticResource ColorConverter}" ConverterParameter="ListViewSelectedItem" />
             </MultiBinding>
         </StackLayout.BackgroundColor>
         <Label Text="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}} , Path=BindingContext.Translations , Converter={StaticResource TranslationConverter} , ConverterParameter=btn-buy-now , Mode=TwoWay}"   HorizontalOptions="Start" VerticalOptions="Start"/>
