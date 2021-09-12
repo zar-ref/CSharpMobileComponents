@@ -1,7 +1,9 @@
 ﻿using CSharpMobileComponents.Models;
 using CSharpMobileComponents.Models.Interfaces;
+using CSharpMobileComponents.Pages;
 using CSharpMobileComponents.Resources.Controls.Interfaces;
 using CSharpMobileComponents.Resources.CustomViews;
+using CSharpMobileComponents.Resources.Util;
 using CSharpMobileComponents.Resources.ViewCells;
 using System;
 using System.Collections.Generic;
@@ -11,12 +13,13 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static CSharpMobileComponents.Pages.BaseNavigationPage;
 using static CSharpMobileComponents.Resources.Constants;
 
 namespace CSharpMobileComponents.Resources.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SelectableListView : ExtendedListView, ISelectableList
+    public partial class SelectableListView : ExtendedListView, ISelectableList,ICustomControl
     {
         public static readonly BindableProperty SelectableListTypeProperty = BindableProperty.Create(
           propertyName: "SelectableListType",
@@ -62,14 +65,16 @@ namespace CSharpMobileComponents.Resources.Controls
          declaringType: typeof(SelectableListView),
          defaultValue: true);
 
+        public event  RegisterControlEventHandler RegisterControlEvent;
+
         public bool HasDefaultBehaviour
         {
             get { return (bool)GetValue(HasDefaultBehaviourProperty); }
             set { SetValue(HasDefaultBehaviourProperty, value); }
         }
 
-
-
+        public int ControlHashCode { get; set; }
+         
 
         public void HandleItemTapped(object sender, ItemTappedEventArgs e)
         {
@@ -99,7 +104,9 @@ namespace CSharpMobileComponents.Resources.Controls
 
         public SelectableListView()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            ControlHashCode = this.GetHashCode();
+            
         }
 
         private static void HandleChildViewPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -107,7 +114,7 @@ namespace CSharpMobileComponents.Resources.Controls
             try
             {
                 var control = (SelectableListView)bindable;
-
+                control.RegisterControlEvent?.Invoke(control);
                 var newChildView = (ICustomView)newValue;
                 var type = newChildView.GetType();
                 var dataTemplate = new DataTemplate(() =>
@@ -117,7 +124,6 @@ namespace CSharpMobileComponents.Resources.Controls
                     var selectableCell = new SelectableRadioViewCell();
                     selectableCell.SetViewBindings();
                     selectableCell.SetValue(SelectableRadioViewCell.ChildViewProperty, childView);
-                    //selectableCell.ToggleSelectionButtonClicked += SelectableCell_ToggleSelectionButtonClicked;
                     return selectableCell;
                 });
                 control.ItemTemplate = dataTemplate;
@@ -130,20 +136,7 @@ namespace CSharpMobileComponents.Resources.Controls
 
         }
 
-        //public static  void SelectableCell_ToggleSelectionButtonClicked(object sender, object e)
-        //{
-        //    var selectableItem = (ISelectableModel)e;
-        //    if (!HasMultipleSelections)
-        //    {
-        //        var listItems = (IEnumerable<ISelectableModel>)ItemsSource;
-        //        foreach (var listItem in listItems)
-        //        {
-        //            if (listItem == selectableItem)
-        //                continue;
-        //            listItem.IsSelected = false;
-        //        }
-        //    }
-        //    selectableItem.IsSelected = !selectableItem.IsSelected;
-        //}
+        
+ 
     }
 }

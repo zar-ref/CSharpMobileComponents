@@ -1,4 +1,5 @@
-﻿using CSharpMobileComponents.ViewModels;
+﻿using CSharpMobileComponents.Resources.Controls.Interfaces;
+using CSharpMobileComponents.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,13 +24,14 @@ namespace CSharpMobileComponents.Pages
         public Frame ModalBorderFrame { get; set; }
         public Frame OverlayFrame { get; set; }
 
+        public List<ICustomControl> CustomControls { get; set; } = new List<ICustomControl>();
         public BaseNavigationPage()
         {
             InitializeComponent();
             OverlayFrame = overlayFrame;
             ModalBorderFrame = modalBorderFrame;
             ModalFrame = modalFrame;
-            ResetToolbar();
+            ResetToolbar(); 
         }
         public void OnCloseModal(System.Object sender, System.EventArgs e)
         {
@@ -77,6 +79,17 @@ namespace CSharpMobileComponents.Pages
             if (vm == null)
                 return;
             vm.SwitchColorTheme(); 
+        }      
+     
+        public delegate void RegisterControlEventHandler(object customControl);
+        public void BaseNavigationPage_RegisterControlEvent(object customControl)
+        {
+            var control = (ICustomControl)customControl;
+            if (control == null)
+                return;
+            if (CustomControls.Any(cc => cc.ControlHashCode == control.ControlHashCode))
+                return;
+            CustomControls.Add(control);
         }
     }
 }

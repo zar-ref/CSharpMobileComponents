@@ -22,7 +22,7 @@ namespace CSharpMobileComponents.Resources.ViewCells
           defaultValue: null,
           defaultBindingMode: BindingMode.OneWay,
           declaringType: typeof(SelectableRadioViewCell),
-          propertyChanged: HandleChildViewPropertyChanged2);
+          propertyChanged: HandleChildViewPropertyChanged);
 
         public View ChildView
         {
@@ -44,7 +44,7 @@ namespace CSharpMobileComponents.Resources.ViewCells
             ToggleSelectionButtonClicked?.Invoke(sender, BindingContext);
         }
 
-        static void HandleChildViewPropertyChanged2(BindableObject bindable, object oldValue, object newValue)
+        static void HandleChildViewPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
 
             var control = (SelectableRadioViewCell)bindable; 

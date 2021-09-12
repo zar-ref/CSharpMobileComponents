@@ -27,7 +27,7 @@ namespace CSharpMobileComponents.Pages
 
             BindingContext = _viewModel = new HomePageViewModel();
 
-
+            list.RegisterControlEvent += BaseNavigationPage_RegisterControlEvent;
             list.SetBinding(ListView.ItemsSourceProperty, "list");
             list.SetValue(SelectableListView.ChildViewProperty, new StringOnlyView());
             //var dataTemplate = new DataTemplate(() =>
@@ -47,6 +47,8 @@ namespace CSharpMobileComponents.Pages
             //});
             //list.ItemTemplate = dataTemplate;
         }
+
+     
 
         protected override void OnAppearing()
         {
