@@ -19,7 +19,7 @@ using static CSharpMobileComponents.Resources.Constants;
 namespace CSharpMobileComponents.Resources.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SelectableListView : ExtendedListView, ISelectableList,ICustomControl
+    public partial class SelectableListView :  ExtendedListView, ISelectableList, ICustomControl
     {
         public static readonly BindableProperty SelectableListTypeProperty = BindableProperty.Create(
           propertyName: "SelectableListType",
@@ -65,7 +65,6 @@ namespace CSharpMobileComponents.Resources.Controls
          declaringType: typeof(SelectableListView),
          defaultValue: true);
 
-        public event  RegisterControlEventHandler RegisterControlEvent;
 
         public bool HasDefaultBehaviour
         {
@@ -74,7 +73,20 @@ namespace CSharpMobileComponents.Resources.Controls
         }
 
         public int ControlHashCode { get; set; }
-         
+     
+        public static readonly BindableProperty PageHashCodeProperty = BindableProperty.Create(
+          propertyName: "PageHashCode",
+          returnType: typeof(int),
+          declaringType: typeof(SelectableListView),
+          defaultValue: 0,
+          propertyChanged: HandlePageHashCodePropertyChanged);
+
+        public int PageHashCode
+        {
+            get { return (int)GetValue(PageHashCodeProperty); }
+            set { SetValue(PageHashCodeProperty, value); }
+        }
+
 
         public void HandleItemTapped(object sender, ItemTappedEventArgs e)
         {
@@ -101,12 +113,19 @@ namespace CSharpMobileComponents.Resources.Controls
                 TappedCommand?.Execute(e.Item);
             }
         }
-
         public SelectableListView()
         {
             InitializeComponent();
             ControlHashCode = this.GetHashCode();
-            
+        }
+
+        public void RegisterControl()
+        {
+            MessagingCenter.Send<ICustomControl , int>(this, CustomControlsMessagesNames.Register.ToString(), PageHashCode);
+        }
+        public void UnsubscribeOnDisappearing()
+        {
+
         }
 
         private static void HandleChildViewPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -114,7 +133,7 @@ namespace CSharpMobileComponents.Resources.Controls
             try
             {
                 var control = (SelectableListView)bindable;
-                control.RegisterControlEvent?.Invoke(control);
+
                 var newChildView = (ICustomView)newValue;
                 var type = newChildView.GetType();
                 var dataTemplate = new DataTemplate(() =>
@@ -130,13 +149,19 @@ namespace CSharpMobileComponents.Resources.Controls
             }
             catch (Exception ex)
             {
-                   
+
                 return;
             }
 
         }
 
-        
- 
+
+        private static void HandlePageHashCodePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var control = (SelectableListView)bindable;
+            var pageHashCode = (int)newValue;
+            control.PageHashCode = pageHashCode;
+            control.RegisterControl();
+        }
     }
 }

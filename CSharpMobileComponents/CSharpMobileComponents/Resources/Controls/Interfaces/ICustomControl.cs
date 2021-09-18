@@ -8,7 +8,9 @@ namespace CSharpMobileComponents.Resources.Controls.Interfaces
     public interface ICustomControl
     {
         int ControlHashCode { get; set; }
-        event RegisterControlEventHandler RegisterControlEvent ;
+        int PageHashCode { get; set; }
+        void RegisterControl();
+        void UnsubscribeOnDisappearing();
         
 
     }

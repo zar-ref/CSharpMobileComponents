@@ -6,6 +6,7 @@
              xmlns:controls="clr-namespace:CSharpMobileComponents.Resources.Controls" 
              xmlns:customViews="clr-namespace:CSharpMobileComponents.Resources.CustomViews" 
              xmlns:Effects="clr-namespace:CSharpMobileComponents.Resources.Util.Tint"
+             x:Name="this"
              BackgroundColor="{Binding Colors , Converter={StaticResource ColorConverter} , ConverterParameter=Background} ">
     <pages:BaseNavigationPage.ChildContent>
         <Grid>
@@ -15,39 +16,7 @@
                 <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
             <StackLayout  x:Name="TestStaack" Grid.Row="0">
-                <controls:SelectableListView x:Name="list" HasUnevenRows="False" />
-                <!--<controls:SelectableListView x:Name="list" 
-                                             ItemsSource="{Binding list}"
-                                             >
-                    <controls:SelectableListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                   <customViews:StringOnlyView DisplayText="{Binding DisplayText}"/>
-                            </ViewCell>
-                         
-                        </DataTemplate>
-                    </controls:SelectableListView.ItemTemplate>
-
-                </controls:SelectableListView>-->
-             
-                <!--<Frame 
-                    HorizontalOptions="Center" VerticalOptions="Center"    
-                    Margin="30" Padding="0"
-                    BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=RadioButton }" 
-                    CornerRadius="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=OutterRadioButtonCornerRadius }"
-                    WidthRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=OutterRadioButton }"
-                    HeightRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=OutterRadioButton }">
-                    <Frame 
-                        Margin="0" Padding="0"
-                
-                        CornerRadius="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=InnerRadioButtonCornerRadius }"
-                        WidthRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=InnerRadioButton }"
-                        HeightRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=InnerRadioButton }"
-                        HorizontalOptions="Center" VerticalOptions="Center"              
-                        >
-
-                    </Frame>
-                </Frame>-->
+                <controls:SelectableListView x:Name="list" PageHashCode="{Binding PageHashCode, Source={x:Reference this}}" HasUnevenRows="False" /> 
             </StackLayout>
             <!--Command="{Binding  GoToMenuPageCommand  , Mode=OneWay}"-->
             <controls:SecondaryBtnControl  

@@ -129,5 +129,12 @@ namespace CSharpMobileComponents.Resources
             Check
         }
 
+        public enum CustomControlsMessagesNames
+        {
+            Register,
+            UnsubscribeOnDisappearing
+
+        }
+
     }
 }

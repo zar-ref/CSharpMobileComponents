@@ -16,7 +16,11 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=GridRadioButtonWidthContainer }"/>
             </Grid.ColumnDefinitions>
-            <Frame  Grid.Row="0" Grid.Column="0"
+            <Button Grid.Row="0" Grid.Column="0"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                    BackgroundColor="Transparent"
+                    x:Name="toggleSelectionButton"/>
+            <Frame  Grid.Row="0" Grid.Column="0" InputTransparent="True"
                     IsVisible="{Binding IsSelected, Converter={StaticResource InverseBoolConverter}}"
                     HorizontalOptions="Center" VerticalOptions="Center"    
                     Margin="0" Padding="0"
@@ -26,7 +30,7 @@
                     WidthRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=OutterRadioButton }"
                     HeightRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=OutterRadioButton }">
             </Frame>
-            <Frame  Grid.Row="0" Grid.Column="0"
+            <Frame  Grid.Row="0" Grid.Column="0" InputTransparent="True"
                     IsVisible="{Binding IsSelected}"
                     HorizontalOptions="Center" VerticalOptions="Center"    
                     Margin="0" Padding="0"
@@ -44,12 +48,6 @@
                     HorizontalOptions="Center" VerticalOptions="Center">
                 </Frame>
             </Frame>
-            <Button Grid.Row="0" Grid.Column="0"
-                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                    x:Name="toggleSelectionButton"/>
-
-
-
         </Grid>
         
         <StackLayout 

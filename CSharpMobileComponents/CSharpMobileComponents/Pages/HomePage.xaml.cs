@@ -23,29 +23,14 @@ namespace CSharpMobileComponents.Pages
         public HomePageViewModel _viewModel;
         public HomePage()
         {
+            PageHashCode = this.GetHashCode();
             InitializeComponent();
+           
 
             BindingContext = _viewModel = new HomePageViewModel();
-
-            list.RegisterControlEvent += BaseNavigationPage_RegisterControlEvent;
-            list.SetBinding(ListView.ItemsSourceProperty, "list");
-            list.SetValue(SelectableListView.ChildViewProperty, new StringOnlyView());
-            //var dataTemplate = new DataTemplate(() =>
-            //{
-
-
-            //    var selectableCell = new SelectableRadioViewCell();
-            //    //var x = new Label();
-            //    //x.SetBinding(Label.TextProperty, "DisplayText");
-            //    //selectableCell.ChildView = x;
-            //    //return new ViewCell { View = x };
-            //    //return selectableCell;
-
-            //    var stringOnlyLabel = new StringOnlyView();
-            //    stringOnlyLabel.SetViewBindings();
-            //    return new ViewCell { View = stringOnlyLabel };
-            //});
-            //list.ItemTemplate = dataTemplate;
+             
+            list.SetBinding(ListView.ItemsSourceProperty, nameof(_viewModel.list));
+            list.SetValue(SelectableListView.ChildViewProperty, new StringOnlyView());            
         }
 
      
