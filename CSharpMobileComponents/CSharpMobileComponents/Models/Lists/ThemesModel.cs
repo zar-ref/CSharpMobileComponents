@@ -2,12 +2,13 @@
 using CSharpMobileComponents.Models.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using static CSharpMobileComponents.Resources.Constants;
 
 namespace CSharpMobileComponents.Models.Lists
 {
-    public class ThemesModel : BaseModel, ISelectableModel, IDisplayTextModel
+    public class ThemesModel :    BaseModel, ISelectableModel, IDisplayTextModel
     {
         private bool isSelected { get; set; }
 
@@ -38,14 +39,16 @@ namespace CSharpMobileComponents.Models.Lists
             }
             set
             {
-                if (displayText != value)
-                {
+                //if (displayText != value)
+                //{
                     displayText = value;
                     OnPropertyChanged("DisplayText");
-                }
+                //}
 
             }
         }
         public ColorThemes Theme { get; set; }
+
+
     }
 }

@@ -7,5 +7,7 @@ namespace CSharpMobileComponents.Resources.CustomViews
     public interface ICustomView
     {
         void SetViewBindings();
+        void SetBindingContext(object bindingContext);
+        int? ListIndex { get; set; }
     }
 }

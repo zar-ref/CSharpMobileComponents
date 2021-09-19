@@ -10,15 +10,15 @@ namespace CSharpMobileComponents.Models
 
     public class BaseModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        public event EventHandler<ModelEventArgs> RaiseModelPropertyChangedEvent = delegate { };
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            var changed = PropertyChanged;
-            if (changed == null)
-                return;
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChangedEventHandler changed = PropertyChanged;            
+            changed?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+             
+ 
         }
     }
 

@@ -30,6 +30,8 @@ namespace CSharpMobileComponents.Resources.ViewCells
             set { SetValue(ChildViewProperty, value); }
         }  
         ISelectableModel SelectableItem { get; set; } = null;
+        public int? ListIndex { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public   event EventHandler<object> ToggleSelectionButtonClicked;
     
         public SelectableRadioViewCell()
@@ -75,6 +77,9 @@ namespace CSharpMobileComponents.Resources.ViewCells
             //this.SetBinding(DisplayTextProperty, "DisplayText");
         }
 
-      
+        public void SetBindingContext(object bindingContext)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

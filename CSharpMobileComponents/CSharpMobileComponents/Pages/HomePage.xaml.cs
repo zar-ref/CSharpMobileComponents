@@ -28,9 +28,9 @@ namespace CSharpMobileComponents.Pages
            
 
             BindingContext = _viewModel = new HomePageViewModel();
-             
-            list.SetBinding(ListView.ItemsSourceProperty, nameof(_viewModel.list));
-            list.SetValue(SelectableListView.ChildViewProperty, new StringOnlyView());            
+
+            list.SetBinding(StackLayoutList.BindingContextProperty, "list");
+            list.SetValue(StackLayoutList.ChildViewProperty, new StringOnlyView());            
         }
 
      
@@ -44,12 +44,14 @@ namespace CSharpMobileComponents.Pages
         private void PrimaryBtnControl_ButtonClicked(object sender, EventArgs e)
         {
             //_viewModel.SwitchColorTheme();
-            _viewModel.list.FirstOrDefault().IsSelected = !_viewModel.list.FirstOrDefault().IsSelected;
+            //_viewModel.list.FirstOrDefault().IsSelected = !_viewModel.list.FirstOrDefault().IsSelected;
+            _viewModel.list.FirstOrDefault().DisplayText = "changed!";
         }
 
         private void PrimaryBtnControl_ButtonClicked_2(object sender, EventArgs e)
         {
-            _viewModel.SwitchTranslations(CSharpMobileComponents.Resources.Constants.Languages.English);
+            _viewModel.list.LastOrDefault().DisplayText = "changed! again";
+            //_viewModel.SwitchTranslations(CSharpMobileComponents.Resources.Constants.Languages.English);
         }
     }
 }
