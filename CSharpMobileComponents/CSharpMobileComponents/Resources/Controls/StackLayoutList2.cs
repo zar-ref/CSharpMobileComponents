@@ -7,7 +7,7 @@ using System.Text;
 using Xamarin.Forms;
 using static CSharpMobileComponents.Resources.Constants;
 
-namespace CSharpMobileComponents.Resources.Controls
+namespace CSharpMobileComponents.Resources.Controls.StackLayoutList2
 {
     public class StackLayoutList : StackLayout, ICustomControl
     {
@@ -17,8 +17,8 @@ namespace CSharpMobileComponents.Resources.Controls
            defaultValue: null,
            defaultBindingMode: BindingMode.OneWay,
            declaringType: typeof(StackLayoutList));
-           // ,
-           //propertyChanged: HandleItemsPropertyChanged);
+        // ,
+        //propertyChanged: HandleItemsPropertyChanged);
 
 
         public IEnumerable<object> Items
@@ -42,19 +42,20 @@ namespace CSharpMobileComponents.Resources.Controls
             var type = newChildView.GetType();
             control.Children.Clear();
             int i = 0;
-            
+
             foreach (var item in control.Items)
             {
                 ICustomView childView = (ICustomView)Activator.CreateInstance(type);
                 //childView.ListIndex = i;
                 childView.SetBindingContext(item);
                 var view = (View)childView;
+                
 
                 //view.SetValue(BindingContextProperty, item);
                 control.Children.Add(view);
                 i++;
             }
-             
+
         }
 
         public View ChildView
@@ -87,7 +88,7 @@ namespace CSharpMobileComponents.Resources.Controls
 
         public StackLayoutList()
         {
-        
+
             ControlHashCode = this.GetHashCode();
         }
         private static void HandleItemsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -96,7 +97,7 @@ namespace CSharpMobileComponents.Resources.Controls
             var items = (IEnumerable<object>)newValue;
             control.Items = items;
             control.SetValue(StackLayoutList.BindingContextProperty, control.Items);
-            //BindableLayout.SetItemsSource(control, control.Items);
+
         }
 
         public void RegisterControl()
@@ -114,7 +115,7 @@ namespace CSharpMobileComponents.Resources.Controls
             var items = BindingContext as IEnumerable<object>;
             if (items == null)
                 return;
-            Items = items; 
+            Items = items;
         }
 
     }

@@ -28,12 +28,13 @@ namespace CSharpMobileComponents.Resources.ViewCells
         {
             get { return (View)GetValue(ChildViewProperty); }
             set { SetValue(ChildViewProperty, value); }
-        }  
+        }
         ISelectableModel SelectableItem { get; set; } = null;
         public int? ListIndex { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        ICustomView ICustomView.ChildView { get; set; }
 
-        public   event EventHandler<object> ToggleSelectionButtonClicked;
-    
+        public event EventHandler<object> ToggleSelectionButtonClicked;
+
         public SelectableRadioViewCell()
         {
             InitializeComponent();
@@ -49,14 +50,14 @@ namespace CSharpMobileComponents.Resources.ViewCells
         static void HandleChildViewPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
 
-            var control = (SelectableRadioViewCell)bindable; 
-            var v = (StringOnlyView)newValue; 
+            var control = (SelectableRadioViewCell)bindable;
+            var v = (StringOnlyView)newValue;
             v.SetViewBindings();
             control.childView.Children.Add(v);
 
         }
 
-        
+
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
@@ -69,7 +70,7 @@ namespace CSharpMobileComponents.Resources.ViewCells
                 SelectableItem = selectableItemReceived;
             //TODO
             //if(SelectableItem.IsSelected != selectableItemReceived.IsSelected )
-             
+
         }
 
         public void SetViewBindings()

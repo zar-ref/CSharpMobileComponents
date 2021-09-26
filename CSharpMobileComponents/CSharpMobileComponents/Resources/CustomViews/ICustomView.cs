@@ -8,6 +8,6 @@ namespace CSharpMobileComponents.Resources.CustomViews
     {
         void SetViewBindings();
         void SetBindingContext(object bindingContext);
-        int? ListIndex { get; set; }
+        ICustomView ChildView { get; set; }
     }
 }

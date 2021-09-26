@@ -1,4 +1,5 @@
 ﻿using CSharpMobileComponents.Resources.Controls;
+using CSharpMobileComponents.Resources.Controls.StackLayoutList;
 using CSharpMobileComponents.Resources.Converters;
 using CSharpMobileComponents.Resources.CustomViews;
 using CSharpMobileComponents.Resources.Util.Tint;
@@ -30,7 +31,7 @@ namespace CSharpMobileComponents.Pages
             BindingContext = _viewModel = new HomePageViewModel();
 
             list.SetBinding(StackLayoutList.BindingContextProperty, "list");
-            list.SetValue(StackLayoutList.ChildViewProperty, new StringOnlyView());            
+            list.SetValue(StackLayoutList.ItemViewProperty, new StringOnlyView());            
         }
 
      
