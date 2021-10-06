@@ -56,7 +56,10 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 
         public virtual void UnsubscribeOnDisappearing()
         {
- 
+
         }
+
+        public abstract void InitStackList(string bindingContextProperty, ICustomView view);
+      
     }
 }

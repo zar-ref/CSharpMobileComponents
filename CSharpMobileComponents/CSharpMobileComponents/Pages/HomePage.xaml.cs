@@ -29,9 +29,9 @@ namespace CSharpMobileComponents.Pages
            
 
             BindingContext = _viewModel = new HomePageViewModel();
-
-            list.SetBinding(StackLayoutList.BindingContextProperty, "list");
-            list.SetValue(StackLayoutList.ItemViewProperty, new StringOnlyView());            
+            list.InitStackList("list", new StringOnlyView());
+            //list.SetBinding(StackLayoutList.BindingContextProperty, "list");
+            //list.SetValue(StackLayoutList.ItemViewProperty, new StringOnlyView());            
         }
 
      
