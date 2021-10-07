@@ -59,7 +59,25 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 
         }
 
-        public abstract void InitStackList(string bindingContextProperty, ICustomView view);
-      
+        public abstract void InitStackList(string bindingContextProperty, ICustomView view, params ICustomView[] sequentialChildViews);
+
+        public ICustomView SetChildViews(ICustomView view, params ICustomView[] sequentialChildViews)
+        {
+            if (sequentialChildViews == null)
+                return view;
+            if (sequentialChildViews.Length == 1)
+            {
+                view.ChildView = sequentialChildViews[0];
+                return view;
+            }
+            for (int i = 1; i < sequentialChildViews.Length; i++)
+            {
+               
+                sequentialChildViews[i-1].ChildView = sequentialChildViews[i];              
+               
+
+            }
+        }
+
     }
 }

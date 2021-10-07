@@ -59,7 +59,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             Items = items;
         }
 
-        public override void InitStackList(string bindingContextProperty, ICustomView view)
+        public override void InitStackList(string bindingContextProperty, ICustomView view, params ICustomView[] sequentialChildViews)
         {
             this.SetBinding(BindingContextProperty, bindingContextProperty);
             this.SetValue(StackLayoutList.ItemViewProperty, view);
