@@ -19,7 +19,7 @@
             <StackLayout  x:Name="TestStaack" Grid.Row="0">
                 <!--<controls:SelectableListView x:Name="list" PageHashCode="{Binding PageHashCode, Source={x:Reference this}}" HasUnevenRows="False" />--> 
                 <!--<controls:StackLayoutList x:Name="list" PageHashCode="{Binding PageHashCode, Source={x:Reference this}}"   />-->
-                <stackList:StackLayoutList x:Name="list" PageHashCode="{Binding PageHashCode, Source={x:Reference this}}"/>
+                <stackList:SelectableStackLayoutList x:Name="list" PageHashCode="{Binding PageHashCode, Source={x:Reference this}}"/>
             </StackLayout>
             <!--Command="{Binding  GoToMenuPageCommand  , Mode=OneWay}"-->
             <controls:SecondaryBtnControl  

@@ -14,12 +14,15 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Button 
-            x:Name="selectItemButton"
-            Grid.Row="0" Grid.Column="0" />
+        
+            x:Name="itemTappedButton"
+            Grid.Row="0" Grid.Column="0" 
+            BackgroundColor="Transparent"
+            />
         <StackLayout 
             Grid.Row="0" Grid.Column="0"
             x:Name="view"
-            InputTransparent="True"
+            InputTransparent="True" 
             VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
     </Grid>
 </StackLayout>

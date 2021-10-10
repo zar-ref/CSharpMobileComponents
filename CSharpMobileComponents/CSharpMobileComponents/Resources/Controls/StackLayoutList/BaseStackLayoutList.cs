@@ -3,6 +3,7 @@ using CSharpMobileComponents.Resources.CustomViews;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 using static CSharpMobileComponents.Resources.Constants;
 
@@ -36,6 +37,9 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
            defaultValue: 0,
            propertyChanged: HandlePageHashCodePropertyChanged);
 
+        protected ICommand TappedItemCommand { get; set; } = null;
+        protected ICommand SelectItemItemCommand { get; set; } = null;
+
         private static void HandlePageHashCodePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (BaseStackLayoutList)bindable;
@@ -59,25 +63,8 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 
         }
 
-        public abstract void InitStackList(string bindingContextProperty, ICustomView view, params ICustomView[] sequentialChildViews);
+        public abstract void InitStackList(string bindingContextProperty, ICustomView view,   ICommand tappedItemCommand , ICommand selectItemCommand  );
 
-        public ICustomView SetChildViews(ICustomView view, params ICustomView[] sequentialChildViews)
-        {
-            if (sequentialChildViews == null)
-                return view;
-            if (sequentialChildViews.Length == 1)
-            {
-                view.ChildView = sequentialChildViews[0];
-                return view;
-            }
-            for (int i = 1; i < sequentialChildViews.Length; i++)
-            {
-               
-                sequentialChildViews[i-1].ChildView = sequentialChildViews[i];              
-               
-
-            }
-        }
-
+     
     }
 }

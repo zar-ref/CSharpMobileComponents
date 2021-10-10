@@ -11,8 +11,8 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
     {
         public object Item { get; set; }
         public ICustomView View { get; set; }
-        public object GroupKey { get; set; }
-        public ICommand OnSelectItemCommand { get; set; }
-        public object SelectItemCommandParameter { get; set; }
+        public object GroupKey { get; set; } 
+        public ICommand OnItemTappedCommand { get; set; }
+        public object ItemTappedCommandParameter { get; set; }
     }
 }

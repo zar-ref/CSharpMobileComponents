@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
@@ -33,27 +34,46 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 
             foreach (var item in control.Items)
             {
-                ICustomView childView = (ICustomView)Activator.CreateInstance(type);
-                //childView.ListIndex = i;
-                childView.SetBindingContext(item);
-                var view = (View)childView;
+                var selectableItemView = new SelectableRadioView();               
+                selectableItemView.SetBindingContext(item);
+                selectableItemView.SetValue(SelectableRadioView.SelectItemCommandProperty, control.SelectItemItemCommand);
 
-                //view.SetValue(BindingContextProperty, item);
-                control.Children.Add(view);
+                ICustomView itemView = (ICustomView)Activator.CreateInstance(type);
+                itemView.SetBindingContext(item);
+
+                //var view = (View)itemView; 
+
+                StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView };
+
+                control.Children.Add(new CustomStackLayoutListItem(stackItem));
                 i++;
             }
 
         }
 
-        public override void InitStackList(string bindingContextProperty, ICustomView view,  params ICustomView[] sequentialChildViews)
+        public override void InitStackList(string bindingContextProperty, ICustomView view, ICommand tappedItemCommand, ICommand selectItemCommand)
         {
             this.SetBinding(BindingContextProperty, bindingContextProperty);
-            this.SetValue(StackLayoutList.ItemViewProperty, view);
+            if (tappedItemCommand != null)
+                TappedItemCommand = tappedItemCommand;
+            if (selectItemCommand != null)
+                SelectItemItemCommand = selectItemCommand;
+            this.SetValue(SelectableStackLayoutList.ItemViewProperty, view);
         }
 
         public SelectableStackLayoutList() : base()
         {
 
         }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+            var items = BindingContext as IEnumerable<object>;
+            if (items == null)
+                return;
+            Items = items;
+        }
+
     }
 }

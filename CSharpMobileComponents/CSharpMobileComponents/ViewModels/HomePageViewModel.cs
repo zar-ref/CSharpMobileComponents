@@ -12,9 +12,12 @@ namespace CSharpMobileComponents.ViewModels
         public ICommand GoToMenuPageCommand { get; set; }
         public int Test { get; set; } = 2;
         public List<ThemesModel> list { get; set; } = new List<ThemesModel>();
+        public ICommand CheckItemCommand { get; set; }
+
         public HomePageViewModel()
         { 
             GoToMenuPageCommand = new Command(() => GoToMenu());
+            CheckItemCommand = new Command<ThemesModel>(model => CheckItem(model));
             list.Add(new ThemesModel() { DisplayText = "yo", IsSelected = true }) ;
             list.Add(new ThemesModel() { DisplayText = "yoa"});
        
@@ -24,6 +27,10 @@ namespace CSharpMobileComponents.ViewModels
         private void GoToMenu()
         {
 
+        }
+        public void CheckItem(ThemesModel model)
+        {
+            model.IsSelected = !model.IsSelected;
         }
     }
 }

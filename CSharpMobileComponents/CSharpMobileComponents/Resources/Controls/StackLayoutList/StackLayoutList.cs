@@ -3,6 +3,7 @@ using CSharpMobileComponents.Resources.CustomViews;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
@@ -26,6 +27,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
         private static void HandleItemViewPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (StackLayoutList)bindable;
+ 
             var newItemView = (ICustomView)newValue;
             var type = newItemView.GetType();
             control.Children.Clear();
@@ -59,7 +61,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             Items = items;
         }
 
-        public override void InitStackList(string bindingContextProperty, ICustomView view, params ICustomView[] sequentialChildViews)
+        public override void InitStackList(string bindingContextProperty, ICustomView view, ICommand tappedItemCommand, ICommand selectItemCommand)
         {
             this.SetBinding(BindingContextProperty, bindingContextProperty);
             this.SetValue(StackLayoutList.ItemViewProperty, view);
