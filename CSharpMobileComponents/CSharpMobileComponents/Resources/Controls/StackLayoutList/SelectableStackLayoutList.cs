@@ -40,7 +40,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 
                 ICustomView itemView = (ICustomView)Activator.CreateInstance(type);
                 itemView.SetBindingContext(item);
-
+                selectableItemView.ChildView = itemView;  
                 //var view = (View)itemView; 
 
                 StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView };

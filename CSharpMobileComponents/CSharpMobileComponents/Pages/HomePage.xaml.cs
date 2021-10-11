@@ -51,7 +51,7 @@ namespace CSharpMobileComponents.Pages
 
         private void PrimaryBtnControl_ButtonClicked_2(object sender, EventArgs e)
         {
-            //_viewModel.list.LastOrDefault().DisplayText = "changed! again";
+            _viewModel.list.LastOrDefault().DisplayText = "changed! again";
             //_viewModel.SwitchTranslations(CSharpMobileComponents.Resources.Constants.Languages.English);
         }
     }

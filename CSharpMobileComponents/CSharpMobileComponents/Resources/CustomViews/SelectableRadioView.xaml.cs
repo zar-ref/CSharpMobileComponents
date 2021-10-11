@@ -16,13 +16,33 @@ namespace CSharpMobileComponents.Resources.CustomViews
     public partial class SelectableRadioView : StackLayout, ICustomView
     {
         ISelectableModel SelectableItem { get; set; } = null;
-        public ICustomView ChildView { get; set; }
+        public ICustomView ChildView
+        {
+            get { return (ICustomView)GetValue(ChildViewwProperty); }
+            set { SetValue(ChildViewwProperty, value); }
+        }
+
+
+        public static readonly BindableProperty ChildViewwProperty = BindableProperty.Create(
+            propertyName: "ChildView",
+            returnType: typeof(ICustomView),
+            defaultValue: null,
+            defaultBindingMode: BindingMode.OneWay,
+            declaringType: typeof(SelectableRadioView),
+            propertyChanged: HandleChildViewPropertyChanged);
+
+        private static void HandleChildViewPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var control = (SelectableRadioView)bindable;
+            control.ChildView = (ICustomView)newValue;
+            control.childView.Children.Add((View)control.ChildView);
+        }
 
         public static readonly BindableProperty SelectItemCommandProperty = BindableProperty.Create(
-       propertyName: "SelectItemCommand",
-       returnType: typeof(ICommand),
-       declaringType: typeof(SelectableRadioView),
-       propertyChanged: HandleSelectItemCommandPropertyChanged);
+           propertyName: "SelectItemCommand",
+           returnType: typeof(ICommand),
+           declaringType: typeof(SelectableRadioView),
+           propertyChanged: HandleSelectItemCommandPropertyChanged);
 
 
         public ICommand SelectItemCommand
@@ -36,20 +56,20 @@ namespace CSharpMobileComponents.Resources.CustomViews
             var control = (SelectableRadioView)bindable;
             var newCommand = (ICommand)newValue;
             control.SelectItemCommand = newCommand;
-            //control.toggleSelectionButton.Command = newCommand;
-            //control.toggleSelectionButton.CommandParameter = control.SelectableItem;
+            control.toggleSelectionButton.Command = newCommand;
+            control.toggleSelectionButton.CommandParameter = control.SelectableItem;
         }
 
         public SelectableRadioView()
         {
             InitializeComponent();
-            toggleSelectionButton.Clicked += ToggleSelectionButton_Clicked;
-            
+            //toggleSelectionButton.Clicked += ToggleSelectionButton_Clicked;
+
         }
 
         private void ToggleSelectionButton_Clicked(object sender, EventArgs e)
         {
-          
+
         }
 
         protected override void OnBindingContextChanged()

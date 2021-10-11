@@ -24,7 +24,7 @@
                     InputTransparent="False" 
                
                     HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                    BackgroundColor="OrangeRed"
+                    BackgroundColor="Transparent"
                     x:Name="toggleSelectionButton"/>
         <Frame  Grid.Row="0" Grid.Column="0" InputTransparent="True"
                     IsVisible="{Binding IsSelected, Converter={StaticResource InverseBoolConverter}}"
