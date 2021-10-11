@@ -21,8 +21,9 @@
             />
         <StackLayout 
             Grid.Row="0" Grid.Column="0"
-            x:Name="view"
-            InputTransparent="True" 
+            x:Name="view" 
+            InputTransparent="True"
+            CascadeInputTransparent="False"
             VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
     </Grid>
 </StackLayout>

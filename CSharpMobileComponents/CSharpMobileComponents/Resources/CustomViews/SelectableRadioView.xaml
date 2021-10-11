@@ -2,9 +2,10 @@
 <StackLayout xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CSharpMobileComponents.Resources.CustomViews.SelectableRadioView"
-             Orientation="Horizontal"
-             InputTransparent="True"
-          CascadeInputTransparent="False"
+             Orientation="Horizontal"  
+             InputTransparent="True"   
+             CascadeInputTransparent="False"
+             
          >
     <StackLayout.BackgroundColor>
         <MultiBinding Converter="{StaticResource SelectedListMultiBoolBackgroundColorConverter}"   >
@@ -12,10 +13,7 @@
             <Binding Source="{RelativeSource AncestorType={x:Type ContentPage}}" Path="BindingContext.Colors"   Converter="{StaticResource ColorConverter}" ConverterParameter="ListViewSelectedItem" />
         </MultiBinding>
     </StackLayout.BackgroundColor>
-    <Grid HorizontalOptions="Start" VerticalOptions="FillAndExpand"
-            InputTransparent="True"
-          CascadeInputTransparent="False"
-       >
+    <Grid HorizontalOptions="Start" VerticalOptions="FillAndExpand">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -24,6 +22,7 @@
         </Grid.ColumnDefinitions>
         <Button Grid.Row="0" Grid.Column="0"
                     InputTransparent="False" 
+               
                     HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                     BackgroundColor="OrangeRed"
                     x:Name="toggleSelectionButton"/>
