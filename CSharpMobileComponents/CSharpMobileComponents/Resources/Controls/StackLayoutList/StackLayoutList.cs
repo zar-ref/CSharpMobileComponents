@@ -55,7 +55,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
-            var items = BindingContext as IEnumerable<object>;
+            var items = BindingContext as IList<object>;
             if (items == null)
                 return;
             Items = items;

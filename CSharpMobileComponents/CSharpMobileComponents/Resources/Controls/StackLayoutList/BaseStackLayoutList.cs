@@ -12,17 +12,18 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
     public abstract class BaseStackLayoutList : StackLayout, ICustomControl
     {
         public static readonly BindableProperty ItemsProperty = BindableProperty.Create(
-        propertyName: "Items",
-        returnType: typeof(IEnumerable<object>),
-        defaultValue: null,
-        defaultBindingMode: BindingMode.OneWay,
-        declaringType: typeof(BaseStackLayoutList));
+            propertyName: "Items",
+            returnType: typeof(IEnumerable<object>),
+            defaultValue: null,
+            defaultBindingMode: BindingMode.OneWay,
+            declaringType: typeof(BaseStackLayoutList),
+            propertyChanged: HandleItemsPropertyChanged);
 
         public IEnumerable<object> Items
         {
             get { return (IEnumerable<object>)GetValue(ItemsProperty); }
             set { SetValue(ItemsProperty, value); }
-        }
+        } 
 
         public abstract ICustomView ItemView { get; set; }
 
@@ -48,6 +49,13 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             control.RegisterControl();
         }
 
+
+        private static void HandleItemsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var control = (BaseStackLayoutList)bindable;
+            var items = newValue as IEnumerable<object>;
+            control.SetValue(BindingContextProperty, items);
+        }
         public BaseStackLayoutList()
         {
             ControlHashCode = this.GetHashCode();

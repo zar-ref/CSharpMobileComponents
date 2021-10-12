@@ -19,6 +19,8 @@ namespace CSharpMobileComponents.ViewModels
             GoToMenuPageCommand = new Command(() => GoToMenu());
             CheckItemCommand = new Command<ThemesModel>(model => CheckItem(model));
             list.Add(new ThemesModel() { DisplayText = "yo", IsSelected = true }) ;
+            list.Add(new ThemesModel() { DisplayText = "todelete"});
+            list.Add(new ThemesModel() { DisplayText = "yoa"});
             list.Add(new ThemesModel() { DisplayText = "yoa"});
        
 
@@ -30,7 +32,8 @@ namespace CSharpMobileComponents.ViewModels
         }
         public void CheckItem(ThemesModel model)
         {
-            model.IsSelected = !model.IsSelected;
+            list.RemoveAt(1);
+            OnPropertyChanged("list");
         }
     }
 }
