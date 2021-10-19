@@ -2,6 +2,7 @@
 using CSharpMobileComponents.Resources.CustomViews;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -13,15 +14,15 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
     {
         public static readonly BindableProperty ItemsProperty = BindableProperty.Create(
             propertyName: "Items",
-            returnType: typeof(IEnumerable<object>),
+            returnType: typeof(ObservableCollection<object>),
             defaultValue: null,
             defaultBindingMode: BindingMode.OneWay,
             declaringType: typeof(BaseStackLayoutList),
             propertyChanged: HandleItemsPropertyChanged);
 
-        public IEnumerable<object> Items
+        public ObservableCollection<object> Items
         {
-            get { return (IEnumerable<object>)GetValue(ItemsProperty); }
+            get { return (ObservableCollection<object>)GetValue(ItemsProperty); }
             set { SetValue(ItemsProperty, value); }
         } 
 
@@ -53,8 +54,8 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
         private static void HandleItemsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (BaseStackLayoutList)bindable;
-            var items = newValue as IEnumerable<object>;
-            control.SetValue(BindingContextProperty, items);
+            var items = newValue as ObservableCollection<object>;
+            control.Items = items;
         }
         public BaseStackLayoutList()
         {

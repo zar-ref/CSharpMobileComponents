@@ -2,6 +2,7 @@
 using CSharpMobileComponents.Resources.CustomViews;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -55,7 +56,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
-            var items = BindingContext as IList<object>;
+            var items = BindingContext as ObservableCollection<object>;
             if (items == null)
                 return;
             Items = items;

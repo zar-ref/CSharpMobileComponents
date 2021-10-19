@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 {
@@ -54,7 +55,8 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 
         public override void InitStackList(string bindingContextProperty, ICustomView view, ICommand tappedItemCommand, ICommand selectItemCommand)
         {
-            this.SetBinding(BindingContextProperty, bindingContextProperty, BindingMode.TwoWay);
+            this.SetBinding(BindingContextProperty, bindingContextProperty, BindingMode.OneWay);
+
             if (tappedItemCommand != null)
                 TappedItemCommand = tappedItemCommand;
             if (selectItemCommand != null)
@@ -62,21 +64,29 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             this.SetValue(SelectableStackLayoutList.ItemViewProperty, view);
         }
 
+      
+
         public SelectableStackLayoutList() : base()
         {
 
-        } 
+        }
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
-            var items = BindingContext as IEnumerable<object>;
+     
+            var enumerable = BindingContext as IEnumerable<object>;
+            if (enumerable == null)
+                return;
+            var items = new ObservableCollection<object>(enumerable);
+
             if (items == null)
                 return;
-            if (Items == null) //First Appearance
+            if (Items == null) //First Appeearence
                 Items = items;
+
             else
             {
-                if(Items.Count() < items.Count())//Removed from list
+                if (Items.Count() < items.Count())//Removed from list
                 {
                     var itemsToRemove = items.Except(Items).ToList();
                     foreach (var item in itemsToRemove)
@@ -87,7 +97,20 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 
                 }
             }
+            //try
+            //{ 
+
+            //    ((ObservableCollection<object>)BindingContext).CollectionChanged += Xx_CollectionChanged;
+            //}
+            //catch (Exception ex)
+            //{
+                 
+            //}
         }
 
+        public void Xx_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+
+        }
     }
 }
