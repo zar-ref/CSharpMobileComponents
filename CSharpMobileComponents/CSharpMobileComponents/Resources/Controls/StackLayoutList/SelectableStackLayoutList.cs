@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 {
@@ -26,12 +27,14 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
          declaringType: typeof(SelectableStackLayoutList),
          propertyChanged: HandleItemViewPropertyChanged);
 
-        private static void HandleItemViewPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void HandleItemViewPropertyChanged(BindableObject bindable, object oldValue, object newValue) //This should be renamed for using init
         {
             var control = (SelectableStackLayoutList)bindable;
             var newChildView = (ICustomView)newValue;
             var type = newChildView.GetType();
             control.Children.Clear();
+
+            control.ItemView = newChildView;
             int i = 0;
 
             foreach (var item in control.Items)
@@ -84,33 +87,41 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             if (Items == null) //First Appeearence
                 Items = items;
 
-            else
-            {
-                if (Items.Count() < items.Count())//Removed from list
-                {
-                    var itemsToRemove = items.Except(Items).ToList();
-                    foreach (var item in itemsToRemove)
-                    {
-                        var itemToDelete = this.Children.FirstOrDefault(_stackItem => ((CustomStackLayoutListItem)_stackItem).Item == item);
-                        this.Children.Remove(itemToDelete);
-                    }
-
-                }
-            }
-            //try
-            //{ 
-
-            //    ((ObservableCollection<object>)BindingContext).CollectionChanged += Xx_CollectionChanged;
-            //}
-            //catch (Exception ex)
-            //{
-                 
-            //}
+           
         }
 
         public void Xx_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            if(e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (var item in e.OldItems)
+                {
+                    //Removed items
+                    var itemToDelete = this.Children.FirstOrDefault(_stackItem => ((CustomStackLayoutListItem)_stackItem).Item == item);
+                    this.Children.Remove(itemToDelete);
+                }
+            }
 
+            if(e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (var item in e.NewItems)
+                {
+                    //Add items
+                    var selectableItemView = new SelectableRadioView();
+                    selectableItemView.SetBindingContext(item);
+                    selectableItemView.SetValue(SelectableRadioView.SelectItemCommandProperty, this.SelectItemItemCommand);
+                    var type = this.ItemView.GetType();
+                    ICustomView itemView = (ICustomView)Activator.CreateInstance(type);
+                    itemView.SetBindingContext(item);
+                    selectableItemView.ChildView = itemView;
+                    //var view = (View)itemView; 
+
+                    StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView };
+
+                    this.Children.Add(new CustomStackLayoutListItem(stackItem));
+                    
+                }
+            }
         }
     }
 }

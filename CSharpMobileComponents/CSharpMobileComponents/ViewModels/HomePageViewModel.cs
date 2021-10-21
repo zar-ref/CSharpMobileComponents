@@ -33,8 +33,8 @@ namespace CSharpMobileComponents.ViewModels
         }
         public void CheckItem(ThemesModel model)
         {
-            list.RemoveAt(1);
-            OnPropertyChanged("list");
+            list.Add(model);
+            //OnPropertyChanged("list");
         }
     }
 }
