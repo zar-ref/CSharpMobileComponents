@@ -5,6 +5,9 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Linq;
+using CSharpMobileComponents.Resources.Util;
+using System.Threading.Tasks;
 
 namespace CSharpMobileComponents.ViewModels
 {
@@ -16,14 +19,31 @@ namespace CSharpMobileComponents.ViewModels
         public ICommand CheckItemCommand { get; set; }
 
         public HomePageViewModel()
-        { 
+        {
             GoToMenuPageCommand = new Command(() => GoToMenu());
-            CheckItemCommand = new Command<ThemesModel>(model => CheckItem(model));
-            list.Add(new ThemesModel() { DisplayText = "yo", IsSelected = true }) ;
-            list.Add(new ThemesModel() { DisplayText = "todelete"});
-            list.Add(new ThemesModel() { DisplayText = "yoa"});
-            list.Add(new ThemesModel() { DisplayText = "yoa"});
-       
+            CheckItemCommand = new Command<ThemesModel>(async (model) =>
+          {
+              IsLoading = true;
+              await Task.Run(async () =>
+              {
+
+                  await BeginInvokeOnMainThreadAsync(async () => await CheckItem(model));
+              });
+
+          });
+
+            list.Add(new ThemesModel() { DisplayText = "2", IsSelected = true });
+            list.Add(new ThemesModel() { DisplayText = "3" });
+            list.Add(new ThemesModel() { DisplayText = "1" });
+            list.Add(new ThemesModel() { DisplayText = "5" });
+            list.Add(new ThemesModel() { DisplayText = "4" });
+            list.Add(new ThemesModel() { DisplayText = "44" });
+            list.Add(new ThemesModel() { DisplayText = "94" });
+            list.Add(new ThemesModel() { DisplayText = "74" });
+            list.Add(new ThemesModel() { DisplayText = "34" });
+            list.Add(new ThemesModel() { DisplayText = "14" });
+            list.Add(new ThemesModel() { DisplayText = "24" });
+
 
         }
 
@@ -31,10 +51,14 @@ namespace CSharpMobileComponents.ViewModels
         {
 
         }
-        public void CheckItem(ThemesModel model)
+        private Task CheckItem(ThemesModel model)
         {
-            list.Add(model);
-            //OnPropertyChanged("list");
+            list.SortAscending(s => s.DisplayText);
+            //list.Add(model);
+            OnPropertyChanged("list");
+            return Task.CompletedTask;
         }
+
+
     }
 }

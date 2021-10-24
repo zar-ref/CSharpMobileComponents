@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CSharpMobileComponents.Pages.BaseNavigationPage">
+             x:Class="CSharpMobileComponents.Pages.BaseNavigationPage"
+             xmlns:controls="clr-namespace:CSharpMobileComponents.Resources.Controls">
     <ContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
@@ -52,6 +53,7 @@
                 Grid.Row="0" Grid.Column="0"  
                 x:Name="ChildContentContainer"            
                 />
+            <controls:LoadingSpinner Grid.Row="0" Grid.Column="0"   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -67,7 +67,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             this.SetValue(SelectableStackLayoutList.ItemViewProperty, view);
         }
 
-      
+
 
         public SelectableStackLayoutList() : base()
         {
@@ -76,7 +76,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
-     
+
             var enumerable = BindingContext as IEnumerable<object>;
             if (enumerable == null)
                 return;
@@ -87,12 +87,12 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             if (Items == null) //First Appeearence
                 Items = items;
 
-           
+
         }
 
         public void Xx_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if(e.Action == NotifyCollectionChangedAction.Remove)
+            if (e.Action == NotifyCollectionChangedAction.Remove)
             {
                 foreach (var item in e.OldItems)
                 {
@@ -102,7 +102,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                 }
             }
 
-            if(e.Action == NotifyCollectionChangedAction.Add)
+            else if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 foreach (var item in e.NewItems)
                 {
@@ -119,8 +119,30 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                     StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView };
 
                     this.Children.Add(new CustomStackLayoutListItem(stackItem));
-                    
+
                 }
+
+
+
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Move)
+            {
+                foreach (var item in e.NewItems)
+                {
+                    var selectableItemView = new SelectableRadioView();
+                    selectableItemView.SetBindingContext(item);
+                    selectableItemView.SetValue(SelectableRadioView.SelectItemCommandProperty, this.SelectItemItemCommand);
+                    var type = this.ItemView.GetType();
+                    ICustomView itemView = (ICustomView)Activator.CreateInstance(type);
+                    itemView.SetBindingContext(item);
+                    selectableItemView.ChildView = itemView;
+                    //var view = (View)itemView; 
+
+                    StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView };
+
+                    this.Children[e.NewStartingIndex] = new CustomStackLayoutListItem(stackItem);
+                }
+   
             }
         }
     }

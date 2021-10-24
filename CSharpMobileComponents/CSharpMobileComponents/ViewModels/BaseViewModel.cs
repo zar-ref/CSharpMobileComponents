@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using static CSharpMobileComponents.Resources.Constants;
 
@@ -100,6 +101,54 @@ namespace CSharpMobileComponents.ViewModels
             binding.ConverterParameter = thicknessType.ToString();
             return binding;
         }
+
+        public Task<bool> BeginInvokeOnMainThreadAsync(Func<Task> task)
+        {
+            var tcs = new TaskCompletionSource<bool>();
+          
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+                    IsLoading = true;
+                    await task();
+                    tcs.SetResult(true);
+                    IsLoading = false;
+                }
+                catch (Exception ex)
+                {
+                    IsLoading = false;
+                    tcs.SetException(ex);
+                }
+            });
+            IsLoading = false;
+            return tcs.Task;
+        }
+
+        public Task<object> BeginInvokeOnMainThreadAsync(Func<Task<object>> task)
+        {
+            var tcs = new TaskCompletionSource<object>();
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+                    IsLoading = true;
+                    var retVal = await task();
+                    tcs.SetResult(retVal);
+                    IsLoading = false;
+                }
+                catch (Exception ex)
+                {
+                    IsLoading = false;
+                    tcs.SetException(ex);
+                }
+            });
+            IsLoading = false;
+            return tcs.Task;
+        }
+
+
+
 
         #region INotifyPropertyChanged
 
