@@ -24,12 +24,12 @@ namespace CSharpMobileComponents.ViewModels
             CheckItemCommand = new Command<ThemesModel>(async (model) =>
           {
               IsLoading = true;
-              await Task.Run(async () =>
+             var x =  await Task.Run(async () =>
               {
 
-                  await BeginInvokeOnMainThreadAsync(async () => await CheckItem(model));
+                return  await BeginInvokeOnMainThreadAsync(async () => await CheckItem2(model));
               });
-
+              var y = x;
           });
 
             list.Add(new ThemesModel() { DisplayText = "2", IsSelected = true });
@@ -59,6 +59,10 @@ namespace CSharpMobileComponents.ViewModels
             return Task.CompletedTask;
         }
 
+        private Task<int> CheckItem2(ThemesModel model)
+        {
+            return Task.FromResult(2);
+        }
 
     }
 }

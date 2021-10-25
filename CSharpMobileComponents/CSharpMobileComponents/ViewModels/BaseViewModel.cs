@@ -102,7 +102,7 @@ namespace CSharpMobileComponents.ViewModels
             return binding;
         }
 
-        public Task<bool> BeginInvokeOnMainThreadAsync(Func<Task> task)
+        public Task<bool> BeginInvokeOnMainThreadAsync(Func<Task> task) //To be used only when updating UI
         {
             var tcs = new TaskCompletionSource<bool>();
           
@@ -125,7 +125,7 @@ namespace CSharpMobileComponents.ViewModels
             return tcs.Task;
         }
 
-        public Task<object> BeginInvokeOnMainThreadAsync(Func<Task<object>> task)
+        public Task<object> BeginInvokeOnMainThreadAsync(Func<Task<object>> task) //To be used only when updating UI
         {
             var tcs = new TaskCompletionSource<object>();
             Device.BeginInvokeOnMainThread(async () =>
