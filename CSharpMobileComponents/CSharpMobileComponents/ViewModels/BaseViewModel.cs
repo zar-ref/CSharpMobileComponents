@@ -110,18 +110,18 @@ namespace CSharpMobileComponents.ViewModels
             {
                 try
                 {
-                    IsLoading = true;
+                     
                     await task();
                     tcs.SetResult(true);
                     IsLoading = false;
                 }
                 catch (Exception ex)
                 {
-                    IsLoading = false;
+               
                     tcs.SetException(ex);
                 }
             });
-            IsLoading = false;
+  
             return tcs.Task;
         }
 
@@ -147,7 +147,29 @@ namespace CSharpMobileComponents.ViewModels
             return tcs.Task;
         }
 
+        public async Task<bool> RunTaskAndUpdateUI(Func<Task> task)
+        {
+            IsLoading = true;
+            var retVal= await Task.Run(async () =>
+            {
+              
+                return await BeginInvokeOnMainThreadAsync(async () => await task.Invoke());
+            });
+            IsLoading = false;
+            return retVal;
+        }
 
+        public async Task<object> RunTaskAndUpdateUI(Func<Task<object>> task)
+        {
+            IsLoading = true;
+            var retVal = await Task.Run(async () =>
+            {
+
+                return await BeginInvokeOnMainThreadAsync(async () => await task.Invoke());
+            });
+            IsLoading = false;
+            return retVal;
+        }
 
 
         #region INotifyPropertyChanged
