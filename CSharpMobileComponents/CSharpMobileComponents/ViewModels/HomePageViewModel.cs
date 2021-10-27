@@ -18,14 +18,15 @@ namespace CSharpMobileComponents.ViewModels
         public ObservableCollection<ThemesModel> list { get; set; } = new ObservableCollection<ThemesModel>();
         public ICommand CheckItemCommand { get; set; }
 
-        public HomePageViewModel()
+        public   HomePageViewModel()
         {
             GoToMenuPageCommand = new Command(() => GoToMenu());
             CheckItemCommand = new Command<ThemesModel>(async (model) =>
-          {
+            {
               await RunTaskAndUpdateUI(() => CheckItem(model));
              
-          });
+             
+            });
 
             list.Add(new ThemesModel() { DisplayText = "2", IsSelected = true });
             list.Add(new ThemesModel() { DisplayText = "3" });
