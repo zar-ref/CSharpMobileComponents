@@ -52,7 +52,7 @@ namespace CSharpMobileComponents.Pages
         {
             ColorsDataStore.Instance.List.Add(new Models.Lists.ThemesModel() { DisplayText = "neww" });
             _viewModel.OnPropertyChanged("List");
-            _ = _viewModel.List; 
+            //_ = _viewModel.List; 
             //_viewModel.list.LastOrDefault().DisplayText = "changed! again";
             //_viewModel.SwitchTranslations(CSharpMobileComponents.Resources.Constants.Languages.English);
         }
