@@ -58,7 +58,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 
         public override void InitStackList(string bindingContextProperty, ICustomView view, ICommand tappedItemCommand, ICommand selectItemCommand)
         {
-            this.SetBinding(BindingContextProperty, bindingContextProperty, BindingMode.OneWay);
+            this.SetBinding(BindingContextProperty, bindingContextProperty, BindingMode.TwoWay);
 
             if (tappedItemCommand != null)
                 TappedItemCommand = tappedItemCommand;
@@ -84,13 +84,15 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 
             if (items == null)
                 return;
-            if (Items == null) //First Appeearence
+            //if (Items == null) //first appeearence
                 Items = items;
+
+
 
 
         }
 
-        public void Xx_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        public override void Xx_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Remove)
             {

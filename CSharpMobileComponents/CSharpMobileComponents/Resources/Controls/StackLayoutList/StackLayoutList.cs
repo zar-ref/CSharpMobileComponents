@@ -3,6 +3,7 @@ using CSharpMobileComponents.Resources.CustomViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -66,6 +67,11 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
         {
             this.SetBinding(BindingContextProperty, bindingContextProperty);
             this.SetValue(StackLayoutList.ItemViewProperty, view);
+        }
+
+        public override void Xx_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

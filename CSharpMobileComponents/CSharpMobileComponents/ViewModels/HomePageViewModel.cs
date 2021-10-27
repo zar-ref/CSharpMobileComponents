@@ -8,6 +8,8 @@ using Xamarin.Forms;
 using System.Linq;
 using CSharpMobileComponents.Resources.Util;
 using System.Threading.Tasks;
+using CSharpMobileComponents.DataStores;
+using System.Collections.Specialized;
 
 namespace CSharpMobileComponents.ViewModels
 {
@@ -16,17 +18,30 @@ namespace CSharpMobileComponents.ViewModels
         public ICommand GoToMenuPageCommand { get; set; }
         public int Test { get; set; } = 2;
         public ObservableCollection<ThemesModel> list { get; set; } = new ObservableCollection<ThemesModel>();
+        public ObservableCollection<ThemesModel> List
+        {
+            get
+            {
+
+                var retVal =  ColorsDataStore.Instance.List ;
+                if (ListCollectionChangedEvent != null)
+                {
+                    retVal.CollectionChanged -= ListCollectionChangedEvent;
+                    retVal.CollectionChanged += ListCollectionChangedEvent;
+
+                }
+                return retVal;
+            }
+        }
+
+        public NotifyCollectionChangedEventHandler ListCollectionChangedEvent = null;
         public ICommand CheckItemCommand { get; set; }
 
-        public   HomePageViewModel()
+        public HomePageViewModel()
         {
             GoToMenuPageCommand = new Command(() => GoToMenu());
-            CheckItemCommand = new Command<ThemesModel>(async (model) =>
-            {
-              await RunTaskAndUpdateUI(() => CheckItem(model));
-             
-             
-            });
+            CheckItemCommand = new Command<ThemesModel>(async (_themesModel) => await RunTaskAndUpdateUI(() => CheckItem(_themesModel)));
+
 
             list.Add(new ThemesModel() { DisplayText = "2", IsSelected = true });
             list.Add(new ThemesModel() { DisplayText = "3" });

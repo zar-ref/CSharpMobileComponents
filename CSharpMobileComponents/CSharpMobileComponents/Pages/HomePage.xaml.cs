@@ -1,4 +1,5 @@
-﻿using CSharpMobileComponents.Resources.Controls;
+﻿using CSharpMobileComponents.DataStores;
+using CSharpMobileComponents.Resources.Controls;
 using CSharpMobileComponents.Resources.Controls.StackLayoutList;
 using CSharpMobileComponents.Resources.Converters;
 using CSharpMobileComponents.Resources.CustomViews;
@@ -24,36 +25,45 @@ namespace CSharpMobileComponents.Pages
         public HomePageViewModel _viewModel;
         public HomePage()
         {
-            PageHashCode = this.GetHashCode();
+            
             InitializeComponent();
-           
-
             BindingContext = _viewModel = new HomePageViewModel();
-            list.InitStackList("list" , new StringOnlyView() , null , _viewModel.CheckItemCommand);
-            _viewModel.list.CollectionChanged += list.Xx_CollectionChanged;
-            //list.SetBinding(StackLayoutList.BindingContextProperty, "list");
-            //list.SetValue(StackLayoutList.ItemViewProperty, new StringOnlyView());            
+            _ =  _viewModel.RunTaskAndUpdateUI(async () => await InitPage());         
         }
 
      
 
-        protected override void OnAppearing()
+        protected  override  void OnAppearing()
         {
             base.OnAppearing();
+            
             //_viewModel.OnPropertyChanged("Translations");
         }
 
         private void PrimaryBtnControl_ButtonClicked(object sender, EventArgs e)
         {
             //_viewModel.SwitchColorTheme();
-            _viewModel.list.FirstOrDefault().IsSelected = !_viewModel.list.FirstOrDefault().IsSelected;
-            _viewModel.list.FirstOrDefault().DisplayText = "changed!";
+            _viewModel.List.FirstOrDefault().IsSelected = !_viewModel.list.FirstOrDefault().IsSelected;
+            _viewModel.List.FirstOrDefault().DisplayText = "changed!";
+            
         }
 
         private void PrimaryBtnControl_ButtonClicked_2(object sender, EventArgs e)
         {
-            _viewModel.list.LastOrDefault().DisplayText = "changed! again";
+            ColorsDataStore.Instance.List.Add(new Models.Lists.ThemesModel() { DisplayText = "neww" });
+            _viewModel.OnPropertyChanged("List");
+            _ = _viewModel.List; 
+            //_viewModel.list.LastOrDefault().DisplayText = "changed! again";
             //_viewModel.SwitchTranslations(CSharpMobileComponents.Resources.Constants.Languages.English);
+        }
+
+        private  Task InitPage()
+        {
+            _viewModel.ListCollectionChangedEvent = list.Xx_CollectionChanged;
+            list.InitStackList("List", new StringOnlyView(), null, _viewModel.CheckItemCommand);
+
+            //_viewModel.List.CollectionChanged += list.Xx_CollectionChanged;
+            return   Task.CompletedTask;
         }
     }
 }

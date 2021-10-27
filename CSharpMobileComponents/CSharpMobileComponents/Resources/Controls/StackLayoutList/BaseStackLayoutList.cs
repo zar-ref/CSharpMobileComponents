@@ -55,7 +55,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
         {
             var control = (BaseStackLayoutList)bindable;
             var items = newValue as ObservableCollection<object>;
-            control.Items = items;
+            control.Items = items; 
         }
         public BaseStackLayoutList()
         {
@@ -74,6 +74,6 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 
         public abstract void InitStackList(string bindingContextProperty, ICustomView view,   ICommand tappedItemCommand , ICommand selectItemCommand  );
 
-     
+        public abstract void Xx_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e);
     }
 }

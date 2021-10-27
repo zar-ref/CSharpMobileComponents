@@ -30,6 +30,7 @@ namespace CSharpMobileComponents.Pages
         public BaseNavigationPage()
         {
             InitializeComponent();
+            PageHashCode = this.GetHashCode();
             OverlayFrame = overlayFrame;
             ModalBorderFrame = modalBorderFrame;
             ModalFrame = modalFrame;

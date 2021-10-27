@@ -1,7 +1,9 @@
 ﻿using CSharpMobileComponents.Models;
+using CSharpMobileComponents.Models.Lists;
 using CSharpMobileComponents.Resources.Styles;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using static CSharpMobileComponents.Resources.Constants;
 
@@ -44,6 +46,15 @@ namespace CSharpMobileComponents.DataStores
         {
             RegistDataStore();
             FillColorsDictionary();
+
+            List.Add(new ThemesModel() { DisplayText = "2", IsSelected = true });
+            List.Add(new ThemesModel() { DisplayText = "3" });
+            List.Add(new ThemesModel() { DisplayText = "1" });
+            List.Add(new ThemesModel() { DisplayText = "5" });
+            List.Add(new ThemesModel() { DisplayText = "4" });
+            List.Add(new ThemesModel() { DisplayText = "44" });
+            List.Add(new ThemesModel() { DisplayText = "94" });
+            List.Add(new ThemesModel() { DisplayText = "74" }); 
         }
 
 
@@ -104,5 +115,6 @@ namespace CSharpMobileComponents.DataStores
 
         }
 
+        public ObservableCollection<ThemesModel> List { get; set; } = new ObservableCollection<ThemesModel>();
     }
 }
