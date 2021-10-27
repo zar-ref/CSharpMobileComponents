@@ -105,23 +105,22 @@ namespace CSharpMobileComponents.ViewModels
         public Task<bool> BeginInvokeOnMainThreadAsync(Func<Task> task) //To be used only when updating UI
         {
             var tcs = new TaskCompletionSource<bool>();
-          
+
             Device.BeginInvokeOnMainThread(async () =>
             {
                 try
                 {
-                     
+
                     await task();
                     tcs.SetResult(true);
-                    IsLoading = false;
                 }
                 catch (Exception ex)
                 {
-               
+
                     tcs.SetException(ex);
                 }
             });
-  
+
             return tcs.Task;
         }
 
@@ -132,42 +131,42 @@ namespace CSharpMobileComponents.ViewModels
             {
                 try
                 {
-                    IsLoading = true;
                     var retVal = await task();
                     tcs.SetResult(retVal);
-                    IsLoading = false;
                 }
                 catch (Exception ex)
                 {
-                    IsLoading = false;
                     tcs.SetException(ex);
                 }
             });
-            IsLoading = false;
             return tcs.Task;
         }
 
-        public async Task<bool> RunTaskAndUpdateUI(Func<Task> task)
+        public async Task<bool> RunTaskAndUpdateUI(Func<Task> task, bool needsLoading = true)
         {
-            IsLoading = true;
-            var retVal= await Task.Run(async () =>
-            {
-              
-                return await BeginInvokeOnMainThreadAsync(async () => await task.Invoke());
-            });
-            IsLoading = false;
+            if (needsLoading)
+                IsLoading = true;
+            var retVal = await Task.Run(async () =>
+             {
+
+                 return await BeginInvokeOnMainThreadAsync(async () => await task.Invoke());
+             });
+            if (needsLoading)
+                IsLoading = false;
             return retVal;
         }
 
-        public async Task<object> RunTaskAndUpdateUI(Func<Task<object>> task)
+        public async Task<object> RunTaskAndUpdateUI(Func<Task<object>> task, bool needsLoading = true)
         {
-            IsLoading = true;
+            if (needsLoading)
+                IsLoading = true;
             var retVal = await Task.Run(async () =>
             {
 
                 return await BeginInvokeOnMainThreadAsync(async () => await task.Invoke());
             });
-            IsLoading = false;
+            if (needsLoading)
+                IsLoading = false;
             return retVal;
         }
 

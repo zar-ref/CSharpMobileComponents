@@ -23,13 +23,8 @@ namespace CSharpMobileComponents.ViewModels
             GoToMenuPageCommand = new Command(() => GoToMenu());
             CheckItemCommand = new Command<ThemesModel>(async (model) =>
           {
-              IsLoading = true;
-             var x =  await Task.Run(async () =>
-              {
-
-                return  await BeginInvokeOnMainThreadAsync(async () => await CheckItem2(model));
-              });
-              var y = x;
+              await RunTaskAndUpdateUI(() => CheckItem(model));
+             
           });
 
             list.Add(new ThemesModel() { DisplayText = "2", IsSelected = true });
