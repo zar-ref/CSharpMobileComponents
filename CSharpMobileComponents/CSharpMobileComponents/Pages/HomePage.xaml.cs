@@ -55,13 +55,14 @@ namespace CSharpMobileComponents.Pages
             //_viewModel.SwitchTranslations(CSharpMobileComponents.Resources.Constants.Languages.English);
         }
 
-        private  Task InitPage()
-        {
+        private async Task  InitPage()
+        { 
             _viewModel.ListCollectionChangedEvent = list.StackLayoutCollectionChanged;
             list.InitStackList("List", new StringOnlyView(), null, _viewModel.CheckItemCommand);
             testScrollView.Scrolled += _viewModel.ScrollView_OnScrolled;
+           
             //_viewModel.List.CollectionChanged += list.Xx_CollectionChanged;
-            return   Task.CompletedTask;
+            return;
         }
     }
 }
