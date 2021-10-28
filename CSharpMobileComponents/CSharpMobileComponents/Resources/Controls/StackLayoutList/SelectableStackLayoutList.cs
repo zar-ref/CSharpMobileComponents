@@ -27,7 +27,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
          declaringType: typeof(SelectableStackLayoutList),
          propertyChanged: HandleItemViewPropertyChanged);
 
-        private static void HandleItemViewPropertyChanged(BindableObject bindable, object oldValue, object newValue) //This should be renamed for using init
+        private static void HandleItemViewPropertyChanged(BindableObject bindable, object oldValue, object newValue) 
         {
             var control = (SelectableStackLayoutList)bindable;
             var newChildView = (ICustomView)newValue;
@@ -45,11 +45,9 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 
                 ICustomView itemView = (ICustomView)Activator.CreateInstance(type);
                 itemView.SetBindingContext(item);
-                selectableItemView.ChildView = itemView;
-                //var view = (View)itemView; 
+                selectableItemView.ChildView = itemView; 
 
                 StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView };
-
                 control.Children.Add(new CustomStackLayoutListItem(stackItem));
                 i++;
             }
@@ -76,7 +74,6 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
-
             var enumerable = BindingContext as IEnumerable<object>;
             if (enumerable == null)
                 return;
@@ -84,16 +81,12 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 
             if (items == null)
                 return;
-            //if (Items == null) //first appeearence
-                Items = items;
-
-
-
-
+            Items = items;
         }
 
-        public override void Xx_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        public override void StackLayoutCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+        
             if (e.Action == NotifyCollectionChangedAction.Remove)
             {
                 foreach (var item in e.OldItems)
@@ -116,16 +109,11 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                     ICustomView itemView = (ICustomView)Activator.CreateInstance(type);
                     itemView.SetBindingContext(item);
                     selectableItemView.ChildView = itemView;
-                    //var view = (View)itemView; 
 
                     StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView };
-
                     this.Children.Add(new CustomStackLayoutListItem(stackItem));
 
                 }
-
-
-
             }
             else if (e.Action == NotifyCollectionChangedAction.Move)
             {
@@ -138,13 +126,10 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                     ICustomView itemView = (ICustomView)Activator.CreateInstance(type);
                     itemView.SetBindingContext(item);
                     selectableItemView.ChildView = itemView;
-                    //var view = (View)itemView; 
 
                     StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView };
-
                     this.Children[e.NewStartingIndex] = new CustomStackLayoutListItem(stackItem);
                 }
-   
             }
         }
     }

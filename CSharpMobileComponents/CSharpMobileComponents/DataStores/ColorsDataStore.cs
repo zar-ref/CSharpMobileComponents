@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using static CSharpMobileComponents.Resources.Constants;
 
 namespace CSharpMobileComponents.DataStores
@@ -54,7 +55,23 @@ namespace CSharpMobileComponents.DataStores
             List.Add(new ThemesModel() { DisplayText = "4" });
             List.Add(new ThemesModel() { DisplayText = "44" });
             List.Add(new ThemesModel() { DisplayText = "94" });
-            List.Add(new ThemesModel() { DisplayText = "74" }); 
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
+            List.Add(new ThemesModel() { DisplayText = "74" });
         }
 
 
@@ -101,7 +118,7 @@ namespace CSharpMobileComponents.DataStores
                 DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.DarkLightContrast.ToString()),
                 LightThemeColor = CustomStyles.GetColorFromName(ColorNames.DarkLightContrast.ToString())
             });
-             Colors.Add(ColorTypes.RadioButton.ToString(), new ColorTheme()
+            Colors.Add(ColorTypes.RadioButton.ToString(), new ColorTheme()
             {
                 DarkThemeColor = CustomStyles.GetColorFromName(ColorNames.Primary.ToString()),
                 LightThemeColor = CustomStyles.GetColorFromName(ColorNames.Primary.ToString())
@@ -116,5 +133,15 @@ namespace CSharpMobileComponents.DataStores
         }
 
         public ObservableCollection<ThemesModel> List { get; set; } = new ObservableCollection<ThemesModel>();
+
+        public Task AddMoreItems()
+        {
+            List.Add(new ThemesModel() { DisplayText = "newwwwwww" });
+            List.Add(new ThemesModel() { DisplayText = "newwwwwww" });
+            List.Add(new ThemesModel() { DisplayText = "newwwwwww" });
+            List.Add(new ThemesModel() { DisplayText = "newwwwwww" });
+            List.Add(new ThemesModel() { DisplayText = "newwwwwww" });
+            return Task.CompletedTask;
+        }
     }
 }

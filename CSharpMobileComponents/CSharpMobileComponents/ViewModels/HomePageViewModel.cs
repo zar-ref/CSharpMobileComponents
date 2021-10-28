@@ -16,14 +16,13 @@ namespace CSharpMobileComponents.ViewModels
     public class HomePageViewModel : NavigationViewModel
     {
         public ICommand GoToMenuPageCommand { get; set; }
-        public int Test { get; set; } = 2;
-        public ObservableCollection<ThemesModel> list { get; set; } = new ObservableCollection<ThemesModel>();
+        public NotifyCollectionChangedEventHandler ListCollectionChangedEvent = null;
         public ObservableCollection<ThemesModel> List
         {
             get
             {
 
-                var retVal =  ColorsDataStore.Instance.List ;
+                var retVal = ColorsDataStore.Instance.List;
                 if (ListCollectionChangedEvent != null)
                 {
                     retVal.CollectionChanged -= ListCollectionChangedEvent;
@@ -34,7 +33,7 @@ namespace CSharpMobileComponents.ViewModels
             }
         }
 
-        public NotifyCollectionChangedEventHandler ListCollectionChangedEvent = null;
+
         public ICommand CheckItemCommand { get; set; }
 
         public HomePageViewModel()
@@ -43,17 +42,6 @@ namespace CSharpMobileComponents.ViewModels
             CheckItemCommand = new Command<ThemesModel>(async (_themesModel) => await RunTaskAndUpdateUI(() => CheckItem(_themesModel)));
 
 
-            list.Add(new ThemesModel() { DisplayText = "2", IsSelected = true });
-            list.Add(new ThemesModel() { DisplayText = "3" });
-            list.Add(new ThemesModel() { DisplayText = "1" });
-            list.Add(new ThemesModel() { DisplayText = "5" });
-            list.Add(new ThemesModel() { DisplayText = "4" });
-            list.Add(new ThemesModel() { DisplayText = "44" });
-            list.Add(new ThemesModel() { DisplayText = "94" });
-            list.Add(new ThemesModel() { DisplayText = "74" });
-            list.Add(new ThemesModel() { DisplayText = "34" });
-            list.Add(new ThemesModel() { DisplayText = "14" });
-            list.Add(new ThemesModel() { DisplayText = "24" });
 
 
         }
@@ -64,15 +52,27 @@ namespace CSharpMobileComponents.ViewModels
         }
         private Task CheckItem(ThemesModel model)
         {
-            list.SortAscending(s => s.DisplayText);
-            //list.Add(model);
+
             OnPropertyChanged("list");
             return Task.CompletedTask;
         }
 
-        private Task<int> CheckItem2(ThemesModel model)
+
+        public async void ScrollView_OnScrolled(object sender, ScrolledEventArgs e) //Pagination if needed!!
         {
-            return Task.FromResult(2);
+            if (!(sender is ScrollView scrollView))
+                return;
+
+            var scrollingSpace = scrollView.ContentSize.Height - scrollView.Height;
+
+            if (scrollingSpace >( e.ScrollY + 5) )
+                return;
+
+            await RunTaskAndUpdateUI(async () =>
+            {
+                await ColorsDataStore.Instance.AddMoreItems();
+                OnPropertyChanged("List");
+            });
         }
 
     }

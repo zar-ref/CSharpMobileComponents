@@ -74,6 +74,6 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 
         public abstract void InitStackList(string bindingContextProperty, ICustomView view,   ICommand tappedItemCommand , ICommand selectItemCommand  );
 
-        public abstract void Xx_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e);
+        public abstract void StackLayoutCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e);
     }
 }

@@ -69,7 +69,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             this.SetValue(StackLayoutList.ItemViewProperty, view);
         }
 
-        public override void Xx_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        public override void StackLayoutCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             throw new NotImplementedException();
         }

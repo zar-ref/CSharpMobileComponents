@@ -42,9 +42,7 @@ namespace CSharpMobileComponents.Pages
 
         private void PrimaryBtnControl_ButtonClicked(object sender, EventArgs e)
         {
-            //_viewModel.SwitchColorTheme();
-            _viewModel.List.FirstOrDefault().IsSelected = !_viewModel.list.FirstOrDefault().IsSelected;
-            _viewModel.List.FirstOrDefault().DisplayText = "changed!";
+            //_viewModel.SwitchColorTheme(); 
             
         }
 
@@ -59,9 +57,9 @@ namespace CSharpMobileComponents.Pages
 
         private  Task InitPage()
         {
-            _viewModel.ListCollectionChangedEvent = list.Xx_CollectionChanged;
+            _viewModel.ListCollectionChangedEvent = list.StackLayoutCollectionChanged;
             list.InitStackList("List", new StringOnlyView(), null, _viewModel.CheckItemCommand);
-
+            testScrollView.Scrolled += _viewModel.ScrollView_OnScrolled;
             //_viewModel.List.CollectionChanged += list.Xx_CollectionChanged;
             return   Task.CompletedTask;
         }
