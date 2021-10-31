@@ -59,7 +59,7 @@ namespace CSharpMobileComponents.Pages
         { 
             _viewModel.ListCollectionChangedEvent = list.StackLayoutCollectionChanged;
             list.InitStackList("List", new StringOnlyView(), null, _viewModel.CheckItemCommand);
-            testScrollView.Scrolled += _viewModel.ScrollView_OnScrolled;
+            //testScrollView.Scrolled += _viewModel.ScrollView_OnScrolled;
            
             //_viewModel.List.CollectionChanged += list.Xx_CollectionChanged;
             return;
