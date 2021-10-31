@@ -53,24 +53,6 @@ namespace CSharpMobileComponents.DataStores
             List.Add(new ThemesModel() { DisplayText = "1" });
             List.Add(new ThemesModel() { DisplayText = "5" });
             List.Add(new ThemesModel() { DisplayText = "4" });
-            List.Add(new ThemesModel() { DisplayText = "44" });
-            List.Add(new ThemesModel() { DisplayText = "94" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
-            List.Add(new ThemesModel() { DisplayText = "74" });
             List.Add(new ThemesModel() { DisplayText = "74" });
         }
 

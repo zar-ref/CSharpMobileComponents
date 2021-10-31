@@ -48,8 +48,9 @@ namespace CSharpMobileComponents.Pages
 
         private void PrimaryBtnControl_ButtonClicked_2(object sender, EventArgs e)
         {
-            ColorsDataStore.Instance.List.Add(new Models.Lists.ThemesModel() { DisplayText = "neww" });
-            _viewModel.OnPropertyChanged("List");
+            //ColorsDataStore.Instance.List.Add(new Models.Lists.ThemesModel() { DisplayText = "neww" });
+            ColorsDataStore.Instance.List.LastOrDefault().IsSelected = !ColorsDataStore.Instance.List.LastOrDefault().IsSelected;
+            //_viewModel.OnPropertyChanged("List");
             //_ = _viewModel.List; 
             //_viewModel.list.LastOrDefault().DisplayText = "changed! again";
             //_viewModel.SwitchTranslations(CSharpMobileComponents.Resources.Constants.Languages.English);
