@@ -45,7 +45,7 @@ namespace CSharpMobileComponents.Models.Lists
 
         public GroupingModel Grouping { get; set; }
 
-        public void GenerateGroupKeyDisplayText()
+        private void GenerateGroupKeyDisplayText()
         {
             var groupkey = DisplayText.Split('_')[1];
             this.Grouping.GroupingKey = groupkey;

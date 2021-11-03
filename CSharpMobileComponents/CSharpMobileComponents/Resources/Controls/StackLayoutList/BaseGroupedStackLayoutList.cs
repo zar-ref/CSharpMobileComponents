@@ -16,15 +16,15 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
     {
         public static readonly BindableProperty ItemsProperty = BindableProperty.Create(
             propertyName: "Items",
-            returnType: typeof(ObservableCollection<ObservableGroupCollection<IGroupingModel, object>>),
+            returnType: typeof(ObservableCollection<ObservableGroupCollection<object, object>>),
             defaultValue: null,
             defaultBindingMode: BindingMode.OneWay,
             declaringType: typeof(BaseGroupedStackLayoutList),
             propertyChanged: HandleItemsPropertyChanged);
 
-        public ObservableCollection<ObservableGroupCollection<IGroupingModel, object>> Items
+        public ObservableCollection<ObservableGroupCollection<object, object>> Items
         {
-            get { return (ObservableCollection<ObservableGroupCollection<IGroupingModel, object>>)GetValue(ItemsProperty); }
+            get { return (ObservableCollection<ObservableGroupCollection<object, object>>)GetValue(ItemsProperty); }
             set { SetValue(ItemsProperty, value); }
         }
 
@@ -73,7 +73,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
         private static void HandleItemsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (BaseGroupedStackLayoutList)bindable;
-            var items = newValue as ObservableCollection<ObservableGroupCollection<IGroupingModel, object>>;
+            var items = newValue as ObservableCollection<ObservableGroupCollection<object, object>>;
             control.Items = items;
         }
 

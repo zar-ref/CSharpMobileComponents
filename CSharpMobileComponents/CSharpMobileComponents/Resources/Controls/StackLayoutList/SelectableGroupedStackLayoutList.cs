@@ -37,7 +37,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             control.Children.Clear();
 
             control.ItemView = newChildView;
-            int i = 0;
+       
 
             foreach (var groupedItems in control.Items)
             {
@@ -47,18 +47,24 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                 var keyItemView = (ICustomView)Activator.CreateInstance(keyItemViewType);
                 keyItemView.SetBindingContext(key);
 
+                StackLayoutListItem groupStackItem = new StackLayoutListItem() { Item = key, View = keyItemView };
+                control.Children.Add(new CustomStackLayoutListItem(groupStackItem));
+                foreach (var item in groupedItems)
+                {
+                    var selectableItemView = new SelectableRadioView();
+                    selectableItemView.SetBindingContext(item);
+                    selectableItemView.SetValue(SelectableRadioView.SelectItemCommandProperty, control.SelectItemItemCommand);
+
+                    ICustomView itemView = (ICustomView)Activator.CreateInstance(type);
+                    itemView.SetBindingContext(item);
+                    selectableItemView.ChildView = itemView;
+
+                    StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView };
+                    control.Children.Add(new CustomStackLayoutListItem(stackItem));
+                }
                 
-                var selectableItemView = new SelectableRadioView();
-                selectableItemView.SetBindingContext(groupedItems);
-                selectableItemView.SetValue(SelectableRadioView.SelectItemCommandProperty, control.SelectItemItemCommand);
-
-                ICustomView itemView = (ICustomView)Activator.CreateInstance(type);
-                itemView.SetBindingContext(groupedItems);
-                selectableItemView.ChildView = itemView;
-
-                StackLayoutListItem stackItem = new StackLayoutListItem() { Item = groupedItems, View = selectableItemView };
-                control.Children.Add(new CustomStackLayoutListItem(stackItem));
-                i++;
+                
+                
             }
 
         }
