@@ -10,6 +10,7 @@ using CSharpMobileComponents.Resources.Util;
 using System.Threading.Tasks;
 using CSharpMobileComponents.DataStores;
 using System.Collections.Specialized;
+using CSharpMobileComponents.Models;
 
 namespace CSharpMobileComponents.ViewModels
 {
@@ -31,6 +32,24 @@ namespace CSharpMobileComponents.ViewModels
                 }
                 return retVal;
             }
+
+        }
+
+        public ObservableCollection<ObservableGroupCollection<object, GroupingTestModel>> GroupedList
+        {
+            get
+            {
+
+                var retVal = TestDataStore.Instance.GroupedList;
+                //if (ListCollectionChangedEvent != null)
+                //{
+                //    retVal.CollectionChanged -= ListCollectionChangedEvent;
+                //    retVal.CollectionChanged += ListCollectionChangedEvent;
+
+                //}
+                return retVal;
+            }
+
         }
 
 

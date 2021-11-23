@@ -1,4 +1,4 @@
-﻿using using CSharpMobileComponents.Resources.CustomViews;
+﻿using CSharpMobileComponents.Resources.CustomViews;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +7,8 @@ using Xamarin.Forms;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-
+using CSharpMobileComponents.Models;
+using CSharpMobileComponents.Models.Lists;
 
 namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 {
@@ -88,8 +89,28 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 
         public override void InitGroupedStackList(string bindingContextProperty, ICustomView groupKeyView, ICustomView itemView, ICommand tappedItemCommand, ICommand selectItemCommand)
         {
+            this.SetBinding(BindingContextProperty, bindingContextProperty, BindingMode.TwoWay);
+            if (tappedItemCommand != null)
+                TappedItemCommand = tappedItemCommand;
+            if (selectItemCommand != null)
+                SelectItemItemCommand = selectItemCommand;
+            this.SetValue(SelectableGroupedStackLayoutList.GroupKeyItemViewProperty, groupKeyView);
+            this.SetValue(SelectableGroupedStackLayoutList.ItemViewProperty, itemView);
 
         }
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+            var enumerable = BindingContext as IEnumerable<ObservableGroupCollection<object, object>>;
+            if (enumerable == null)
+                return;
+            var items = new ObservableCollection<ObservableGroupCollection<object, object>>(enumerable);
+
+            if (items == null)
+                return;
+            Items = items;
+        }
+
 
         public override void StackLayoutGroupedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {

@@ -48,6 +48,8 @@ namespace CSharpMobileComponents.Models.Lists
         private void GenerateGroupKeyDisplayText()
         {
             var groupkey = DisplayText.Split('_')[1];
+            this.Grouping = new GroupingModel();
+            this.Grouping = new GroupingModel();
             this.Grouping.GroupingKey = groupkey;
             this.Grouping.GroupingKeyDisplayText = groupkey;
         }

@@ -56,12 +56,11 @@ namespace CSharpMobileComponents.Pages
         }
 
         private async Task  InitPage()
-        { 
-            _viewModel.ListCollectionChangedEvent = list.StackLayoutCollectionChanged;
-            list.InitStackList("List", new StringOnlyView(), null, _viewModel.CheckItemCommand);
-            //testScrollView.Scrolled += _viewModel.ScrollView_OnScrolled;
-           
-            //_viewModel.List.CollectionChanged += list.Xx_CollectionChanged;
+        {
+            //_viewModel.ListCollectionChangedEvent = list.StackLayoutCollectionChanged;
+            //list.InitStackList("List", new StringOnlyView(), null, _viewModel.CheckItemCommand);
+            //_viewModel.ListCollectionChangedEvent = groupedlist.StackLayoutGroupedCollectionChanged;
+            groupedlist.InitGroupedStackList("GroupedList", new GroupKeyStringOnlyView(), new StringOnlyView(), null, null);
             return;
         }
     }
