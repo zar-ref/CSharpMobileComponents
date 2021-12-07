@@ -38,7 +38,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             control.Children.Clear();
 
             control.ItemView = newChildView;
-       
+
 
             foreach (var groupedItems in control.Items)
             {
@@ -63,9 +63,9 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                     StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView };
                     control.Children.Add(new CustomStackLayoutListItem(stackItem));
                 }
-                
-                
-                
+
+
+
             }
 
         }
@@ -101,6 +101,16 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
+            var x = BindingContext;
+            var type = x.GetType();
+            var y = BindingContext as IEnumerable<IEnumerable<object>>;
+            if (y != null)
+            {
+                foreach (var yy in y)
+                {
+                    var z = yy as ObservableGroupCollection<object, object>;
+                }
+            }
             var enumerable = BindingContext as IEnumerable<ObservableGroupCollection<object, object>>;
             if (enumerable == null)
                 return;
