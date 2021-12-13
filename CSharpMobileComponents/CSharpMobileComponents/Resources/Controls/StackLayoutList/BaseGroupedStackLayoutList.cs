@@ -15,17 +15,33 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
     public abstract class BaseGroupedStackLayoutList : StackLayout, ICustomControl
     {
         public static readonly BindableProperty ItemsProperty = BindableProperty.Create(
-            propertyName: "Items",
+           propertyName: "Items",
+           returnType: typeof(ObservableCollection<object>),
+           defaultValue: null,
+           defaultBindingMode: BindingMode.OneWay,
+           declaringType: typeof(BaseGroupedStackLayoutList),
+           propertyChanged: HandleItemsPropertyChanged);
+
+        public ObservableCollection<object> Items
+        {
+            get { return (ObservableCollection<object>)GetValue(ItemsProperty); }
+            set { SetValue(ItemsProperty, value); }
+        }
+
+        public string GroupedPropertyName { get; set; }
+
+        public static readonly BindableProperty GroupedItemsProperty = BindableProperty.Create(
+            propertyName: "GroupedItems",
             returnType: typeof(ObservableCollection<ObservableGroupCollection<object, object>>),
             defaultValue: null,
             defaultBindingMode: BindingMode.OneWay,
             declaringType: typeof(BaseGroupedStackLayoutList),
-            propertyChanged: HandleItemsPropertyChanged);
+            propertyChanged: HandleGroupedItemsPropertyChanged);
 
-        public ObservableCollection<ObservableGroupCollection<object, object>> Items
+        public ObservableCollection<ObservableGroupCollection<object, object>> GroupedItems
         {
-            get { return (ObservableCollection<ObservableGroupCollection<object, object>>)GetValue(ItemsProperty); }
-            set { SetValue(ItemsProperty, value); }
+            get { return (ObservableCollection<ObservableGroupCollection<object, object>>)GetValue(GroupedItemsProperty); }
+            set { SetValue(GroupedItemsProperty, value); }
         }
 
         public abstract ICustomView ItemView { get; set; }
@@ -70,15 +86,21 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
         }
 
 
-        private static void HandleItemsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void HandleGroupedItemsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (BaseGroupedStackLayoutList)bindable;
             var items = newValue as ObservableCollection<ObservableGroupCollection<object, object>>;
+            control.GroupedItems = items;
+        }
+
+        private static void HandleItemsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var control = (BaseGroupedStackLayoutList)bindable;
+            var items = newValue as ObservableCollection<object>;
             control.Items = items;
         }
 
-
-        public abstract void InitGroupedStackList(string bindingContextProperty, ICustomView groupKeyView, ICustomView itemView, ICommand tappedItemCommand, ICommand selectItemCommand);
+        public abstract void InitGroupedStackList(string bindingContextProperty, string groupingPropertyName , ICustomView groupKeyView, ICustomView itemView, ICommand tappedItemCommand, ICommand selectItemCommand);
 
         public abstract void StackLayoutGroupedCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e);
 

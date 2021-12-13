@@ -1,5 +1,6 @@
 ﻿using CSharpMobileComponents.Models;
 using CSharpMobileComponents.Models.Interfaces;
+using CSharpMobileComponents.Models.Lists;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace CSharpMobileComponents.Resources.CustomViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GroupKeyStringOnlyView : Label, ICustomView
     {
-        IGroupingModel TextItem { get; set; } = null;
+        GroupingTestModel TextItem { get; set; } = null;
         public static readonly BindableProperty DisplayTextProperty = BindableProperty.Create(
          propertyName: "DisplayText",
          returnType: typeof(string),
@@ -39,7 +40,7 @@ namespace CSharpMobileComponents.Resources.CustomViews
 
             base.OnBindingContextChanged();
 
-            var bindingContext = BindingContext as IGroupingModel;
+            var bindingContext = BindingContext as GroupingTestModel;
             if (bindingContext == null)
                 return;
             if (TextItem == null)
@@ -48,7 +49,7 @@ namespace CSharpMobileComponents.Resources.CustomViews
                 SetViewBindings();
             }
 
-            if (TextItem.GroupingKeyDisplayText != bindingContext.GroupingKeyDisplayText)
+            if (TextItem.DisplayText != bindingContext.GroupText)
             {
                 TextItem = bindingContext;
                 SetViewBindings();
@@ -68,13 +69,13 @@ namespace CSharpMobileComponents.Resources.CustomViews
 
         public void SetViewBindings()
         {
-            this.SetBinding(DisplayTextProperty, "GroupingDisplayText");
+            this.SetBinding(DisplayTextProperty, "GroupText");
         }
 
         private void Model_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             this.BindingContext = sender;
-            var bindingContext = BindingContext as IDisplayTextModel;
+            var bindingContext = BindingContext as GroupingTestModel;
             if (bindingContext == null)
                 return;
             SetViewBindings();

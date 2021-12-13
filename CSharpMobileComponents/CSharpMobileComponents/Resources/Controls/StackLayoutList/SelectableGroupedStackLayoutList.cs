@@ -40,7 +40,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             control.ItemView = newChildView;
 
 
-            foreach (var groupedItems in control.Items)
+            foreach (var groupedItems in control.GroupedItems)
             {
 
                 var key = groupedItems.Key;
@@ -87,8 +87,9 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             control.GroupKeyItemView = newGroupKeyItemView;
         }
 
-        public override void InitGroupedStackList(string bindingContextProperty, ICustomView groupKeyView, ICustomView itemView, ICommand tappedItemCommand, ICommand selectItemCommand)
+        public override void InitGroupedStackList(string bindingContextProperty,  string groupingPropertyName, ICustomView groupKeyView, ICustomView itemView, ICommand tappedItemCommand, ICommand selectItemCommand)
         {
+            GroupedPropertyName = groupingPropertyName;
             this.SetBinding(BindingContextProperty, bindingContextProperty, BindingMode.TwoWay);
             if (tappedItemCommand != null)
                 TappedItemCommand = tappedItemCommand;
@@ -101,24 +102,20 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
-            var x = BindingContext;
-            var type = x.GetType();
-            var y = BindingContext as IEnumerable<IEnumerable<object>>;
-            if (y != null)
-            {
-                foreach (var yy in y)
-                {
-                    var z = yy as ObservableGroupCollection<object, object>;
-                }
-            }
-            var enumerable = BindingContext as IEnumerable<ObservableGroupCollection<object, object>>;
+          
+            
+            var enumerable = BindingContext as IEnumerable<object>;
             if (enumerable == null)
                 return;
-            var items = new ObservableCollection<ObservableGroupCollection<object, object>>(enumerable);
+            var items = new ObservableCollection<object>(enumerable);
 
             if (items == null)
                 return;
+            if (items.Any(_item => _item.GetType().GetProperty(GroupedPropertyName) == null))
+                return;
             Items = items;
+            GroupedItems = new ObservableCollection<ObservableGroupCollection<object, object>>( Items.GroupBy(_item => _item.GetType().GetProperty(GroupedPropertyName)).Select(_items => new  ObservableGroupCollection<object, object>(_items)).ToList());
+
         }
 
 

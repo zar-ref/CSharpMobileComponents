@@ -41,17 +41,30 @@ namespace CSharpMobileComponents.Models.Lists
             }
         }
 
-    
+        private string groupText { get; set; }
 
-        public GroupingModel Grouping { get; set; }
+        public string GroupText
+        {
+            get
+            {
+                return groupText;
+            }
+            set
+            {
+                groupText = value;
+                OnPropertyChanged("GroupText");
+            }
+        }
+
+
+
+
+
 
         private void GenerateGroupKeyDisplayText()
         {
             var groupkey = DisplayText.Split('_')[1];
-            this.Grouping = new GroupingModel();
-            this.Grouping = new GroupingModel();
-            this.Grouping.GroupingKey = groupkey;
-            this.Grouping.GroupingKeyDisplayText = groupkey;
+            GroupText = groupkey;
         }
 
         public GroupingTestModel(string displayText)

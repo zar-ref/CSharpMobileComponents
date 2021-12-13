@@ -35,24 +35,24 @@ namespace CSharpMobileComponents.ViewModels
 
         }
 
-        public ObservableCollection<ObservableGroupCollection<object, GroupingTestModel>> GroupedList
-        {
-            get
-            {
+        //public ObservableCollection<ObservableGroupCollection<object, GroupingTestModel>> GroupedList
+        //{
+        //    get
+        //    {
 
-                var retVal = TestDataStore.Instance.GroupedList;
-                //if (ListCollectionChangedEvent != null)
-                //{
-                //    retVal.CollectionChanged -= ListCollectionChangedEvent;
-                //    retVal.CollectionChanged += ListCollectionChangedEvent;
+        //        var retVal = TestDataStore.Instance.GroupedList;
+        //        //if (ListCollectionChangedEvent != null)
+        //        //{
+        //        //    retVal.CollectionChanged -= ListCollectionChangedEvent;
+        //        //    retVal.CollectionChanged += ListCollectionChangedEvent;
 
-                //}
-                return retVal;
-            }
+        //        //}
+        //        return retVal;
+        //    }
 
-        }
+        //}
 
-
+        public ObservableCollection<GroupingTestModel> ListToGroup { get; set; } = new ObservableCollection<GroupingTestModel>(TestDataStore.Instance.ListToGroup.ToList());
         public ICommand CheckItemCommand { get; set; }
 
         public HomePageViewModel()

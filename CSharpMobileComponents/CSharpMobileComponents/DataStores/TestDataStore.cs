@@ -35,14 +35,14 @@ namespace CSharpMobileComponents.DataStores
 
 
         public ObservableCollection<GroupingTestModel> ListToGroup { get; set; } = new ObservableCollection<GroupingTestModel>();
-        public ObservableCollection<ObservableGroupCollection<object, GroupingTestModel>> GroupedList
-        {
-            get
-            {
-                return new ObservableCollection<ObservableGroupCollection<object, GroupingTestModel>>(ListToGroup.GroupBy(g => g.Grouping.GroupingKey).Select(items => new ObservableGroupCollection<object, GroupingTestModel>(items)).ToList());
+        //public ObservableCollection<ObservableGroupCollection<object, GroupingTestModel>> GroupedList
+        //{
+        //    get
+        //    {
+        //        return new ObservableCollection<ObservableGroupCollection<object, GroupingTestModel>>(ListToGroup.GroupBy(g => g.Grouping.GroupingKey).Select(items => new ObservableGroupCollection<object, GroupingTestModel>(items)).ToList());
 
 
-            }
-        }
+        //    }
+        //}
     }
 }
