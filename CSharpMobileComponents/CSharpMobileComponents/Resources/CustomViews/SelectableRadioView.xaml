@@ -21,8 +21,7 @@
             <ColumnDefinition Width="{Binding Sizes,  Converter={StaticResource SizesConverter} , ConverterParameter=GridRadioButtonWidthContainer }"/>
         </Grid.ColumnDefinitions>
         <Button Grid.Row="0" Grid.Column="0"
-                    InputTransparent="False" 
-               
+                    InputTransparent="False"                
                     HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                     BackgroundColor="Transparent"
                     x:Name="toggleSelectionButton"/>

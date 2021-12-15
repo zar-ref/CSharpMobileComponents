@@ -63,7 +63,7 @@ namespace CSharpMobileComponents.Resources.CustomViews
         public SelectableRadioView()
         {
             InitializeComponent();
-            //toggleSelectionButton.Clicked += ToggleSelectionButton_Clicked;
+            toggleSelectionButton.Clicked += ToggleSelectionButton_Clicked;
 
         }
 

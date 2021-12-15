@@ -58,7 +58,7 @@ namespace CSharpMobileComponents.ViewModels
         public HomePageViewModel()
         {
             GoToMenuPageCommand = new Command(() => GoToMenu());
-            CheckItemCommand = new Command<ThemesModel>(async (_themesModel) => await RunTaskAndUpdateUI(() => CheckItem(_themesModel)));
+            CheckItemCommand = new Command<GroupingTestModel>(async (_themesModel) => await RunTaskAndUpdateUI(() => CheckItem(_themesModel)));
 
 
 
@@ -69,10 +69,10 @@ namespace CSharpMobileComponents.ViewModels
         {
 
         }
-        private Task CheckItem(ThemesModel model)
+        private Task CheckItem(GroupingTestModel model)
         {
-
-            OnPropertyChanged("list");
+            model.IsSelected = !model.IsSelected;
+            //OnPropertyChanged("list");
             return Task.CompletedTask;
         }
 

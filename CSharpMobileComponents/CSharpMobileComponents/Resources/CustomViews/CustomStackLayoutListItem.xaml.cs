@@ -26,7 +26,7 @@ namespace CSharpMobileComponents.Resources.CustomViews
             GroupKey = listItem?.GroupKey ?? null; 
             OnItemTappedCommand = listItem?.OnItemTappedCommand ?? null;
             ItemTappedCommandParameter = listItem?.ItemTappedCommandParameter ?? null;
-            InitializeComponent();
+            InitializeComponent(); 
             view.Children.Add((View)View);
             if (OnItemTappedCommand != null)
             {
