@@ -16,18 +16,18 @@ namespace CSharpMobileComponents.Resources.CustomViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GroupKeyStringOnlyView : Label, ICustomView
     {
-        GroupingTestModel TextItem { get; set; } = null;
+        string TextItem { get; set; } = null;
         public static readonly BindableProperty DisplayTextProperty = BindableProperty.Create(
          propertyName: "DisplayText",
          returnType: typeof(string),
-         declaringType: typeof(StringOnlyView),
+         declaringType: typeof(GroupKeyStringOnlyView),
          propertyChanged: HandleDisplayTextPropertyChanged);
 
         private static void HandleDisplayTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (StringOnlyView)bindable;
+            var control = (GroupKeyStringOnlyView)bindable;
             var newText = (string)newValue;
-            control.DisplayText = newText;
+            control.TextItem = newText;
             control.Text = newText;
         }
 
@@ -40,7 +40,7 @@ namespace CSharpMobileComponents.Resources.CustomViews
 
             base.OnBindingContextChanged();
 
-            var bindingContext = BindingContext as GroupingTestModel;
+            var bindingContext = BindingContext as string;
             if (bindingContext == null)
                 return;
             if (TextItem == null)
@@ -49,7 +49,7 @@ namespace CSharpMobileComponents.Resources.CustomViews
                 SetViewBindings();
             }
 
-            if (TextItem.DisplayText != bindingContext.GroupText)
+            if (TextItem != bindingContext)
             {
                 TextItem = bindingContext;
                 SetViewBindings();
@@ -62,14 +62,14 @@ namespace CSharpMobileComponents.Resources.CustomViews
 
         public void SetBindingContext(object bindingContext)
         {
-            var baseModel = bindingContext as BaseModel;
-            baseModel.PropertyChanged += Model_PropertyChanged;
+            //var baseModel = bindingContext as BaseModel;
+            //baseModel.PropertyChanged += Model_PropertyChanged;
             this.BindingContext = bindingContext;
         }
 
         public void SetViewBindings()
         {
-            this.SetBinding(DisplayTextProperty, "GroupText");
+            this.SetValue(DisplayTextProperty, TextItem);
         }
 
         private void Model_PropertyChanged(object sender, PropertyChangedEventArgs e)

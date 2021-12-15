@@ -113,8 +113,10 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                 return;
             if (items.Any(_item => _item.GetType().GetProperty(GroupedPropertyName) == null))
                 return;
+            if (items.Any(_item => _item.GetType().GetProperty(GroupedPropertyName).GetValue(_item) == null))
+                return;
             Items = items;
-            GroupedItems = new ObservableCollection<ObservableGroupCollection<object, object>>( Items.GroupBy(_item => _item.GetType().GetProperty(GroupedPropertyName)).Select(_items => new  ObservableGroupCollection<object, object>(_items)).ToList());
+            GroupedItems = new ObservableCollection<ObservableGroupCollection<object, object>>( Items.GroupBy(_item => _item.GetType().GetProperty(GroupedPropertyName).GetValue(_item)).Select(_items => new  ObservableGroupCollection<object, object>(_items)).ToList());
 
         }
 
