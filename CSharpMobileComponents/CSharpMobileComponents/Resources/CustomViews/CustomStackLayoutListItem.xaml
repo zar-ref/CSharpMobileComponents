@@ -13,12 +13,13 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button 
-        
-            x:Name="itemTappedButton"
-            Grid.Row="0" Grid.Column="0" 
-            BackgroundColor="Transparent"
+        <StackLayout  Grid.Row="0" Grid.Column="0" InputTransparent="True" CascadeInputTransparent="False" >
+            <Button         
+                x:Name="itemTappedButton"           
+                BackgroundColor="Transparent"
             />
+        </StackLayout>
+
         <StackLayout 
             Grid.Row="0" Grid.Column="0"
             x:Name="view" 

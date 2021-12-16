@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using CSharpMobileComponents.DataStores;
 using System.Collections.Specialized;
 using CSharpMobileComponents.Models;
+using CSharpMobileComponents.Models.Interfaces;
 
 namespace CSharpMobileComponents.ViewModels
 {
@@ -58,7 +59,7 @@ namespace CSharpMobileComponents.ViewModels
         public HomePageViewModel()
         {
             GoToMenuPageCommand = new Command(() => GoToMenu());
-            CheckItemCommand = new Command<GroupingTestModel>(async (_themesModel) => await RunTaskAndUpdateUI(() => CheckItem(_themesModel)));
+            CheckItemCommand = new Command<ISelectableModel>(async (_themesModel) => await RunTaskAndUpdateUI(() => CheckItem(_themesModel)));
 
 
 
@@ -69,8 +70,9 @@ namespace CSharpMobileComponents.ViewModels
         {
 
         }
-        private Task CheckItem(GroupingTestModel model)
+        private Task CheckItem(ISelectableModel model)
         {
+         
             model.IsSelected = !model.IsSelected;
             //OnPropertyChanged("list");
             return Task.CompletedTask;
