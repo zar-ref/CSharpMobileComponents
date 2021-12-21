@@ -52,8 +52,22 @@ namespace CSharpMobileComponents.ViewModels
         //    }
 
         //}
+        public NotifyCollectionChangedEventHandler GroupedListCollectionChangedEvent = null;
+        public ObservableCollection<GroupingTestModel> ListToGroup
+        {
+            get
+            {
+                var retVal = TestDataStore.Instance.ListToGroup;
+                if(GroupedListCollectionChangedEvent != null)
+                {
+                    retVal.CollectionChanged -= GroupedListCollectionChangedEvent;
+                    retVal.CollectionChanged += GroupedListCollectionChangedEvent;
+                }
+                return retVal;
+            }
+        }  
 
-        public ObservableCollection<GroupingTestModel> ListToGroup { get; set; } = new ObservableCollection<GroupingTestModel>(TestDataStore.Instance.ListToGroup.ToList());
+
         public ICommand CheckItemCommand { get; set; }
 
         public HomePageViewModel()
@@ -72,7 +86,7 @@ namespace CSharpMobileComponents.ViewModels
         }
         private Task CheckItem(ISelectableModel model)
         {
-         
+
             model.IsSelected = !model.IsSelected;
             //OnPropertyChanged("list");
             return Task.CompletedTask;
@@ -86,7 +100,7 @@ namespace CSharpMobileComponents.ViewModels
 
             var scrollingSpace = scrollView.ContentSize.Height - scrollView.Height;
 
-            if (scrollingSpace >( e.ScrollY + 5) )
+            if (scrollingSpace > (e.ScrollY + 5))
                 return;
 
             await RunTaskAndUpdateUI(async () =>

@@ -48,8 +48,8 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                 var keyItemView = (ICustomView)Activator.CreateInstance(keyItemViewType);
                 keyItemView.SetBindingContext(key);
 
-                StackLayoutListItem groupStackItem = new StackLayoutListItem() { Item = key, View = keyItemView , GroupKey = key};
-                
+                StackLayoutListItem groupStackItem = new StackLayoutListItem() { Item = key, View = keyItemView, GroupKey = key };
+
                 control.Children.Add(new CustomStackLayoutListItem(groupStackItem));
                 foreach (var item in groupedItems)
                 {
@@ -88,7 +88,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             control.GroupKeyItemView = newGroupKeyItemView;
         }
 
-        public override void InitGroupedStackList(string bindingContextProperty,  string groupingPropertyName, ICustomView groupKeyView, ICustomView itemView, ICommand tappedItemCommand, ICommand selectItemCommand)
+        public override void InitGroupedStackList(string bindingContextProperty, string groupingPropertyName, ICustomView groupKeyView, ICustomView itemView, ICommand tappedItemCommand, ICommand selectItemCommand)
         {
             GroupedPropertyName = groupingPropertyName;
             this.SetBinding(BindingContextProperty, bindingContextProperty, BindingMode.TwoWay);
@@ -103,8 +103,8 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
-          
-            
+
+
             var enumerable = BindingContext as IEnumerable<object>;
             if (enumerable == null)
                 return;
@@ -117,14 +117,60 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             if (items.Any(_item => _item.GetType().GetProperty(GroupedPropertyName).GetValue(_item) == null))
                 return;
             Items = items;
-            GroupedItems = new ObservableCollection<ObservableGroupCollection<object, object>>( Items.GroupBy(_item => _item.GetType().GetProperty(GroupedPropertyName).GetValue(_item)).Select(_items => new  ObservableGroupCollection<object, object>(_items)).ToList());
+            GroupedItems = new ObservableCollection<ObservableGroupCollection<object, object>>(Items.GroupBy(_item => _item.GetType().GetProperty(GroupedPropertyName).GetValue(_item)).Select(_items => new ObservableGroupCollection<object, object>(_items)).ToList());
 
         }
 
 
         public override void StackLayoutGroupedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (var item in e.OldItems)
+                {
+                    //Get item key
+                    var itemKeyToDelete = Items.FirstOrDefault(_item => _item.GetType().GetProperty(GroupedPropertyName).GetValue(_item) != null);
+                    var itemKeyList = this.Children.FirstOrDefault(_stackList => ((CustomStackLayoutListItem)_stackList).Item == item) as CustomStackLayoutListItem;
+                    var itemToDelete = this.Children.FirstOrDefault(_stackItem => ((CustomStackLayoutListItem)_stackItem).Item == item);
+                    this.Children.Remove(itemToDelete);
+                }
+            }
 
+            else if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (var item in e.NewItems)
+                {
+                    //Add items
+                    var selectableItemView = new SelectableRadioView();
+                    selectableItemView.SetBindingContext(item);
+                    selectableItemView.SetValue(SelectableRadioView.SelectItemCommandProperty, this.SelectItemItemCommand);
+                    var type = this.ItemView.GetType();
+                    ICustomView itemView = (ICustomView)Activator.CreateInstance(type);
+                    itemView.SetBindingContext(item);
+                    selectableItemView.ChildView = itemView;
+
+                    StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView };
+                    this.Children.Add(new CustomStackLayoutListItem(stackItem));
+
+                }
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Move)
+            {
+                foreach (var item in e.NewItems)
+                {
+                    var selectableItemView = new SelectableRadioView();
+                    selectableItemView.SetBindingContext(item);
+                    selectableItemView.SetValue(SelectableRadioView.SelectItemCommandProperty, this.SelectItemItemCommand);
+                    var type = this.ItemView.GetType();
+                    ICustomView itemView = (ICustomView)Activator.CreateInstance(type);
+                    itemView.SetBindingContext(item);
+                    selectableItemView.ChildView = itemView;
+
+                    StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView };
+                    this.Children[e.NewStartingIndex] = new CustomStackLayoutListItem(stackItem);
+                }
+            }
         }
     }
 }
+
