@@ -18,7 +18,7 @@ namespace CSharpMobileComponents.Resources.CustomViews
         public object GroupKey { get; set; } 
         public ICommand OnItemTappedCommand { get; set; }
         public object ItemTappedCommandParameter { get; set; }
-
+        public bool IsGroupingHeader { get; set; } = false;
         public CustomStackLayoutListItem(IStackLayoutListItem listItem)
         {
             Item = listItem.Item;
@@ -26,6 +26,7 @@ namespace CSharpMobileComponents.Resources.CustomViews
             GroupKey = listItem?.GroupKey ?? null; 
             OnItemTappedCommand = listItem?.OnItemTappedCommand ?? null;
             ItemTappedCommandParameter = listItem?.ItemTappedCommandParameter ?? null;
+            IsGroupingHeader = listItem.IsGroupingHeader;
             InitializeComponent(); 
             view.Children.Add((View)View);
             if (OnItemTappedCommand != null)

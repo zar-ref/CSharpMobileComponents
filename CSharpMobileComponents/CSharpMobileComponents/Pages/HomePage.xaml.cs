@@ -42,14 +42,17 @@ namespace CSharpMobileComponents.Pages
         private void PrimaryBtnControl_ButtonClicked(object sender, EventArgs e)
         {
             //_viewModel.SwitchColorTheme(); 
-            
+            _viewModel.ListToGroup.RemoveAt(0);
+            //_viewModel.OnPropertyChanged("ListToGroup");
         }
 
         private void PrimaryBtnControl_ButtonClicked_2(object sender, EventArgs e)
         {
             //ColorsDataStore.Instance.List.Add(new Models.Lists.ThemesModel() { DisplayText = "neww" });
-            ColorsDataStore.Instance.List.LastOrDefault().IsSelected = !ColorsDataStore.Instance.List.LastOrDefault().IsSelected;
-            //_viewModel.OnPropertyChanged("List");
+            //ColorsDataStore.Instance.List.LastOrDefault().IsSelected = !ColorsDataStore.Instance.List.LastOrDefault().IsSelected;
+            TestDataStore.Instance.ListToGroup.LastOrDefault().IsSelected = !TestDataStore.Instance.ListToGroup.LastOrDefault().IsSelected;
+            //_ = _viewModel.ListToGroup;c
+            _viewModel.OnPropertyChanged("ListToGroup");
             //_ = _viewModel.List; 
             //_viewModel.list.LastOrDefault().DisplayText = "changed! again";
             //_viewModel.SwitchTranslations(CSharpMobileComponents.Resources.Constants.Languages.English);

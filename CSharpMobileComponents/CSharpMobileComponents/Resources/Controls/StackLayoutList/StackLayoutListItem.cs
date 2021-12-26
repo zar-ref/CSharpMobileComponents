@@ -14,5 +14,6 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
         public object GroupKey { get; set; } 
         public ICommand OnItemTappedCommand { get; set; }
         public object ItemTappedCommandParameter { get; set; }
+        public bool IsGroupingHeader { get; set; } = false;
     }
 }

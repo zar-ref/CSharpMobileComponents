@@ -36,22 +36,7 @@ namespace CSharpMobileComponents.ViewModels
 
         }
 
-        //public ObservableCollection<ObservableGroupCollection<object, GroupingTestModel>> GroupedList
-        //{
-        //    get
-        //    {
-
-        //        var retVal = TestDataStore.Instance.GroupedList;
-        //        //if (ListCollectionChangedEvent != null)
-        //        //{
-        //        //    retVal.CollectionChanged -= ListCollectionChangedEvent;
-        //        //    retVal.CollectionChanged += ListCollectionChangedEvent;
-
-        //        //}
-        //        return retVal;
-        //    }
-
-        //}
+ 
         public NotifyCollectionChangedEventHandler GroupedListCollectionChangedEvent = null;
         public ObservableCollection<GroupingTestModel> ListToGroup
         {
