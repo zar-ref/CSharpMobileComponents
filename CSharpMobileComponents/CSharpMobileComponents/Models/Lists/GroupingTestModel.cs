@@ -75,8 +75,9 @@ namespace CSharpMobileComponents.Models.Lists
                 return this.DisplayText == ( obj  as GroupingTestModel ).DisplayText ? 0 : -1 ;
         }
 
+         
         public GroupingTestModel(string displayText)
-        {
+        { 
             DisplayText = displayText;
             GenerateGroupKeyDisplayText();
         }

@@ -49,8 +49,10 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                 control.Children.Add(new CustomStackLayoutListItem(groupStackItem));
                 var itemsWithKey = control.Items.Where(_item => Comparer.Default.Compare(  _item.GetType().GetProperty(control.GroupedPropertyName).GetValue(_item),groupKey) == 0).ToList();
                
-                foreach (var item in itemsWithKey)
+                foreach (var item in control.Items)
                 {
+                    if (Comparer.Default.Compare(item.GetType().GetProperty(control.GroupedPropertyName).GetValue(item), groupKey) != 0)
+                        continue;
                     var selectableItemView = new SelectableRadioView();
                     selectableItemView.SetBindingContext(item);
                     selectableItemView.SetValue(SelectableRadioView.SelectItemCommandProperty, control.SelectItemItemCommand);
@@ -131,7 +133,7 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                         ((CustomStackLayoutListItem)_stackItem).Item != null &&
                         Comparer.DefaultInvariant.Compare(((CustomStackLayoutListItem)_stackItem).Item, item) == 0) as CustomStackLayoutListItem;
                     if (itemToDelete == null)
-                        return;
+                        continue;
                     this.Children.Remove(itemToDelete);
                     bool hasMoreItemsWithKey = this.Children.Any(_stackItem =>
                         ((CustomStackLayoutListItem)_stackItem).Item != null &&

@@ -41,6 +41,7 @@ namespace CSharpMobileComponents.Pages
 
         private void PrimaryBtnControl_ButtonClicked(object sender, EventArgs e)
         {
+            //_viewModel.List.RemoveAt(0);
             //_viewModel.SwitchColorTheme(); 
             _viewModel.ListToGroup.RemoveAt(0);
             //_viewModel.OnPropertyChanged("ListToGroup");
@@ -50,9 +51,11 @@ namespace CSharpMobileComponents.Pages
         {
             //ColorsDataStore.Instance.List.Add(new Models.Lists.ThemesModel() { DisplayText = "neww" });
             //ColorsDataStore.Instance.List.LastOrDefault().IsSelected = !ColorsDataStore.Instance.List.LastOrDefault().IsSelected;
-            TestDataStore.Instance.ListToGroup.LastOrDefault().IsSelected = !TestDataStore.Instance.ListToGroup.LastOrDefault().IsSelected;
+
+            TestDataStore.Instance.ListToGroup.LastOrDefault().IsSelected = true; //= !TestDataStore.Instance.ListToGroup.LastOrDefault().IsSelected;
+            var x = TestDataStore.Instance.ListToGroup.LastOrDefault();
             //_ = _viewModel.ListToGroup;c
-            _viewModel.OnPropertyChanged("ListToGroup");
+            //_viewModel.OnPropertyChanged("ListToGroup");
             //_ = _viewModel.List; 
             //_viewModel.list.LastOrDefault().DisplayText = "changed! again";
             //_viewModel.SwitchTranslations(CSharpMobileComponents.Resources.Constants.Languages.English);

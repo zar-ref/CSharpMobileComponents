@@ -18,7 +18,12 @@ namespace CSharpMobileComponents.DataStores
         private static TestDataStore instance = null;
         public static TestDataStore Instance
         {
-            get { return instance == null ? new TestDataStore() : instance; }
+            get
+            {
+                if (instance == null)
+                    instance = new TestDataStore();
+                return instance;
+            }
         }
 
         public TestDataStore()
@@ -30,7 +35,6 @@ namespace CSharpMobileComponents.DataStores
             ListToGroup.Add(new GroupingTestModel("ogfgla_0"));
             ListToGroup.Add(new GroupingTestModel("ogfgfla_2"));
             ListToGroup.Add(new GroupingTestModel("olafgfg_0"));
-
         }
 
 
