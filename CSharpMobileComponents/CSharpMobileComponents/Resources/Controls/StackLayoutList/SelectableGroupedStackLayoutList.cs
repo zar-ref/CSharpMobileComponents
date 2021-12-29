@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Input;
-using Xamarin.Forms; 
+using Xamarin.Forms;
 namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
 {
     public class SelectableGroupedStackLayoutList : BaseGroupedStackLayoutList
@@ -35,11 +35,11 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             control.Children.Clear();
 
             control.ItemView = newChildView;
-            var groupedItemKeys = control.Items.GroupBy(_item => _item.GetType().GetProperty(control.GroupedPropertyName).GetValue(_item)).Select(_group => _group.Key); 
-             
+            var groupedItemKeys = control.Items.GroupBy(_item => _item.GetType().GetProperty(control.GroupedPropertyName).GetValue(_item)).Select(_group => _group.Key);
+
             foreach (var groupKey in groupedItemKeys)
             {
-                 
+
                 var keyItemViewType = control.GroupKeyItemView.GetType();
                 var keyItemView = (ICustomView)Activator.CreateInstance(keyItemViewType);
                 keyItemView.SetBindingContext(groupKey);
@@ -47,12 +47,13 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                 StackLayoutListItem groupStackItem = new StackLayoutListItem() { Item = null, View = keyItemView, GroupKey = groupKey, IsGroupingHeader = true };
 
                 control.Children.Add(new CustomStackLayoutListItem(groupStackItem));
+
+                //group by is only selecting for the first element of each grouped list and the rest are ignored. Workaround below
                 var itemsWithKey = control.Items.Where(_item => Comparer.Default.Compare(  _item.GetType().GetProperty(control.GroupedPropertyName).GetValue(_item),groupKey) == 0).ToList();
-               
-                foreach (var item in control.Items)
+
+                foreach (var item in itemsWithKey)
                 {
-                    if (Comparer.Default.Compare(item.GetType().GetProperty(control.GroupedPropertyName).GetValue(item), groupKey) != 0)
-                        continue;
+
                     var selectableItemView = new SelectableRadioView();
                     selectableItemView.SetBindingContext(item);
                     selectableItemView.SetValue(SelectableRadioView.SelectItemCommandProperty, control.SelectItemItemCommand);
@@ -117,7 +118,6 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             if (items.Any(_item => _item.GetType().GetProperty(GroupedPropertyName).GetValue(_item) == null))
                 return;
             Items = items;
-            //GroupedItems = new ObservableCollection<ObservableGroupCollection<object, object>>(Items.GroupBy(_item => _item.GetType().GetProperty(GroupedPropertyName).GetValue(_item)).Select(_items => new ObservableGroupCollection<object, object>(_items)).ToList());
 
         }
 
@@ -129,15 +129,24 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                 foreach (var item in e.OldItems)
                 {
                     //Get item 
-                    var itemToDelete = this.Children.FirstOrDefault(_stackItem => 
-                        ((CustomStackLayoutListItem)_stackItem).Item != null &&
-                        Comparer.DefaultInvariant.Compare(((CustomStackLayoutListItem)_stackItem).Item, item) == 0) as CustomStackLayoutListItem;
+                    //var itemToDelete = this.Children.FirstOrDefault(_stackItem => 
+                    //    ((CustomStackLayoutListItem)_stackItem).Item != null &&
+                    //    Comparer.DefaultInvariant.Compare(((CustomStackLayoutListItem)_stackItem).Item, item) == 0) as CustomStackLayoutListItem;
+
+                    var itemToDelete = this.Children.FirstOrDefault(_stackItem =>
+                       ((CustomStackLayoutListItem)_stackItem).Item != null &&
+                        ((CustomStackLayoutListItem)_stackItem).Item == item) as CustomStackLayoutListItem;
+
                     if (itemToDelete == null)
                         continue;
                     this.Children.Remove(itemToDelete);
+                    //bool hasMoreItemsWithKey = this.Children.Any(_stackItem =>
+                    //    ((CustomStackLayoutListItem)_stackItem).Item != null &&
+                    //    Comparer.DefaultInvariant.Compare(((CustomStackLayoutListItem)_stackItem).GroupKey, itemToDelete.GroupKey) == 0 &&
+                    //    !((CustomStackLayoutListItem)_stackItem).IsGroupingHeader);
                     bool hasMoreItemsWithKey = this.Children.Any(_stackItem =>
                         ((CustomStackLayoutListItem)_stackItem).Item != null &&
-                        Comparer.DefaultInvariant.Compare(((CustomStackLayoutListItem)_stackItem).GroupKey, itemToDelete.GroupKey) == 0 &&
+                        ((CustomStackLayoutListItem)_stackItem).GroupKey == itemToDelete.GroupKey &&
                         !((CustomStackLayoutListItem)_stackItem).IsGroupingHeader);
                     if (!hasMoreItemsWithKey)
                         this.Children.Remove(this.Children.FirstOrDefault(_stackItem => Comparer.Default.Compare(((CustomStackLayoutListItem)_stackItem).GroupKey, itemToDelete.GroupKey) == 0));
