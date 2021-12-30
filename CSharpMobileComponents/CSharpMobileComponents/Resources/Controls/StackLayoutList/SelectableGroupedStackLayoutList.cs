@@ -44,12 +44,16 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                 var keyItemView = (ICustomView)Activator.CreateInstance(keyItemViewType);
                 keyItemView.SetBindingContext(groupKey);
 
-                StackLayoutListItem groupStackItem = new StackLayoutListItem() { Item = null, View = keyItemView, GroupKey = groupKey, IsGroupingHeader = true };
+                //StackLayoutListItem groupStackItem = new StackLayoutListItem() { Item = null, View = keyItemView, GroupKey = groupKey, IsGroupingHeader = true };
 
-                control.Children.Add(new CustomStackLayoutListItem(groupStackItem));
+                //control.Children.Add(new CustomStackLayoutListItem(groupStackItem));//old and correct
+                //new...
+                CustomGroupKeyStackLayoutListItem groupKeyStackItem = new CustomGroupKeyStackLayoutListItem(new GroupedStackLayoutListItem() { View = keyItemView, GroupKeyItem = groupKey });
+
+
 
                 //group by is only selecting for the first element of each grouped list and the rest are ignored. Workaround below
-                var itemsWithKey = control.Items.Where(_item => Comparer.Default.Compare(  _item.GetType().GetProperty(control.GroupedPropertyName).GetValue(_item),groupKey) == 0).ToList();
+                var itemsWithKey = control.Items.Where(_item => Comparer.Default.Compare(_item.GetType().GetProperty(control.GroupedPropertyName).GetValue(_item), groupKey) == 0).ToList();
 
                 foreach (var item in itemsWithKey)
                 {
@@ -63,10 +67,12 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                     selectableItemView.ChildView = itemView;
 
                     StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView, GroupKey = groupKey };
-                    control.Children.Add(new CustomStackLayoutListItem(stackItem));
+                    //control.Children.Add(new CustomStackLayoutListItem(stackItem));//old and correct
+
+                    groupKeyStackItem.Children.Add(new CustomStackLayoutListItem(stackItem));
                 }
 
-
+                control.Children.Add(groupKeyStackItem);
 
             }
 
@@ -128,28 +134,27 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
             {
                 foreach (var item in e.OldItems)
                 {
-                    //Get item 
-                    //var itemToDelete = this.Children.FirstOrDefault(_stackItem => 
-                    //    ((CustomStackLayoutListItem)_stackItem).Item != null &&
-                    //    Comparer.DefaultInvariant.Compare(((CustomStackLayoutListItem)_stackItem).Item, item) == 0) as CustomStackLayoutListItem;
+                    var groupedKeyStackList = this.Children.FirstOrDefault(_groupedItem =>
+                        Comparer.Default.Compare(((CustomGroupKeyStackLayoutListItem)_groupedItem).GroupKeyItem, item.GetType().GetProperty(GroupedPropertyName).GetValue(item)) == 0
+                        ) as CustomGroupKeyStackLayoutListItem;
 
-                    var itemToDelete = this.Children.FirstOrDefault(_stackItem =>
-                       ((CustomStackLayoutListItem)_stackItem).Item != null &&
-                        ((CustomStackLayoutListItem)_stackItem).Item == item) as CustomStackLayoutListItem;
+                    var itemToDelete = groupedKeyStackList.Children
+                        .Skip(1) //The first element is the grid for where the group view resides
+                        .FirstOrDefault(_stackItem =>
+                            ((CustomStackLayoutListItem)_stackItem).Item != null &&
+                            ((CustomStackLayoutListItem)_stackItem).Item == item) as CustomStackLayoutListItem;
 
                     if (itemToDelete == null)
                         continue;
-                    this.Children.Remove(itemToDelete);
-                    //bool hasMoreItemsWithKey = this.Children.Any(_stackItem =>
-                    //    ((CustomStackLayoutListItem)_stackItem).Item != null &&
-                    //    Comparer.DefaultInvariant.Compare(((CustomStackLayoutListItem)_stackItem).GroupKey, itemToDelete.GroupKey) == 0 &&
-                    //    !((CustomStackLayoutListItem)_stackItem).IsGroupingHeader);
-                    bool hasMoreItemsWithKey = this.Children.Any(_stackItem =>
-                        ((CustomStackLayoutListItem)_stackItem).Item != null &&
-                        ((CustomStackLayoutListItem)_stackItem).GroupKey == itemToDelete.GroupKey &&
-                        !((CustomStackLayoutListItem)_stackItem).IsGroupingHeader);
+                    groupedKeyStackList.Children.Remove(itemToDelete);
+
+                    bool hasMoreItemsWithKey = groupedKeyStackList.Children
+                        .Skip(1) //The first element is the grid for where the group view resides
+                        .Any(_stackItem =>
+                            ((CustomStackLayoutListItem)_stackItem).Item != null &&
+                            Comparer.Default.Compare(  ((CustomStackLayoutListItem)_stackItem).GroupKey , itemToDelete.GroupKey) == 0);
                     if (!hasMoreItemsWithKey)
-                        this.Children.Remove(this.Children.FirstOrDefault(_stackItem => Comparer.Default.Compare(((CustomStackLayoutListItem)_stackItem).GroupKey, itemToDelete.GroupKey) == 0));
+                        this.Children.Remove(this.Children.FirstOrDefault(_stackItem => Comparer.Default.Compare(((CustomGroupKeyStackLayoutListItem)_stackItem).GroupKeyItem, itemToDelete.GroupKey) == 0));
                 }
             }
 
@@ -166,25 +171,25 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                     itemView.SetBindingContext(item);
                     selectableItemView.ChildView = itemView;
 
-                    StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView };
-                    this.Children.Add(new CustomStackLayoutListItem(stackItem));
+                    var groupKey = item.GetType().GetProperty(GroupedPropertyName).GetValue(item);
 
-                }
-            }
-            else if (e.Action == NotifyCollectionChangedAction.Move)
-            {
-                foreach (var item in e.NewItems)
-                {
-                    var selectableItemView = new SelectableRadioView();
-                    selectableItemView.SetBindingContext(item);
-                    selectableItemView.SetValue(SelectableRadioView.SelectItemCommandProperty, this.SelectItemItemCommand);
-                    var type = this.ItemView.GetType();
-                    ICustomView itemView = (ICustomView)Activator.CreateInstance(type);
-                    itemView.SetBindingContext(item);
-                    selectableItemView.ChildView = itemView;
+                    if(this.Children.Count == 0) //List has been reset
+                    {
+                        var keyItemViewType = this.GroupKeyItemView.GetType();
+                        var keyItemView = (ICustomView)Activator.CreateInstance(keyItemViewType);
+                        keyItemView.SetBindingContext(groupKey);
+                        CustomGroupKeyStackLayoutListItem groupKeyStackItem = new CustomGroupKeyStackLayoutListItem(new GroupedStackLayoutListItem() { View = keyItemView, GroupKeyItem = groupKey });
+                        this.Children.Add(groupKeyStackItem);
+                    }
 
-                    StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView };
-                    this.Children[e.NewStartingIndex] = new CustomStackLayoutListItem(stackItem);
+                    var groupedKeyStackList = this.Children.FirstOrDefault(_groupedItem =>
+                        Comparer.Default.Compare(((CustomGroupKeyStackLayoutListItem)_groupedItem).GroupKeyItem, groupKey) == 0
+                        ) as CustomGroupKeyStackLayoutListItem;
+                    
+                    StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView, GroupKey = groupKey };
+
+                    groupedKeyStackList.Children.Add(new CustomStackLayoutListItem(stackItem));
+
                 }
             }
         }

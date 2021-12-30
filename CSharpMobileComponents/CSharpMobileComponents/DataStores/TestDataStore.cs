@@ -29,16 +29,19 @@ namespace CSharpMobileComponents.DataStores
         public TestDataStore()
         {
             ListToGroup.Add(new GroupingTestModel("ossla_0"));
-            ListToGroup.Add(new GroupingTestModel("oççla_0"));
-            ListToGroup.Add(new GroupingTestModel("olsa_2"));
-            ListToGroup.Add(new GroupingTestModel("ssola_1"));
-            ListToGroup.Add(new GroupingTestModel("ogfgla_0"));
-            ListToGroup.Add(new GroupingTestModel("ogfgfla_2"));
-            ListToGroup.Add(new GroupingTestModel("olafgfg_0"));
+            //ListToGroup.Add(new GroupingTestModel("oççla_0"));
+            //ListToGroup.Add(new GroupingTestModel("olsa_2"));
+            //ListToGroup.Add(new GroupingTestModel("ssola_1"));
+            //ListToGroup.Add(new GroupingTestModel("ogfgla_0"));
+            //ListToGroup.Add(new GroupingTestModel("ogfgfla_2"));
+            //ListToGroup.Add(new GroupingTestModel("olafgfg_0"));
+
+            ListToGroup2.Add(new GroupingTestModel("ssola_1"));
         }
 
 
         public ObservableCollection<GroupingTestModel> ListToGroup { get; set; } = new ObservableCollection<GroupingTestModel>();
+        public ObservableCollection<GroupingTestModel> ListToGroup2 { get; set; } = new ObservableCollection<GroupingTestModel>();
         //public ObservableCollection<ObservableGroupCollection<object, GroupingTestModel>> GroupedList
         //{
         //    get

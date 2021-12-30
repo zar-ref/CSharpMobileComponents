@@ -12,7 +12,8 @@
     <pages:BaseNavigationPage.ChildContent>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.6*"/>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="0.3*"/>
                 <RowDefinition Height="0.2*"/>
                 <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
@@ -22,15 +23,22 @@
                 <!--<stackList:SelectableStackLayoutList x:Name="list" PageHashCode="{Binding PageHashCode, Source={x:Reference this}}"/>-->
                 <stackList:SelectableGroupedStackLayoutList x:Name="groupedlist" PageHashCode="{Binding PageHashCode, Source={x:Reference this}}"/>
             </ScrollView>
+
+            <ScrollView  x:Name="testScrollView2"   Grid.Row="1">
+                <!--<controls:SelectableListView x:Name="list" PageHashCode="{Binding PageHashCode, Source={x:Reference this}}" HasUnevenRows="False" />-->
+                <!--<controls:StackLayoutList x:Name="list" PageHashCode="{Binding PageHashCode, Source={x:Reference this}}"   />-->
+                <!--<stackList:SelectableStackLayoutList x:Name="list" PageHashCode="{Binding PageHashCode, Source={x:Reference this}}"/>-->
+                <stackList:SelectableGroupedStackLayoutList x:Name="groupedlist2" PageHashCode="{Binding PageHashCode, Source={x:Reference this}}"/>
+            </ScrollView>
             <!--Command="{Binding  GoToMenuPageCommand  , Mode=OneWay}"-->
             <controls:SecondaryBtnControl  
-                                        Grid.Row="1"  
+                                        Grid.Row="2"  
                                         ButtonClicked="PrimaryBtnControl_ButtonClicked"
                                         WidthRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=PrimaryOrSecondaryButtonControlWidth }"
                                         VerticalOptions="End" HorizontalOptions="Center"                                         
                                         DisplayText="{Binding Path=Translations , Converter={StaticResource TranslationConverter} , ConverterParameter=btn-start-demo , Mode=TwoWay}"/>
 
-            <controls:PrimaryBtnControl Grid.Row="2"    
+            <controls:PrimaryBtnControl Grid.Row="3"    
                                         Margin="{Binding Thicknesses, Converter={StaticResource ThicknessConverter} , ConverterParameter=MarginTop_3 }"
                                         ButtonClicked="PrimaryBtnControl_ButtonClicked_2"
                                         WidthRequest="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=PrimaryOrSecondaryButtonControlWidth }"

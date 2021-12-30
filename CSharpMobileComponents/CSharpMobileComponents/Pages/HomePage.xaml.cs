@@ -1,9 +1,10 @@
 ﻿using CSharpMobileComponents.DataStores;
+using CSharpMobileComponents.Models.Lists;
 using CSharpMobileComponents.Resources.Controls;
 using CSharpMobileComponents.Resources.Controls.StackLayoutList;
 using CSharpMobileComponents.Resources.Converters;
 using CSharpMobileComponents.Resources.CustomViews;
-using CSharpMobileComponents.Resources.Util.Tint; 
+using CSharpMobileComponents.Resources.Util.Tint;
 using CSharpMobileComponents.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -24,18 +25,18 @@ namespace CSharpMobileComponents.Pages
         public HomePageViewModel _viewModel;
         public HomePage()
         {
-            
+
             InitializeComponent();
             BindingContext = _viewModel = new HomePageViewModel();
-            _ =  _viewModel.RunTaskAndUpdateUI(async () => await InitPage());         
+            _ = _viewModel.RunTaskAndUpdateUI(async () => await InitPage());
         }
 
-     
 
-        protected  override  void OnAppearing()
+
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            
+
             //_viewModel.OnPropertyChanged("Translations");
         }
 
@@ -43,8 +44,9 @@ namespace CSharpMobileComponents.Pages
         {
             //_viewModel.List.RemoveAt(0);
             //_viewModel.SwitchColorTheme(); 
-            _viewModel.ListToGroup.RemoveAt(0);
+            //_viewModel.ListToGroup.RemoveAt(0);
             //_viewModel.OnPropertyChanged("ListToGroup");
+            TestDataStore.Instance.ListToGroup.Add(new GroupingTestModel("ne2222www_0"));
         }
 
         private void PrimaryBtnControl_ButtonClicked_2(object sender, EventArgs e)
@@ -52,8 +54,10 @@ namespace CSharpMobileComponents.Pages
             //ColorsDataStore.Instance.List.Add(new Models.Lists.ThemesModel() { DisplayText = "neww" });
             //ColorsDataStore.Instance.List.LastOrDefault().IsSelected = !ColorsDataStore.Instance.List.LastOrDefault().IsSelected;
 
-            TestDataStore.Instance.ListToGroup.LastOrDefault().IsSelected = true; //= !TestDataStore.Instance.ListToGroup.LastOrDefault().IsSelected;
-            var x = TestDataStore.Instance.ListToGroup.LastOrDefault();
+            //TestDataStore.Instance.ListToGroup.LastOrDefault().IsSelected = true; //= !TestDataStore.Instance.ListToGroup.LastOrDefault().IsSelected;
+            //var x = TestDataStore.Instance.ListToGroup.LastOrDefault();
+            TestDataStore.Instance.ListToGroup2.Add(new GroupingTestModel("newww1_1"));
+
             //_ = _viewModel.ListToGroup;c
             //_viewModel.OnPropertyChanged("ListToGroup");
             //_ = _viewModel.List; 
@@ -61,12 +65,15 @@ namespace CSharpMobileComponents.Pages
             //_viewModel.SwitchTranslations(CSharpMobileComponents.Resources.Constants.Languages.English);
         }
 
-        private async Task  InitPage()
+        private async Task InitPage()
         {
             //_viewModel.ListCollectionChangedEvent = list.StackLayoutCollectionChanged;
             //list.InitStackList("List", new StringOnlyView(), null, _viewModel.CheckItemCommand);
             _viewModel.GroupedListCollectionChangedEvent = groupedlist.StackLayoutGroupedCollectionChanged;
-            groupedlist.InitGroupedStackList("ListToGroup", "GroupText", new GroupKeyStringOnlyView(), new StringOnlyView(), null, _viewModel.CheckItemCommand);
+            groupedlist.InitGroupedStackList("ListToGroup", "GroupText", new GroupKeyStringOnlyView(), new StringOnlyView(), null, null);
+
+            _viewModel.GroupedListCollectionChangedEvent2 = groupedlist2.StackLayoutGroupedCollectionChanged;
+            groupedlist2.InitGroupedStackList("ListToGroup2", "GroupText", new GroupKeyStringOnlyView(), new StringOnlyView2(), null, null);
             return;
         }
     }

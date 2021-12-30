@@ -24,6 +24,9 @@
     <Compile Update="Resources\Controls\PrimaryBtnControl.xaml.cs">
       <DependentUpon>PrimaryBtnControl.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Resources\CustomViews\StringOnlyView2.xaml.cs">
+      <DependentUpon>StringOnlyView2.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Resx\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

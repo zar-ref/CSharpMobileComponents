@@ -51,6 +51,20 @@ namespace CSharpMobileComponents.ViewModels
                 return retVal;
             }
         }  
+         public NotifyCollectionChangedEventHandler GroupedListCollectionChangedEvent2 = null;
+        public ObservableCollection<GroupingTestModel> ListToGroup2
+        {
+            get
+            {
+                var retVal = TestDataStore.Instance.ListToGroup2;
+                if(GroupedListCollectionChangedEvent2 != null)
+                {
+                    retVal.CollectionChanged -= GroupedListCollectionChangedEvent2;
+                    retVal.CollectionChanged += GroupedListCollectionChangedEvent2;
+                }
+                return retVal;
+            }
+        }  
 
 
         public ICommand CheckItemCommand { get; set; }

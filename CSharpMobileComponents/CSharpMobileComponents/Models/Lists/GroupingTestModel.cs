@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CSharpMobileComponents.Models.Lists
 {
-    public class GroupingTestModel : BaseModel, ISelectableModel, IDisplayTextModel //, IComparable
+    public class GroupingTestModel : BaseModel, ISelectableModel, IDisplayTextModel  
     {
         private bool isSelected { get; set; }
 
@@ -65,15 +65,7 @@ namespace CSharpMobileComponents.Models.Lists
         {
             var groupkey = DisplayText.Split('_')[1];
             GroupText = groupkey;
-        }
-
-        //public int CompareTo(object obj)
-        //{
-        //    if (obj.GetType() != this.GetType())
-        //        return -1;
-        //    else
-        //        return this.DisplayText == ( obj  as GroupingTestModel ).DisplayText ? 0 : -1 ;
-        //}
+        }     
 
          
         public GroupingTestModel(string displayText)

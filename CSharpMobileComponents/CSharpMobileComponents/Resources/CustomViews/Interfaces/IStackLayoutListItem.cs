@@ -14,6 +14,7 @@ namespace CSharpMobileComponents.Resources.Controls.Interfaces
         bool IsGroupingHeader { get; set; }
         ICommand OnItemTappedCommand { get; set; }
         object ItemTappedCommandParameter { get; set; }
+        double? MaxHeight { get; set; }  
 
     }
 }
