@@ -10,8 +10,7 @@ namespace CSharpMobileComponents.Resources.Controls.Interfaces
     {
         object Item { get; set; }
         ICustomView View { get; set; }
-        object GroupKey { get; set; }
-        bool IsGroupingHeader { get; set; }
+        object GroupKey { get; set; } 
         ICommand OnItemTappedCommand { get; set; }
         object ItemTappedCommandParameter { get; set; }
         double? MaxHeight { get; set; }  

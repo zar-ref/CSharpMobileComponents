@@ -18,7 +18,7 @@ namespace CSharpMobileComponents.Resources.CustomViews
         public object GroupKey { get; set; }
         public ICommand OnItemTappedCommand { get; set; }
         public object ItemTappedCommandParameter { get; set; }
-        public bool IsGroupingHeader { get; set; } = false; //useless can remove it...
+     
         public double? MaxHeight { get; set; } = null;
         public CustomStackLayoutListItem(IStackLayoutListItem listItem)
         {
@@ -27,7 +27,7 @@ namespace CSharpMobileComponents.Resources.CustomViews
             GroupKey = listItem?.GroupKey ?? null;
             OnItemTappedCommand = listItem?.OnItemTappedCommand ?? null;
             ItemTappedCommandParameter = listItem?.ItemTappedCommandParameter ?? null;
-            IsGroupingHeader = listItem.IsGroupingHeader;
+             
             InitializeComponent();
             if (listItem.MaxHeight != null)
                 this.MaxHeight = this.HeightRequest = listItem.MaxHeight.Value;

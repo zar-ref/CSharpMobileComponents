@@ -72,8 +72,7 @@ namespace CSharpMobileComponents.Pages
             _viewModel.GroupedListCollectionChangedEvent = groupedlist.StackLayoutGroupedCollectionChanged;
             groupedlist.InitGroupedStackList("ListToGroup", "GroupText", new GroupKeyStringOnlyView(), new StringOnlyView(), null, null);
 
-            _viewModel.GroupedListCollectionChangedEvent2 = groupedlist2.StackLayoutGroupedCollectionChanged;
-            groupedlist2.InitGroupedStackList("ListToGroup2", "GroupText", new GroupKeyStringOnlyView(), new StringOnlyView2(), null, null);
+
             return;
         }
     }
