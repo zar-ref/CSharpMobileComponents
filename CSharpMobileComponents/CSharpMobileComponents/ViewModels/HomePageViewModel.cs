@@ -74,8 +74,7 @@ namespace CSharpMobileComponents.ViewModels
             GoToMenuPageCommand = new Command(() => GoToMenu());
             CheckItemCommand = new Command<ISelectableModel>(async (_themesModel) => await RunTaskAndUpdateUI(() => CheckItem(_themesModel)));
 
-
-
+             
 
         }
 

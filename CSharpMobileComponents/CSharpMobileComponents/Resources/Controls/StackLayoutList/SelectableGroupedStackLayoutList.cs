@@ -44,10 +44,6 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                 var keyItemView = (ICustomView)Activator.CreateInstance(keyItemViewType);
                 keyItemView.SetBindingContext(groupKey);
 
-                //StackLayoutListItem groupStackItem = new StackLayoutListItem() { Item = null, View = keyItemView, GroupKey = groupKey, IsGroupingHeader = true };
-
-                //control.Children.Add(new CustomStackLayoutListItem(groupStackItem));//old and correct
-                //new...
                 CustomGroupKeyStackLayoutListItem groupKeyStackItem = new CustomGroupKeyStackLayoutListItem(new GroupedStackLayoutListItem() { View = keyItemView, GroupKeyItem = groupKey });
 
 
@@ -67,7 +63,6 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                     selectableItemView.ChildView = itemView;
 
                     StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView, GroupKey = groupKey };
-                    //control.Children.Add(new CustomStackLayoutListItem(stackItem));//old and correct
 
                     groupKeyStackItem.Children.Add(new CustomStackLayoutListItem(stackItem));
                 }

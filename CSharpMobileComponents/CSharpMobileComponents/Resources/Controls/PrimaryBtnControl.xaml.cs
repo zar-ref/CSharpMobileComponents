@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpMobileComponents.Resources.Controls.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,7 +13,7 @@ using Xamarin.Forms.Xaml;
 namespace CSharpMobileComponents.Resources.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PrimaryBtnControl : Frame 
+    public partial class PrimaryBtnControl : Frame , IBaseCustomButton
     {
 
         public static  readonly BindableProperty DisplayTextProperty = BindableProperty.Create(

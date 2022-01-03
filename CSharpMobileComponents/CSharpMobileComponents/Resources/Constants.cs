@@ -136,5 +136,20 @@ namespace CSharpMobileComponents.Resources
 
         }
 
+        public enum AlertGenerationTypes
+        {
+            Simple,
+            SimpleWithCommand,
+            YesOrNoChoice 
+        }
+
+        public enum AlertTypes
+        {
+            Info,
+            Error,
+            Choice
+        }
+         
+
     }
 }
