@@ -10,15 +10,48 @@
             <RowDefinition Height=".4*" />
             <RowDefinition Height=".3*" />
         </Grid.RowDefinitions>
-        <Label x:Name="simpleAlertTitleLabel"  Grid.Row="0" 
-               HorizontalOptions="Start"
-               />
-        <Label x:Name="simpleAlertTextLabel"  Grid.Row="1" 
-               HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"
-               />
-        <Button x:Name="simpleAlertActionButton" Grid.Row="2" 
-                HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+        <Label 
+            x:Name="simpleAlertErrorTitleLabel"  Grid.Row="0" 
+            HorizontalOptions="Start"
+            IsVisible="False"
+            TextColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Error }" 
+            FontSize="Title"
+            />
+        <Label 
+            x:Name="simpleAlertTitleLabel"  Grid.Row="0" 
+            HorizontalOptions="Start"
+            IsVisible="False"
+            TextColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Text }" 
+            FontSize="Title"
+            />
+        <Label 
+            x:Name="simpleAlertTextLabel"  Grid.Row="1" 
+            HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"
+            />
+        <Button 
+            x:Name="simpleAlertActionButton" Grid.Row="2" 
+            HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+            IsVisible="False"
+            TextColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Text }" 
+            />
+        <StackLayout
+            x:Name="choiceAlertActionsStack"
+            Grid.Row="2"
+            HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+            IsVisible="False"
+            Orientation="Horizontal"
+            >
+            <Button
+                HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"
+                x:Name="yesOptionButton"
+                TextColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Text }" 
                 />
+            <Button
+                HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+                x:Name="noOptionButton"
+                TextColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Text }" 
+                />
+        </StackLayout>
     </Grid>
 
 </StackLayout>

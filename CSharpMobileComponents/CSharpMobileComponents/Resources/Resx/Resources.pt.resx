@@ -123,7 +123,19 @@
   <data name="btn-start-demo" xml:space="preserve">
     <value>Começar a Demonstração!</value>
   </data>
+  <data name="label-alert" xml:space="preserve">
+    <value>Alerta</value>
+  </data>
   <data name="label-cancel" xml:space="preserve">
     <value>Cancelar</value>
+  </data>
+  <data name="label-error" xml:space="preserve">
+    <value>ERRO</value>
+  </data>
+  <data name="label-no" xml:space="preserve">
+    <value>Não</value>
+  </data>
+  <data name="label-yes" xml:space="preserve">
+    <value>Sim</value>
   </data>
 </root>

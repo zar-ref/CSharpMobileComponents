@@ -64,7 +64,9 @@ namespace CSharpMobileComponents.Resources
             LightLight,
             LightLightContrast,
             LightAccent,
-            LightAccentContrast
+            LightAccentContrast,
+
+            Error
         }
 
         public enum ColorTypes
@@ -79,7 +81,8 @@ namespace CSharpMobileComponents.Resources
             SecondaryButtonBackgroundColor,
             PrimaryButtonTextColor,
             ListViewSelectedItem,
-            RadioButton
+            RadioButton,
+            Error
         }
 
         public enum DeviceTypes
@@ -132,9 +135,14 @@ namespace CSharpMobileComponents.Resources
         public enum CustomControlsMessagesNames
         {
             Register,
-            UnsubscribeOnDisappearing
+            UnsubscribeOnDisappearing,
+            CloseAlertModal,
+            OpenAlertModal,
+
 
         }
+
+      
 
         public enum AlertGenerationTypes
         {
@@ -146,8 +154,7 @@ namespace CSharpMobileComponents.Resources
         public enum AlertTypes
         {
             Info,
-            Error,
-            Choice
+            Error
         }
          
 

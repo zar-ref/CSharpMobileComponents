@@ -77,6 +77,7 @@ namespace CSharpMobileComponents.Models
         /// <param name="buttonNoCommandParameter"></param>
         public AlertModel
             (
+            AlertTypes alertType,
             string alertTitle,
             string alertMessage,
             ICommand buttonYesCommand,
@@ -88,7 +89,7 @@ namespace CSharpMobileComponents.Models
             )
         {
             AlertGenerationType = AlertGenerationTypes.YesOrNoChoice;
-            AlertType = AlertTypes.Choice;
+            AlertType = alertType;
             AlertTitle = alertTitle;
             AlertMessage = alertMessage;
 

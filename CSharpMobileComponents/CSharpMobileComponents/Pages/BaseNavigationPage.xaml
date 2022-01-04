@@ -11,8 +11,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=" *" />
             </Grid.ColumnDefinitions>
-
-            <Grid   Grid.Row="0" Grid.Column="0"   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                Grid.Row="0" Grid.Column="0"  
+                x:Name="ChildContentContainer"            
+                />
+            <controls:LoadingSpinner Grid.Row="0" Grid.Column="0"   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+            <Grid InputTransparent="True" CascadeInputTransparent="False"  Grid.Row="0" Grid.Column="0"   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height=".2*" />
                     <RowDefinition Height="*" />
@@ -49,11 +53,44 @@
                     </Frame>
                 </Frame>
             </Grid>
-            <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                Grid.Row="0" Grid.Column="0"  
-                x:Name="ChildContentContainer"            
-                />
-            <controls:LoadingSpinner Grid.Row="0" Grid.Column="0"   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+            <Grid InputTransparent="True" CascadeInputTransparent="False"   Grid.Row="0" Grid.Column="0"   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".6*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height=".6*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=" .3*" />
+                    <ColumnDefinition Width=" *" />
+                    <ColumnDefinition Width=" .3*" />
+                </Grid.ColumnDefinitions>
+                <Frame IsVisible="False" x:Name="alertOverlayFrame" Grid.RowSpan="3" Grid.ColumnSpan="3" 
+                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  
+                   BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=GradeOut }" 
+                   InputTransparent="False" CascadeInputTransparent="True" Opacity="0.8 ">
+                    <Button
+                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  
+                    Margin="{Binding Sizes, Converter={StaticResource SizesConverter} , ConverterParameter=ModalMargin }"
+                    BackgroundColor="Transparent"
+                    />
+                </Frame>
+
+                <Frame IsVisible="False" x:Name="alertModalBorderFrame" 
+                   Grid.Row="1" Grid.Column="1" 
+                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"    
+                   BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Text }" 
+                   HasShadow="False" Margin="0" Padding="0"   >
+                    <Frame  IsVisible="False" x:Name="alertModalFrame" 
+                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  
+                        Margin="{Binding Thicknesses, Converter={StaticResource ThicknessConverter} , ConverterParameter=ModalMargin }"
+                        BackgroundColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Background }" 
+                        HasShadow="False">
+
+                    </Frame>
+                </Frame>
+            </Grid>
+            
+           
         </Grid>
     </ContentPage.Content>
 </ContentPage>

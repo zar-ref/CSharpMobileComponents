@@ -79,11 +79,47 @@ namespace CSharpMobileComponents.Resources.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alert.
+        /// </summary>
+        internal static string label_alert {
+            get {
+                return ResourceManager.GetString("label-alert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string label_cancel {
             get {
                 return ResourceManager.GetString("label-cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ERROR.
+        /// </summary>
+        internal static string label_error {
+            get {
+                return ResourceManager.GetString("label-error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string label_no {
+            get {
+                return ResourceManager.GetString("label-no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string label_yes {
+            get {
+                return ResourceManager.GetString("label-yes", resourceCulture);
             }
         }
     }

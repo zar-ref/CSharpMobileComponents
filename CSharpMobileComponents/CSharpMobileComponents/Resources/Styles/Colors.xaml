@@ -19,7 +19,11 @@
 
     <Color x:Key="PrimaryDark">#547A1D</Color>
     <Color x:Key="Primary">#6BA32D</Color>
-    <Color x:Key="PrimaryLight">#A7E074</Color> 
+    <Color x:Key="PrimaryLight">#A7E074</Color>
+    
+    
+    <Color x:Key="Error">#C43123</Color> 
+    
     
     
 </ResourceDictionary>

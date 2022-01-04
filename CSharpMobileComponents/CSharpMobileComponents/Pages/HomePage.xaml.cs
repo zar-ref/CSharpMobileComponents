@@ -1,4 +1,5 @@
 ﻿using CSharpMobileComponents.DataStores;
+using CSharpMobileComponents.Models;
 using CSharpMobileComponents.Models.Lists;
 using CSharpMobileComponents.Resources.Controls;
 using CSharpMobileComponents.Resources.Controls.StackLayoutList;
@@ -56,13 +57,15 @@ namespace CSharpMobileComponents.Pages
 
             //TestDataStore.Instance.ListToGroup.LastOrDefault().IsSelected = true; //= !TestDataStore.Instance.ListToGroup.LastOrDefault().IsSelected;
             //var x = TestDataStore.Instance.ListToGroup.LastOrDefault();
-            TestDataStore.Instance.ListToGroup2.Add(new GroupingTestModel("newww1_1"));
+            //TestDataStore.Instance.ListToGroup2.Add(new GroupingTestModel("newww1_1"));
 
             //_ = _viewModel.ListToGroup;c
             //_viewModel.OnPropertyChanged("ListToGroup");
             //_ = _viewModel.List; 
             //_viewModel.list.LastOrDefault().DisplayText = "changed! again";
             //_viewModel.SwitchTranslations(CSharpMobileComponents.Resources.Constants.Languages.English);
+
+            MessagingCenter.Send<object, AlertModel>(this, CustomControlsMessagesNames.OpenAlertModal.ToString(), new AlertModel(AlertTypes.Error, null, "Erro geral"));
         }
 
         private async Task InitPage()
@@ -70,7 +73,7 @@ namespace CSharpMobileComponents.Pages
             //_viewModel.ListCollectionChangedEvent = list.StackLayoutCollectionChanged;
             //list.InitStackList("List", new StringOnlyView(), null, _viewModel.CheckItemCommand);
             _viewModel.GroupedListCollectionChangedEvent = groupedlist.StackLayoutGroupedCollectionChanged;
-            groupedlist.InitGroupedStackList("ListToGroup", "GroupText", new GroupKeyStringOnlyView(), new StringOnlyView(), null, null);
+            groupedlist.InitGroupedStackList("ListToGroup", "GroupText", new GroupKeyStringOnlyView(), new StringOnlyView(), null, _viewModel.CheckItemCommand);
 
 
             return;
