@@ -15,7 +15,7 @@
                 Grid.Row="0" Grid.Column="0"  
                 x:Name="ChildContentContainer"            
                 />
-            <controls:LoadingSpinner Grid.Row="0" Grid.Column="0"   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+           
             <Grid InputTransparent="True" CascadeInputTransparent="False"  Grid.Row="0" Grid.Column="0"   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height=".2*" />
@@ -89,8 +89,8 @@
                     </Frame>
                 </Frame>
             </Grid>
-            
-           
+
+            <controls:LoadingSpinner Grid.Row="0" Grid.Column="0"   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

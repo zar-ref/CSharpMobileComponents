@@ -63,7 +63,12 @@ namespace CSharpMobileComponents.Resources.Controls.StackLayoutList
                     selectableItemView.ChildView = itemView;
 
                     StackLayoutListItem stackItem = new StackLayoutListItem() { Item = item, View = selectableItemView, GroupKey = groupKey };
+                    if (control.TappedItemCommand != null)
+                    {
+                        stackItem.OnItemTappedCommand = control.TappedItemCommand;
+                        stackItem.ItemTappedCommandParameter = item;
 
+                    }
                     groupKeyStackItem.Children.Add(new CustomStackLayoutListItem(stackItem));
                 }
 

@@ -115,6 +115,15 @@ namespace CSharpMobileComponents.Resources.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string label_ok {
+            get {
+                return ResourceManager.GetString("label-ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
         internal static string label_yes {

@@ -12,6 +12,8 @@ using CSharpMobileComponents.DataStores;
 using System.Collections.Specialized;
 using CSharpMobileComponents.Models;
 using CSharpMobileComponents.Models.Interfaces;
+using static CSharpMobileComponents.Resources.Constants;
+using CSharpMobileComponents.Resources;
 
 namespace CSharpMobileComponents.ViewModels
 {
@@ -36,45 +38,55 @@ namespace CSharpMobileComponents.ViewModels
 
         }
 
- 
+
         public NotifyCollectionChangedEventHandler GroupedListCollectionChangedEvent = null;
         public ObservableCollection<GroupingTestModel> ListToGroup
         {
             get
             {
                 var retVal = TestDataStore.Instance.ListToGroup;
-                if(GroupedListCollectionChangedEvent != null)
+                if (GroupedListCollectionChangedEvent != null)
                 {
                     retVal.CollectionChanged -= GroupedListCollectionChangedEvent;
                     retVal.CollectionChanged += GroupedListCollectionChangedEvent;
                 }
                 return retVal;
             }
-        }  
-         public NotifyCollectionChangedEventHandler GroupedListCollectionChangedEvent2 = null;
+        }
+        public NotifyCollectionChangedEventHandler GroupedListCollectionChangedEvent2 = null;
         public ObservableCollection<GroupingTestModel> ListToGroup2
         {
             get
             {
                 var retVal = TestDataStore.Instance.ListToGroup2;
-                if(GroupedListCollectionChangedEvent2 != null)
+                if (GroupedListCollectionChangedEvent2 != null)
                 {
                     retVal.CollectionChanged -= GroupedListCollectionChangedEvent2;
                     retVal.CollectionChanged += GroupedListCollectionChangedEvent2;
                 }
                 return retVal;
             }
-        }  
+        }
 
 
         public ICommand CheckItemCommand { get; set; }
+        public ICommand CheckItemInAlertCommand { get; set; }
+        public ICommand CheckItemInAlertYesOrNoCommand { get; set; }
+        public ICommand SelectItemCommand { get; set; }
+        public ICommand SelectItemYesOrNoCommand { get; set; }
 
         public HomePageViewModel()
         {
             GoToMenuPageCommand = new Command(() => GoToMenu());
-            CheckItemCommand = new Command<ISelectableModel>(async (_themesModel) => await RunTaskAndUpdateUI(() => CheckItem(_themesModel)));
+            CheckItemCommand = new Command<ISelectableModel>(async (_selectableModel) => await RunTaskAndUpdateUI(() => CheckItem(_selectableModel)));
+            CheckItemInAlertCommand = new Command<ISelectableModel>(async (_selectableModel) => await RunTaskAndUpdateUI(() => CheckItemInAlert(_selectableModel)));
+            SelectItemCommand = new Command<ISelectableModel>(async (_selectableModel) => await RunTaskAndUpdateUI(() => SelectItem(_selectableModel)));
+            //Yes or no selection
+            CheckItemInAlertYesOrNoCommand = new Command<AlertYesOrNoChoiceCommandParameterModel>(async (_selectableModel) => await RunTaskAndUpdateUI(() => CheckItemInAlertYesOrNo(_selectableModel)));
+            SelectItemYesOrNoCommand = new Command<object>(async (_selectableModel) => await RunTaskAndUpdateUI(() => SelectItemYesOrNo(_selectableModel)));
 
-             
+
+
 
         }
 
@@ -89,7 +101,48 @@ namespace CSharpMobileComponents.ViewModels
             //OnPropertyChanged("list");
             return Task.CompletedTask;
         }
+        private Task CheckItemInAlert(ISelectableModel model)
+        {
 
+            model.IsSelected = !model.IsSelected;
+            //OnPropertyChanged("list");
+            MessagingCenter.Send<object>(this, Constants.CustomControlsMessagesNames.CloseAlertModal.ToString());
+            return Task.CompletedTask;
+        }
+        private Task CheckItemInAlertYesOrNo(AlertYesOrNoChoiceCommandParameterModel model)
+        {
+            var selectable = model.CommandParameter as ISelectableModel;
+            selectable.IsSelected = model.Choice;
+            //OnPropertyChanged("list");
+            //MessagingCenter.Send<object>(this, Constants.CustomControlsMessagesNames.CloseAlertModal.ToString());
+            return Task.CompletedTask;
+        }
+
+        private Task SelectItem(ISelectableModel model)
+        {
+            AlertModel newAlert = new AlertModel(Resources.Constants.AlertTypes.Info, "Selecting Item?", "Do you wish to select the item Yes Or no?", null, CheckItemCommand, model);
+
+            MessagingCenter.Send<object, AlertModel>(this, CustomControlsMessagesNames.OpenAlertModal.ToString(), newAlert);
+
+            return Task.CompletedTask;
+        }
+        private Task SelectItemYesOrNo(object model)
+        {
+            AlertModel newAlert = new AlertModel(
+                 Resources.Constants.AlertTypes.Info,
+                 "Selecting Item?",
+                 "Do you wish to select the item?",
+                 CheckItemInAlertYesOrNoCommand,
+                 null,
+                 new AlertYesOrNoChoiceCommandParameterModel() { Choice = true, CommandParameter = model },
+                 CheckItemInAlertYesOrNoCommand,
+                 null,
+                 new AlertYesOrNoChoiceCommandParameterModel() { Choice = false, CommandParameter = model });
+
+            MessagingCenter.Send<object, AlertModel>(this, CustomControlsMessagesNames.OpenAlertModal.ToString(), newAlert);
+
+            return Task.CompletedTask;
+        }
 
         public async void ScrollView_OnScrolled(object sender, ScrolledEventArgs e) //Pagination if needed!!
         {

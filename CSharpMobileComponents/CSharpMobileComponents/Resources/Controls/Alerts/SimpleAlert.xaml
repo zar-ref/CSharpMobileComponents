@@ -37,14 +37,15 @@
         <StackLayout
             x:Name="choiceAlertActionsStack"
             Grid.Row="2"
-            HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
+            HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
             IsVisible="False"
             Orientation="Horizontal"
-            >
+            >   
             <Button
                 HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"
                 x:Name="yesOptionButton"
                 TextColor="{Binding Colors, Converter={StaticResource ColorConverter} , ConverterParameter=Text }" 
+       
                 />
             <Button
                 HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"

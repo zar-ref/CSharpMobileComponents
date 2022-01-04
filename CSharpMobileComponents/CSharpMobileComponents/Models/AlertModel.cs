@@ -81,9 +81,9 @@ namespace CSharpMobileComponents.Models
             string alertTitle,
             string alertMessage,
             ICommand buttonYesCommand,
-            string alertActionButtonYesText,
-            ICommand buttonNoCommand,
+            string alertActionButtonYesText,  
             AlertYesOrNoChoiceCommandParameterModel buttonYesCommandParameter,
+            ICommand buttonNoCommand,  
             string alertActionButtonNoText,
             AlertYesOrNoChoiceCommandParameterModel buttonNoCommandParameter
             )
